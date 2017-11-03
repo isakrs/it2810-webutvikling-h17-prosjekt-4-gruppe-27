@@ -11,7 +11,7 @@ import { CompanyService }    from './shared/company.service';
 })
 export class CompaniesComponent implements OnInit {
   heroes: Company[];
-  selectedHero: Company;
+  selectedCompany: Company;
 
   constructor(
     private heroService: CompanyService,
@@ -29,7 +29,7 @@ export class CompaniesComponent implements OnInit {
     this.heroService.create(name)
       .then(hero => {
         this.heroes.push(hero);
-        this.selectedHero = null;
+        this.selectedCompany = null;
       });
   }
 
@@ -38,7 +38,7 @@ export class CompaniesComponent implements OnInit {
         .delete(hero.id)
         .then(() => {
           this.heroes = this.heroes.filter(h => h !== hero);
-          if (this.selectedHero === hero) { this.selectedHero = null; }
+          if (this.selectedCompany === hero) { this.selectedCompany = null; }
         });
   }
 
@@ -47,10 +47,10 @@ export class CompaniesComponent implements OnInit {
   }
 
   onSelect(hero: Company): void {
-    this.selectedHero = hero;
+    this.selectedCompany = hero;
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id]);
+    this.router.navigate(['/detail', this.selectedCompany.id]);
   }
 }
