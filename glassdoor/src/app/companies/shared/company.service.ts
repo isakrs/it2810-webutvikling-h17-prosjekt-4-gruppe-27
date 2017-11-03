@@ -3,54 +3,54 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Hero } from './hero';
+import { Company } from './company.model';
 
 @Injectable()
-export class HeroService {
+export class CompanyService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private companiesUrl = 'api/companies';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
+  getCompanies(): Promise<Company[]> {
+    return this.http.get(this.companiesUrl)
                .toPromise()
-               .then(response => response.json().data as Hero[])
+               .then(response => response.json() as Company[])
                .catch(this.handleError);
   }
 
 
-  getHero(id: number): Promise<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
+  getCompany(id: number): Promise<Company> {
+    const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Hero)
+      .then(response => response.json() as Company)
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
-    const url = `${this.heroesUrl}/${id}`;
+  delete(id: number): Promise<Company> {
+    const url = `${this.companiesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<Hero> {
+  create(name: string): Promise<Company> {
     return this.http
-      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.companiesUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
-      .then(res => res.json().data as Hero)
+      .then(res => res.json() as Company)
       .catch(this.handleError);
   }
 
-  update(hero: Hero): Promise<Hero> {
-    const url = `${this.heroesUrl}/${hero.id}`;
+  update(company: Company): Promise<Company> {
+    const url = `${this.companiesUrl}/${company.id}`;
     return this.http
-      .put(url, JSON.stringify(hero), {headers: this.headers})
+      .put(url, JSON.stringify(company), {headers: this.headers})
       .toPromise()
-      .then(() => hero)
+      .then(() => company)
       .catch(this.handleError);
   }
 
@@ -59,4 +59,3 @@ export class HeroService {
     return Promise.reject(error.message || error);
   }
 }
-
