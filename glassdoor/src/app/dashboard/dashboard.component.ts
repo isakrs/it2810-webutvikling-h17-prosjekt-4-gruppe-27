@@ -9,12 +9,12 @@ import { CompanyService } from '../companies/shared/company.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Company[] = [];
+  companies: Company[] = [];
 
   constructor(private heroService: CompanyService) { }
 
   ngOnInit(): void {
-    this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));
+    this.heroService.getCompanies()
+      .then(companies => this.companies = companies.slice(1, 5));
   }
 }

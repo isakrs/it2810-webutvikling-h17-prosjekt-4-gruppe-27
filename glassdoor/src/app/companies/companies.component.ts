@@ -5,22 +5,22 @@ import { Company }           from './shared/company.model';
 import { CompanyService }    from './shared/company.service';
 
 @Component({
-  selector: 'my-heroes',
+  selector: 'my-companies',
   templateUrl: './companies.component.html',
   styleUrls: [ './companies.component.css' ]
 })
 export class CompaniesComponent implements OnInit {
-  heroes: Company[];
+  companies: Company[];
   selectedCompany: Company;
 
   constructor(
     private heroService: CompanyService,
     private router: Router) { }
 
-  getHeroes(): void {
+  getCompanies(): void {
     this.heroService
-        .getHeroes()
-        .then(heroes => this.heroes = heroes);
+        .getCompanies()
+        .then(companies => this.companies = companies);
   }
 
   add(name: string): void {
@@ -28,7 +28,7 @@ export class CompaniesComponent implements OnInit {
     if (!name) { return; }
     this.heroService.create(name)
       .then(hero => {
-        this.heroes.push(hero);
+        this.companies.push(hero);
         this.selectedCompany = null;
       });
   }
@@ -37,13 +37,13 @@ export class CompaniesComponent implements OnInit {
     this.heroService
         .delete(hero.id)
         .then(() => {
-          this.heroes = this.heroes.filter(h => h !== hero);
+          this.companies = this.companies.filter(h => h !== hero);
           if (this.selectedCompany === hero) { this.selectedCompany = null; }
         });
   }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getCompanies();
   }
 
   onSelect(hero: Company): void {

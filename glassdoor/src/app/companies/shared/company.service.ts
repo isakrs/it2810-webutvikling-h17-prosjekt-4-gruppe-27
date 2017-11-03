@@ -9,12 +9,12 @@ import { Company } from './company.model';
 export class CompanyService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private companiesUrl = 'api/companies';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getHeroes(): Promise<Company[]> {
-    return this.http.get(this.heroesUrl)
+  getCompanies(): Promise<Company[]> {
+    return this.http.get(this.companiesUrl)
                .toPromise()
                .then(response => response.json() as Company[])
                .catch(this.handleError);
@@ -22,7 +22,7 @@ export class CompanyService {
 
 
   getHero(id: number): Promise<Company> {
-    const url = `${this.heroesUrl}/${id}`;
+    const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Company)
@@ -30,7 +30,7 @@ export class CompanyService {
   }
 
   delete(id: number): Promise<Company> {
-    const url = `${this.heroesUrl}/${id}`;
+    const url = `${this.companiesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
@@ -39,14 +39,14 @@ export class CompanyService {
 
   create(name: string): Promise<Company> {
     return this.http
-      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.companiesUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Company)
       .catch(this.handleError);
   }
 
   update(hero: Company): Promise<Company> {
-    const url = `${this.heroesUrl}/${hero.id}`;
+    const url = `${this.companiesUrl}/${hero.id}`;
     return this.http
       .put(url, JSON.stringify(hero), {headers: this.headers})
       .toPromise()

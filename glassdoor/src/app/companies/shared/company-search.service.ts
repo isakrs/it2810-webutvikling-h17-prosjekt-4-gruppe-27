@@ -13,7 +13,7 @@ export class CompanySearchService {
 
   search(term: string): Observable<Company[]> {
     return this.http
-               .get(`api/heroes/?name=${term}`)
+               .get(`api/companies/?name=${term}`)
                .map(response => response.json() as Company[]);
   }
 }
