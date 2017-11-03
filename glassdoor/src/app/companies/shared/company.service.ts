@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Company } from './company/company';
+import { Company } from './company.model';
 
 @Injectable()
 export class CompanyService {

@@ -4,7 +4,7 @@ import { Http }       from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Company }    		from './company/company';
+import { Company }    		from './company.model';
 
 @Injectable()
 export class CompanySearchService {

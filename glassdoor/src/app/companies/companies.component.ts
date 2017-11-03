@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
-import { Company }           from '../company/company';
-import { CompanyService }    from '../company.service';
+import { Company }           from './shared/company.model';
+import { CompanyService }    from './shared/company.service';
 
 @Component({
   selector: 'my-heroes',
