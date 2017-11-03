@@ -1,16 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule }    from '@angular/http';
+
+import { AppRoutingModule } from './app-routing/app-routing.module';
+
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { CompanySearchComponent } from './company-search/company-search.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanyService } from './company.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CompaniesComponent,
+    CompanyDetailComponent,
+    CompanySearchComponent,
+    DashboardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ CompanyService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
