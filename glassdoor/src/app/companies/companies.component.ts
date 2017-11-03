@@ -14,11 +14,11 @@ export class CompaniesComponent implements OnInit {
   selectedCompany: Company;
 
   constructor(
-    private heroService: CompanyService,
+    private companyService: CompanyService,
     private router: Router) { }
 
   getCompanies(): void {
-    this.heroService
+    this.companyService
         .getCompanies()
         .then(companies => this.companies = companies);
   }
@@ -26,19 +26,19 @@ export class CompaniesComponent implements OnInit {
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.create(name)
-      .then(hero => {
-        this.companies.push(hero);
+    this.companyService.create(name)
+      .then(company => {
+        this.companies.push(company);
         this.selectedCompany = null;
       });
   }
 
-  delete(hero: Company): void {
-    this.heroService
-        .delete(hero.id)
+  delete(company: Company): void {
+    this.companyService
+        .delete(company.id)
         .then(() => {
-          this.companies = this.companies.filter(h => h !== hero);
-          if (this.selectedCompany === hero) { this.selectedCompany = null; }
+          this.companies = this.companies.filter(c => c !== company);
+          if (this.selectedCompany === company) { this.selectedCompany = null; }
         });
   }
 
@@ -46,8 +46,8 @@ export class CompaniesComponent implements OnInit {
     this.getCompanies();
   }
 
-  onSelect(hero: Company): void {
-    this.selectedCompany = hero;
+  onSelect(company: Company): void {
+    this.selectedCompany = company;
   }
 
   gotoDetail(): void {

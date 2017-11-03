@@ -1,22 +1,22 @@
 <h2>My Companies</h2>
 <div>
-  <label>Hero name:</label> <input #heroName />
-  <button (click)="add(heroName.value); heroName.value=''">
+  <label>Company name:</label> <input #companyName />
+  <button (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
 </div>
 <ul class="companies">
-  <li *ngFor="let hero of companies" (click)="onSelect(hero)"
-      [class.selected]="hero === selectedCompany">
-    <span class="badge">{{hero.id}}</span>
-    <span>{{hero.name}}</span>
+  <li *ngFor="let company of companies" (click)="onSelect(company)"
+      [class.selected]="company === selectedCompany">
+    <span class="badge">{{company.id}}</span>
+    <span>{{company.name}}</span>
     <button class="delete"
-      (click)="delete(hero); $event.stopPropagation()">x</button>
+      (click)="delete(company); $event.stopPropagation()">x</button>
   </li>
 </ul>
 <div *ngIf="selectedCompany">
   <h2>
-    {{selectedCompany.name | uppercase}} is my hero
+    {{selectedCompany.name | uppercase}} is my company
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

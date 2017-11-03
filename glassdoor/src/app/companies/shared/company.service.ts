@@ -21,7 +21,7 @@ export class CompanyService {
   }
 
 
-  getHero(id: number): Promise<Company> {
+  getCompany(id: number): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
@@ -45,12 +45,12 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
-  update(hero: Company): Promise<Company> {
-    const url = `${this.companiesUrl}/${hero.id}`;
+  update(company: Company): Promise<Company> {
+    const url = `${this.companiesUrl}/${company.id}`;
     return this.http
-      .put(url, JSON.stringify(hero), {headers: this.headers})
+      .put(url, JSON.stringify(company), {headers: this.headers})
       .toPromise()
-      .then(() => hero)
+      .then(() => company)
       .catch(this.handleError);
   }
 

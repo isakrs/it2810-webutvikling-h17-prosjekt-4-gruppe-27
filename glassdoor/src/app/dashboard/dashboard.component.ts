@@ -11,10 +11,10 @@ import { CompanyService } from '../companies/shared/company.service';
 export class DashboardComponent implements OnInit {
   companies: Company[] = [];
 
-  constructor(private heroService: CompanyService) { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    this.heroService.getCompanies()
+    this.companyService.getCompanies()
       .then(companies => this.companies = companies.slice(1, 5));
   }
 }
