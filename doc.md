@@ -67,3 +67,10 @@ Se an hvordan vi ligger an og legg til funksjonalitet
 ### Valg av løsning
 
 Angular på front-end og node.js på back-end. 
+
+
+### Branches
+
+'master'-branchen har fungerende kode med tilhørende tester. 
+'dev'-branchen har fungerende kode hvor tester legges til før den merges inn i master.
+feature branches lages for ny funksjonalitet.
