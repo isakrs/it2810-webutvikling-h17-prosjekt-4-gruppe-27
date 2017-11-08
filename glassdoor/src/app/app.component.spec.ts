@@ -8,7 +8,7 @@ import { AppComponent }  from './app.component';
 
 describe('AppComponent', () => {
 
-  let comp:   AppComponent;
+  let component:   AppComponent;
   let fixture:     ComponentFixture<AppComponent>;  
   let de:          DebugElement;
   let el:          HTMLElement;
@@ -26,18 +26,18 @@ describe('AppComponent', () => {
 
   beforeEach( () => {
     fixture = TestBed.createComponent(AppComponent);
-    comp = fixture.debugElement.componentInstance;
+    component = fixture.debugElement.componentInstance;
 
     de = fixture.debugElement.query(By.css('h1'));
     el = de.nativeElement;
   });
 
   it('should create the app', () => {
-    expect(comp).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should display original title`, () => {
     fixture.detectChanges();
-    expect(el.textContent).toEqual(comp.title);
+    expect(el.textContent).toEqual(component.title);
   });
 });
