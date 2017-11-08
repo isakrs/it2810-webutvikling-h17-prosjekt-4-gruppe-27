@@ -3,12 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing'
 
-
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyService } from '../shared/company.service';
 
-
 describe('CompanyDetailComponent', () => {
+
   let component: CompanyDetailComponent;
   let fixture: ComponentFixture<CompanyDetailComponent>;
 
