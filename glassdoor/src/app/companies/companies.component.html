@@ -1,7 +1,8 @@
 <h2>My Companies</h2>
 <div>
-  <label>Company name:</label> <input #companyName />
-  <button (click)="add(companyName.value); companyName.value=''">
+  <label>Company name:</label> 
+  <input id="company-input" #companyName />
+  <button class="add-company" (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
 </div>
