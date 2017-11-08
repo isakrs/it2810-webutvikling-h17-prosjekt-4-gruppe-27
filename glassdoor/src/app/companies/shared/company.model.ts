@@ -1,4 +1,4 @@
 export class Company {
-  id: number;
-  name: string;
+  constructor(public id = 0, public name = '') { }
+  clone() { return new Company(this.id, this.name); }
 }
