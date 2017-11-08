@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { RouterTestingModule } 	from '@angular/router/testing';
-import { HttpModule } 					from '@angular/http';
+import { RouterModule } 	from '@angular/router';
+import { HttpModule, Http } 					from '@angular/http';
 import { By }										from '@angular/platform-browser';
-import { DebugElement }					from '@angular/core';
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA }					from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { DashboardComponent } from './dashboard.component';
 import { CompanySearchComponent } from '../companies/company-search/company-search.component';
@@ -38,8 +39,12 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent, CompanySearchComponent ],
-      imports: [ RouterTestingModule, HttpModule ],
-      providers: [ CompanyService ]
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [ RouterModule.forRoot([]), HttpModule ],
+      providers: [
+        CompanyService,
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ]
     })
 
     .compileComponents().then( () =>  {
