@@ -1,8 +1,18 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { RouterTestingModule } from '@angular/router/testing'
+import { TestBed, async, ComponentFixture }   from '@angular/core/testing';
+import { RouterTestingModule }                from '@angular/router/testing';
+import { By }                                 from '@angular/platform-browser';
+import { DebugElement }                       from '@angular/core';
+
+import { AppComponent }  from './app.component';
+
 
 describe('AppComponent', () => {
+
+  let comp:   AppComponent;
+  let fixture:     ComponentFixture<AppComponent>;  
+  let de:          DebugElement;
+  let el:          HTMLElement;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -13,20 +23,21 @@ describe('AppComponent', () => {
       ]
     }).compileComponents();
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'Welcome to our Company Insider'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Welcome to our Company Insider');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+
+  beforeEach( () => {
+    fixture = TestBed.createComponent(AppComponent);
+    comp = fixture.debugElement.componentInstance;
+
+    de = fixture.debugElement.query(By.css('h1'));
+    el = de.nativeElement;
+  });
+
+  it('should create the app', () => {
+    expect(comp).toBeTruthy();
+  });
+
+  it(`should display original title`, () => {
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to our Company Insider');
-  }));
+    expect(el.textContent).toEqual(comp.title);
+  });
 });
