@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } 	from '@angular/router/testing';
 import { HttpModule } 					from '@angular/http';
 import { By }										from '@angular/platform-browser';
@@ -8,7 +8,6 @@ import { DashboardComponent } from './dashboard.component';
 import { CompanySearchComponent } from '../companies/company-search/company-search.component';
 import { CompanyService } from '../companies/shared/company.service';
 import { Company } from '../companies/shared/company.model';
-import { CompanyServiceSpy } from './company-service-spy.service';
 
 
 describe('DashboardComponent', () => {
@@ -18,11 +17,23 @@ describe('DashboardComponent', () => {
 	let de:					DebugElement;
 	let el:					HTMLElement;
 
-  let cService: CompanyService;
+  let companyService: CompanyService;
   let spy: any;
 
-  let testCompany = new Company(42, 'Test Company');
-  let companies: Company[] = [testCompany];
+  const mockCompanies: Company[] =  [
+    {id: 1, name: 'DNB'},
+    {id: 2, name: 'Bekk'},
+    {id: 3, name: 'Kolonial.no'},
+    {id: 4, name: 'Blank'},
+    {id: 5, name: 'Accenture'},
+    {id: 7, name: 'Mnemonic'},
+    {id: 8, name: 'Statoil'}
+  ];
+
+  const mockCompaniesSmaller: Company[] =  [
+    {id: 1, name: 'DNB'},
+    {id: 2, name: 'Bekk'}
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,32 +41,14 @@ describe('DashboardComponent', () => {
       imports: [ RouterTestingModule, HttpModule ],
       providers: [ CompanyService ]
     })
-    // // Override component's own provider
-    // .overrideComponent(DashboardComponent, {
-    //   set: {
-    //     providers: [
-    //       {provide: CompanyService, useClass: CompanyServiceSpy}
-    //     ]
-    //   }
-    // })
 
     .compileComponents().then( () =>  {
       fixture = TestBed.createComponent(DashboardComponent);
       component = fixture.componentInstance;
-      // get the component's injected HeroDetailServiceSpy
-      cService = fixture.debugElement.injector.get(CompanyService) as any;
 
-       // Setup spy on the `getQuote` method
-      spy = spyOn(cService, 'getCompanies')
-      .and.returnValue(Promise.resolve(companies));
+      companyService = fixture.debugElement.injector.get(CompanyService) as any;
     })
   }));
-
-  beforeEach(() => {
-		
-
-		fixture.detectChanges();
-  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -67,17 +60,33 @@ describe('DashboardComponent', () => {
 		expect(el.textContent).toEqual('Top Companies');
 	})
 
-  it('should show companies after getCompanies promise (async)', async(() => {
-    de = fixture.debugElement.query(By.css('h4'));
-    el = de.nativeElement;
-    fixture.detectChanges();        // update view with quote
+  it('should display companies 2, 3, 4 and 5', fakeAsync(() => {
+    // Setup spy on the `getCompanies` method
+    spy = spyOn(companyService, 'getCompanies').and.returnValue(Promise.resolve(mockCompanies));
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
- 
-    fixture.whenStable().then(() => { // wait for async getQuote
-      fixture.detectChanges();        // update view with quote
-      console.log("component.companies: ", component.companies);
-      expect(component.companies).toBe(companies);
-    });
+    const deElements = fixture.debugElement.queryAll(By.css('.company h4'));
+
+    expect(deElements.length).toBe(4);
+    expect(deElements[0].nativeElement.textContent).toBe('Bekk');
+    expect(deElements[1].nativeElement.textContent).toBe('Kolonial.no');
+    expect(deElements[2].nativeElement.textContent).toBe('Blank');
+    expect(deElements[3].nativeElement.textContent).toBe('Accenture');
+  }));
+
+
+  it(`should work with less than 5 entries`, fakeAsync( () => {
+    spy = spyOn(companyService, 'getCompanies').and.returnValue(Promise.resolve(mockCompaniesSmaller));
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const deElements = fixture.debugElement.queryAll(By.css('.company h4'));
+
+    expect(deElements.length).toBe(1);
+    expect(deElements[0].nativeElement.textContent).toBe('Bekk');
   }));
 
 
