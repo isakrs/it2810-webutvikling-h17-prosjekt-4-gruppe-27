@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Company }     from '../companies/shared/company.model';
-import { CompanyService } from '../companies/shared/company.service';
+import { Company }     		from '../companies/shared/company.model';
+import { CompanyService } 	from '../companies/shared/company.service';
 
 @Component({
   selector: 'my-dashboard',

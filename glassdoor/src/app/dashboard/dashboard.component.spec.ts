@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { RouterModule } 	from '@angular/router';
-import { HttpModule, Http } 					from '@angular/http';
-import { By }										from '@angular/platform-browser';
-import { DebugElement, CUSTOM_ELEMENTS_SCHEMA }					from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
+import { RouterModule } 	                                   from '@angular/router';
+import { HttpModule, Http } 					                       from '@angular/http';
+import { By }										                             from '@angular/platform-browser';
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA }					     from '@angular/core';
+import { APP_BASE_HREF }                                     from '@angular/common';
 
-import { DashboardComponent } from './dashboard.component';
-import { CompanySearchComponent } from '../companies/company-search/company-search.component';
-import { CompanyService } from '../companies/shared/company.service';
-import { Company } from '../companies/shared/company.model';
+import { DashboardComponent }       from './dashboard.component';
+import { CompanySearchComponent }   from '../companies/company-search/company-search.component';
+import { CompanyService }           from '../companies/shared/company.service';
+import { Company }                  from '../companies/shared/company.model';
 
 
 describe('DashboardComponent', () => {

@@ -1,7 +1,14 @@
-import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { ReflectiveInjector } from '@angular/core';
-import { Http, Response, ResponseOptions, BaseRequestOptions, RequestOptions, ConnectionBackend } from '@angular/http';
+import { TestBed, inject, fakeAsync, tick }       from '@angular/core/testing';
+import { MockBackend, MockConnection }            from '@angular/http/testing';
+import { ReflectiveInjector }                     from '@angular/core';
+import { 
+  Http, 
+  Response,
+  ResponseOptions,
+  BaseRequestOptions,
+  RequestOptions,
+  ConnectionBackend
+  } from '@angular/http';
 
 
 import { CompanySearchService } from './company-search.service';

@@ -1,10 +1,12 @@
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { Http, Response, ResponseOptions, BaseRequestOptions, RequestOptions, ConnectionBackend } from '@angular/http';
-import { ReflectiveInjector } from '@angular/core';
+import { MockBackend, MockConnection } 			from '@angular/http/testing';
+import { Http, Response, ResponseOptions, 
+				BaseRequestOptions, RequestOptions, 
+				ConnectionBackend } 								from '@angular/http';
+import { ReflectiveInjector } 							from '@angular/core';
 
-import { CompanyService } from './company.service';
-import { Company } from './company.model';
+import { CompanyService } 	from './company.service';
+import { Company } 					from './company.model';
 
 describe('CompanyService', () => {
 
@@ -35,7 +37,7 @@ describe('CompanyService', () => {
   it('getCompanies() should return companies', fakeAsync(() => {
 
     let result: Company[];
-    
+
     // note: had to add '.data' to companies here, if not result was undefined. Ref earlier discussion about json().data
     this.companyService.getCompanies().then((companies) => result = companies.data);
     this.lastConnection.mockRespond(new Response(new ResponseOptions({
