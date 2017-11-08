@@ -18,32 +18,41 @@ describe('DashboardComponent', () => {
 	let de:					DebugElement;
 	let el:					HTMLElement;
 
-  let csSpy: CompanyServiceSpy;
+  let cService: CompanyService;
+  let spy: any;
+
+  let testCompany = new Company(42, 'Test Company');
+  let companies: Company[] = [testCompany];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DashboardComponent, CompanySearchComponent ],
       imports: [ RouterTestingModule, HttpModule ],
+      providers: [ CompanyService ]
     })
-    // Override component's own provider
-    .overrideComponent(DashboardComponent, {
-      set: {
-        providers: [
-          {provide: CompanyService, useClass: CompanyServiceSpy}
-        ]
-      }
-    })
+    // // Override component's own provider
+    // .overrideComponent(DashboardComponent, {
+    //   set: {
+    //     providers: [
+    //       {provide: CompanyService, useClass: CompanyServiceSpy}
+    //     ]
+    //   }
+    // })
 
     .compileComponents().then( () =>  {
       fixture = TestBed.createComponent(DashboardComponent);
       component = fixture.componentInstance;
       // get the component's injected HeroDetailServiceSpy
-      csSpy = fixture.debugElement.injector.get(CompanyService) as any;
+      cService = fixture.debugElement.injector.get(CompanyService) as any;
+
+       // Setup spy on the `getQuote` method
+      spy = spyOn(cService, 'getCompanies')
+      .and.returnValue(Promise.resolve(companies));
     })
   }));
 
   beforeEach(() => {
-		de = fixture.debugElement.query(By.css('h3'));
-		el = de.nativeElement;
+		
 
 		fixture.detectChanges();
   });
@@ -53,12 +62,23 @@ describe('DashboardComponent', () => {
   });
 
 	it(`should display title 'Top Companies'`, () => {
+    de = fixture.debugElement.query(By.css('h3'));
+    el = de.nativeElement;
 		expect(el.textContent).toEqual('Top Companies');
 	})
 
-  it('should have called `getCompanies`', () => {
-  expect(csSpy.getCompanies.calls.count()).toBe(1, 'getCompanies called once');
-  });
+  it('should show companies after getCompanies promise (async)', async(() => {
+    de = fixture.debugElement.query(By.css('h4'));
+    el = de.nativeElement;
+    fixture.detectChanges();        // update view with quote
+
+ 
+    fixture.whenStable().then(() => { // wait for async getQuote
+      fixture.detectChanges();        // update view with quote
+      console.log("component.companies: ", component.companies);
+      expect(component.companies).toBe(companies);
+    });
+  }));
 
 
 
