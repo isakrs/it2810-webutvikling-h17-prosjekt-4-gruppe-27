@@ -14,7 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     const reviews = [
       {id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4},
-      {id: 2, rating: 4, comment: 'Loved working here.', idCompany: 1},
+      {id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2},
       {id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
       {id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4},
       {id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3},
