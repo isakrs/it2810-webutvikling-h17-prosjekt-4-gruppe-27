@@ -13,6 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 10, name: 'Palantir'}
     ];
     const reviews = [
+      {id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
       {id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4},
       {id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2},
       {id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
@@ -20,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3},
       {id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4},
       {id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8}
-    ]
+    ];
     return {companies, reviews};
   }
 }
