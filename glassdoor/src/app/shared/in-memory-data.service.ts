@@ -21,6 +21,6 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4},
       {id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8}
     ]
-    return {companies};
+    return {companies, reviews};
   }
 }
