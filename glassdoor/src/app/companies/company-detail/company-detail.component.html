@@ -9,13 +9,3 @@
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
 </div>
-<ul class="reviews">
-  <li *ngFor="let review of reviews">
-    <span class="badge">{{review.id}}</span>
-    <span>{{review.rating}}</span>
-    <span>{{review.comment}}</span>
-    <span>{{review.idCompany}}</span>
-    <button class="delete"
-      (click)="delete(review); $event.stopPropagation()">x</button>
-  </li>
-</ul>
