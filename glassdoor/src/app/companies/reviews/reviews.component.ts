@@ -5,7 +5,7 @@ import { Review }           from './shared/review.model';
 import { ReviewService }    from './shared/review.service';
 
 @Component({
-  selector: 'app-reviews',
+  selector: 'reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.css']
 })
