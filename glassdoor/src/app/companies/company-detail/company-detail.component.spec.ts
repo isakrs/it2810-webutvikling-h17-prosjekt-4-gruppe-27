@@ -6,7 +6,8 @@ import { RouterTestingModule }              from '@angular/router/testing';
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyService }         from '../shared/company.service';
 import { ReviewsComponent }       from '../reviews/reviews.component';
-import { ReviewService }           from '../review/shared/review.service';
+import { ReviewService }          from '../reviews/shared/review.service';
+
 
 describe('CompanyDetailComponent', () => {
 

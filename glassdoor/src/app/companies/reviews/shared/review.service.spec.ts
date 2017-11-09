@@ -12,7 +12,7 @@ describe('ReviewService', () => {
 
 	const mockResponse = [
     {id: 0, rating: 5, comment: 'DNB paid me well', idCompany: 1},
-    {id: 1, rating: 1, comment: 'paid shit.', idCompany: 1}
+    {id: 1, rating: 1, comment: 'paid shit.', idCompany: 2}
   ];
 
   beforeEach(() => {
@@ -28,22 +28,24 @@ describe('ReviewService', () => {
     this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
-  it('getReviews(idCompany=0) should return reviews', fakeAsync(() => {
+  it('getReviews(idCompany=1) should return reviews', fakeAsync(() => {
 
     let result: Review[];
 
     // note: had to add '.data' to companies here, if not result was undefined. Ref earlier discussion about json().data
-    this.reviewService.getReviews(1).then((reviews) => result = reviews.data);
+    this.reviewService.getReviews(1).then((reviews) => {
+      return result = reviews.data
+    });
     this.lastConnection.mockRespond(new Response(new ResponseOptions({
       body: JSON.stringify({data: mockResponse})
     })));
 
     tick();
-    expect(result.length).toBe(2);
+    expect(result.length).toBe(1);
     expect(result[0].id).toBe(0);
     expect(result[0].idCompany).toBe(1);
     expect(result[0].rating).toBe(5);
-    expect(result[1].comment).toBe('paid shit.');
+    expect(result[0].comment).toBe('DNB paid me well');
 
   }));
 });

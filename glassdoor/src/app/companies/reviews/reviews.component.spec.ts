@@ -51,29 +51,9 @@ describe('ReviewsComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-  /*
-  it('should list reviews', fakeAsync(() => {
-    spy = spyOn(companyService, 'getCompanies')
-          .and.returnValue(Promise.resolve(mockCompanies));
-    fixture.detectChanges();
-    tick();
-    fixture.detectChanges();
+  
 
-    const liElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li'));
-    const badgeElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li span.badge'));
-    const buttonElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li button.delete'));
-
-    expect(liElements.length).toBe(7);
-    expect(badgeElements.length).toBe(7);
-    expect(buttonElements.length).toBe(7);
-    expect(liElements[0].nativeElement.textContent.trim()).toContain('Statoil');
-    expect(liElements[6].nativeElement.textContent.trim()).toContain('Dell');
-
-  }));
-  */
+  
 
   /* Add, delete and update functionality will be tested as E2E tests. */
 
