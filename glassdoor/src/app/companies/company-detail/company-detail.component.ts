@@ -4,7 +4,7 @@ import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location }                 from '@angular/common';
 
-import { Company }    	from '../shared/company.model';
+import { Company }    	    from '../shared/company.model';
 import { CompanyService } 	from '../shared/company.service';
 
 @Component({
