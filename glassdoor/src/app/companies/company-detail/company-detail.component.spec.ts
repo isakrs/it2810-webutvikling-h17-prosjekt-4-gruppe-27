@@ -5,6 +5,8 @@ import { RouterTestingModule }              from '@angular/router/testing';
 
 import { CompanyDetailComponent } from './company-detail.component';
 import { CompanyService }         from '../shared/company.service';
+import { ReviewsComponent }       from '../reviews/reviews.component';
+import { ReviewService }           from '../review/shared/review.service';
 
 describe('CompanyDetailComponent', () => {
 
@@ -13,9 +15,9 @@ describe('CompanyDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyDetailComponent ],
+      declarations: [ CompanyDetailComponent, ReviewsComponent ],
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
-      providers: [ CompanyService ]
+      providers: [ CompanyService, ReviewService ]
     })
     .compileComponents().then( () =>  {
       fixture = TestBed.createComponent(CompanyDetailComponent);

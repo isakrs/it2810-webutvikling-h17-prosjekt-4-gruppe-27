@@ -6,11 +6,14 @@ import { Location }                 from '@angular/common';
 
 import { Company }    	    from '../shared/company.model';
 import { CompanyService } 	from '../shared/company.service';
+import { ReviewsComponent } from '../reviews/reviews.component';
+import { ReviewService }    from '../reviews/shared/review.service';
 
 @Component({
   selector: 'company-detail',
   templateUrl: './company-detail.component.html',
-  styleUrls: [ './company-detail.component.css' ]
+  styleUrls: [ './company-detail.component.css' ],
+  providers: [ ReviewService ]
 })
 export class CompanyDetailComponent implements OnInit {
   company: Company;
