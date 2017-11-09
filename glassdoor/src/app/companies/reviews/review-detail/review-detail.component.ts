@@ -1,8 +1,4 @@
-import 'rxjs/add/operator/switchMap';
-
 import { Component, OnInit }        from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Location }                 from '@angular/common';
 
 import { Review }    	from '../shared/review.model';
 import { ReviewService } 	from '../shared/review.service';
@@ -15,18 +11,9 @@ import { ReviewService } 	from '../shared/review.service';
 export class ReviewDetailComponent implements OnInit {
   review: Review;
 
-  constructor(
-    private reviewService: ReviewService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private reviewService: ReviewService) {}
 
   ngOnInit(): void {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.reviewService
-                                        .getReviews(+params.get('id')))
-                                        // id is id of Company, ie idCompany
-                                        // from url: /detail/{id}
-      .subscribe(review => this.review = review);
   }
 
   save(): void {
