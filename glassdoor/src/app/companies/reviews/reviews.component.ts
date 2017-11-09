@@ -41,8 +41,6 @@ export class ReviewsComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.reviewService.getReviews(+params.get('id')))
       .subscribe(reviews => this.reviews = reviews);
-
-    console.log('In reviews, this.reviews: ', this.reviews);
   }
 
   onSelect(review: Review): void {

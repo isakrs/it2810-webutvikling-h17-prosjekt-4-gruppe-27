@@ -14,10 +14,9 @@ export class ReviewService {
   constructor(private http: Http) { }
 
   getReviews(idCompany: number): Promise<Review[]> {
-    const url = `${this.reviewsUrl}/${idCompany}`;
-    return this.http.get(url)
+    return this.http.get(this.reviewsUrl)
       .toPromise()
-      .then(response => response.json() as Review[])
+      .then(response => response.json().filter(company => company.idCompany === idCompany) as Review[])
       .catch(this.handleError);
   }
 
