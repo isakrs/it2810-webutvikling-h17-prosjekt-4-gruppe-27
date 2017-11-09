@@ -15,6 +15,7 @@ import { CompanySearchComponent } from './companies/company-search/company-searc
 import { DashboardComponent }     from './dashboard/dashboard.component';
 import { CompanyService }         from './companies/shared/company.service';
 import { ReviewDetailComponent } from './companies/review-detail/review-detail.component';
+import { ReviewsComponent } from './companies/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ReviewDetailComponent } from './companies/review-detail/review-detail.c
     CompanyDetailComponent,
     CompanySearchComponent,
     DashboardComponent,
-    ReviewDetailComponent
+    ReviewDetailComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
