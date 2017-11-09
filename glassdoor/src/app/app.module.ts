@@ -14,8 +14,8 @@ import { CompanyDetailComponent } from './companies/company-detail/company-detai
 import { CompanySearchComponent } from './companies/company-search/company-search.component';
 import { DashboardComponent }     from './dashboard/dashboard.component';
 import { CompanyService }         from './companies/shared/company.service';
-import { ReviewDetailComponent } from './companies/review-detail/review-detail.component';
-import { ReviewsComponent } from './companies/reviews/reviews.component';
+import { ReviewDetailComponent }  from './companies/reviews/review-detail/review-detail.component';
+import { ReviewsComponent }       from './companies/reviews/reviews.component';
 
 @NgModule({
   declarations: [
