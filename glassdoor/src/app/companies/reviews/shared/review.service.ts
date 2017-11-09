@@ -13,11 +13,11 @@ export class ReviewService {
 
   constructor(private http: Http) { }
 
-  getReviews(idCompany: number): Promise<Review> {
+  getReviews(idCompany: number): Promise<Review[]> {
     const url = `${this.reviewsUrl}/${idCompany}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json() as Review)
+      .then(response => response.json() as Review[])
       .catch(this.handleError);
   }
 
