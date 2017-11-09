@@ -1,8 +1,8 @@
 import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { MockBackend, MockConnection } 			from '@angular/http/testing';
-import { Http, Response, ResponseOptions, 
-				BaseRequestOptions, RequestOptions, 
-				ConnectionBackend } 								from '@angular/http';
+import { Http, Response, ResponseOptions,
+				 BaseRequestOptions, RequestOptions,
+				 ConnectionBackend } 								from '@angular/http';
 import { ReflectiveInjector } 							from '@angular/core';
 
 import { CompanyService } 	from './company.service';
