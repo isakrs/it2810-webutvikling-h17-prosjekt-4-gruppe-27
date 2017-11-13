@@ -4,7 +4,11 @@
   "description": "backend for clone of glassdoor",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "watch-tsc": "tsc -w",
+    "watch-built-serve": "nodemon --watch ./built ./built/app.js",
+    "concurrently":"concurrently",
+    "nodemon":"nodemon",
+    "dev": "npm run concurrently -k -p \"npm run watch-tsc\" -p \"npm run watch-built-serve\""
   },
   "author": "johannzv",
   "license": "ISC",
@@ -12,5 +16,14 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^4.13.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.0.39",
+    "@types/node": "^8.0.51",
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.1"
   }
 }
