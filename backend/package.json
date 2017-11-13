@@ -1,0 +1,14 @@
+{
+  "name": "glassdoor-backend",
+  "version": "0.0.1",
+  "description": "backend for clone of glassdoor",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "johannzv",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
