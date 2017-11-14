@@ -16,7 +16,10 @@ export class ReviewService {
   getReviews(idCompany: number): Promise<Review[]> {
     return this.http.get(this.reviewsUrl)
       .toPromise()
-      .then(response => response.json().filter(company => company.idCompany === idCompany) as Review[])
+      .then(response => {
+        let res = response.json().filter(review => review.idCompany === idCompany);
+        return res as Review[]}
+        )
       .catch(this.handleError);
   }
 
