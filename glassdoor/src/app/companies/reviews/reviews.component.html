@@ -1,10 +1,8 @@
 <ul class="reviews">
   <li *ngFor="let review of reviews" (click)="onSelect(review)"
       [class.selected]="review === selectedReview">
-    <span class="badge">{{review.id}}</span>
-    <span>{{review.rating}}</span>
+    <span class="badge">{{review.rating}}</span>
     <span>{{review.comment}}</span>
-    <span>{{review.idCompany}}</span>
     <button class="delete"
       (click)="delete(review); $event.stopPropagation()">x</button>
   </li>
