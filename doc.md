@@ -32,13 +32,13 @@ Det første man ser når man går inn på siden. Har funksjonalitet for loginn, 
 
 Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, og så legger vi på funksjonalitet for hver iterasjon.
 
-#### Iterasjon: 0
+#### ~~Iterasjon: 0~~
 
-Gå igjennom angular.io tutorial og bli kjent med angular
+~~Gå igjennom angular.io tutorial og bli kjent med angular~~
 
-#### Iterasjon: 1
+#### ~~Iterasjon: 1~~
 
-Endre tour of heroes-applikasjonen fra tutorial til Glassdoor.no (endre navn, attributter osv.)
+~~Endre tour of heroes-applikasjonen fra tutorial til Glassdoor.no (endre navn, attributter osv.)~~
 
 #### Iterasjon: 2
 
