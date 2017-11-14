@@ -20,7 +20,7 @@ export class ReviewsComponent implements OnInit {
 
   add(rating: number, comment: string): void {
     comment = comment.trim();
-    if (!(rating && comment)) { return; }
+    if (!(rating >= 1.0 && rating <= 5.0  && comment)) { return; }
     this.reviewService.create(rating, comment)
       .then(review => {
         this.reviews.push(review);
