@@ -8,7 +8,37 @@ import { error } from 'util';
 let companyRouter: express.Router = express.Router()
 
 companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
-    res.sendStatus(501)
+    try{
+
+        let company = await Company.findById(req.params.id)
+    
+        if(!company){
+            throw new Error('company does not exist')
+        }
+
+        return res.status(200).send(JSON.stringify(company))
+
+    }catch(e){
+
+        return res.status(501).send(JSON.stringify({error:e.message}))
+    }
+})
+
+companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
+    try{
+
+        let companies = await Company.find({})
+    
+        if(!companies){
+            throw new Error('company does not exist')
+        }
+
+        return res.status(200).send(JSON.stringify(companies))
+
+    }catch(e){
+
+        return res.status(501).send(JSON.stringify({error:e.message}))
+    }
 })
 
 companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>{
