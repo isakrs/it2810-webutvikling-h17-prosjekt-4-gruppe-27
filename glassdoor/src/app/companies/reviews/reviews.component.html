@@ -1,3 +1,19 @@
+<div>
+  <label>Review rating:</label>
+  <input id="review-input-rating" #reviewRating />
+  <label>Review comment:</label>
+  <input id="review-input-comment" #reviewComment />
+  <button
+    class="add-review"
+    (click)="
+      add(reviewRating.value, reviewComment.value);
+      reviewRating.value='';
+      reviewComment.value=''
+    "
+    >
+    Add
+  </button>
+</div>
 <ul class="reviews">
   <li *ngFor="let review of reviews" (click)="onSelect(review)"
       [class.selected]="review === selectedReview">
