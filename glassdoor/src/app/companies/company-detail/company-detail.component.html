@@ -1,11 +1,18 @@
 <div *ngIf="company">
   <h2>{{company.name}} details!</h2>
   <div>
-    <label>id: </label>{{company.id}}</div>
+    <label>id: </label>{{company.id}}
+  </div>
   <div>
     <label>name: </label>
     <input [(ngModel)]="company.name" placeholder="name" />
-   </div>
+  </div>
+  <div *ngIf="company.averageRating">
+    <label>Rating: </label>{{company.averageRating}}
+  </div>
+  <div *ngIf="company.nComments">
+    <label>Comments:</label>{{company.nComments}}
+  </div>
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
 </div>
