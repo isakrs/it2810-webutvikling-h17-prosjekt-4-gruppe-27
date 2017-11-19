@@ -13,6 +13,7 @@ import { SortCompaniesPipe }     from './shared/sort-companies.pipe';
 export class CompaniesComponent implements OnInit {
   companies: Company[];
   selectedCompany: Company;
+  sortValue: string;
 
   constructor(
     private companyService: CompanyService,
@@ -45,6 +46,7 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCompanies();
+    this.sortValue = "name";
   }
 
   onSelect(company: Company): void {

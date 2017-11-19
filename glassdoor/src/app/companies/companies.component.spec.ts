@@ -4,6 +4,7 @@ import { RouterModule }                         from '@angular/router';
 import { Http, HttpModule }                     from '@angular/http';
 import { APP_BASE_HREF }                        from '@angular/common';
 import { By }                                   from '@angular/platform-browser';
+import { FormsModule }                          from '@angular/forms';
 
 import { CompaniesComponent } from './companies.component';
 import { CompanyService }     from './shared/company.service';
@@ -38,7 +39,8 @@ describe('CompaniesComponent', () => {
       ],
       imports: [
         RouterModule.forRoot([]),
-        HttpModule
+        HttpModule,
+        FormsModule
       ]
     }).compileComponents();
 
