@@ -16,7 +16,7 @@ import { DashboardComponent }     from './dashboard/dashboard.component';
 import { CompanyService }         from './companies/shared/company.service';
 import { ReviewDetailComponent }  from './companies/reviews/review-detail/review-detail.component';
 import { ReviewsComponent }       from './companies/reviews/reviews.component';
-import { SortCompaniesPipe }          from './companies/shared/sort-names.pipe';
+import { SortCompaniesPipe }      from './companies/shared/sort-companies.pipe';
 
 @NgModule({
   declarations: [
