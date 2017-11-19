@@ -1,6 +1,5 @@
 import * as express from 'express'
 import {default as Company} from './../../db/models/companyModel'
-import {default as CompanySchema} from './../../db/schemas/companySchema'
 import { error } from 'util';
 
 
@@ -11,7 +10,7 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
     try{
 
         let company = await Company.findById(req.params.id)
-    
+
         if(!company){
             throw new Error('company does not exist')
         }
@@ -20,7 +19,7 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
 
     }catch(e){
 
-        return res.status(501).send(JSON.stringify({error:e.message}))
+        return res.status(400).send(JSON.stringify({error:e.message}))
     }
 })
 
@@ -28,7 +27,7 @@ companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     try{
 
         let companies = await Company.find({})
-    
+
         if(!companies){
             throw new Error('company does not exist')
         }
@@ -37,22 +36,22 @@ companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
 
     }catch(e){
 
-        return res.status(501).send(JSON.stringify({error:e.message}))
+        return res.status(400).send(JSON.stringify({error:e.message}))
     }
 })
 
 companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>{
-    
+
     try{
     let deletedComp = await Company.findByIdAndRemove(req.params.id)
     if(!deletedComp){
-        let error:Error = new Error('Internal server Error')
+        let error:Error = new Error('The companany does not exist')
         throw error
     }
     res.status(200).send(JSON.stringify({message:`company ${req.params.id} is now deleted`}))
     return
     }catch(e){
-        res.status(501)
+        res.status(400)
         res.send(JSON.stringify(e.message))
         return
     }
@@ -79,8 +78,8 @@ companyRouter.post('/', async(req:express.Request, res: express.Response)=>{
         res.send(JSON.stringify(e))
         return
     }
-  
-    
+
+
 
 })
 export default companyRouter
