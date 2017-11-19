@@ -3,7 +3,7 @@ import { Router }            from '@angular/router';
 
 import { Company }           from './shared/company.model';
 import { CompanyService }    from './shared/company.service';
-import { SortNamesPipe }     from './shared/sort-names.pipe'
+import { SortCompaniesPipe }     from './shared/sort-companies.pipe';
 
 @Component({
   selector: 'my-companies',

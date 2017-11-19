@@ -8,7 +8,7 @@ import { By }                                   from '@angular/platform-browser'
 import { CompaniesComponent } from './companies.component';
 import { CompanyService }     from './shared/company.service';
 import { Company }            from './shared/company.model';
-import { SortNamesPipe }      from './shared/sort-names.pipe'
+import { SortCompaniesPipe }  from './shared/sort-companies.pipe';
 
 describe('CompaniesComponent', () => {
 
@@ -30,7 +30,7 @@ describe('CompaniesComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      declarations: [CompaniesComponent, SortNamesPipe],
+      declarations: [CompaniesComponent, SortCompaniesPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         CompanyService,

@@ -5,7 +5,7 @@ import { Company } from './company.model';
 @Pipe({
   name: 'sortNames'
 })
-export class SortNamesPipe implements PipeTransform {
+export class SortCompaniesPipe implements PipeTransform {
 
   transform(companies: Company[], sortValue: any): Company[] {
 
