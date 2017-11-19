@@ -20,7 +20,13 @@ export class SortCompaniesPipe implements PipeTransform {
           return 0;
         }
       });
-      return companies;
+      // companies are sorted ascendingly (A-Z), (0-inf)
+
+      if (sortValue === 'averageRating' || sortValue === 'nComments') {
+        return companies.reverse();
+      } else {
+        return companies;
+      }
 
   }
 
