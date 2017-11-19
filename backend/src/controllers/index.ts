@@ -15,7 +15,7 @@ const setResponsePropterties = (req:express.Request, res: express.Response, next
 }
 
 const checkContentType = (req:express.Request,res:express.Response,next:express.NextFunction)=>{
-    if (req.method !== 'GET' && req.header('Content-Type') !== 'application/json'){
+    if (req.method !== 'GET' && req.method !== 'DELETE' && req.header('Content-Type') !== 'application/json'){
         res.status(403)
         res.send(JSON.stringify({error:'Content-Type should be application/json'}))
         return
