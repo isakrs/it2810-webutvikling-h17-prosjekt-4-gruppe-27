@@ -1,13 +1,14 @@
 import { ComponentFixture, async, fakeAsync, tick, TestBed } from '@angular/core/testing';
 import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Http, HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
-import { By } from '@angular/platform-browser';
+import { RouterModule }                         from '@angular/router';
+import { Http, HttpModule }                     from '@angular/http';
+import { APP_BASE_HREF }                        from '@angular/common';
+import { By }                                   from '@angular/platform-browser';
 
 import { CompaniesComponent } from './companies.component';
-import { CompanyService } from './shared/company.service';
-import { Company } from './shared/company.model';
+import { CompanyService }     from './shared/company.service';
+import { Company }            from './shared/company.model';
+import { SortNamesPipe }      from './shared/sort-names.pipe'
 
 describe('CompaniesComponent', () => {
 
@@ -29,7 +30,7 @@ describe('CompaniesComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      declarations: [CompaniesComponent],
+      declarations: [CompaniesComponent, SortNamesPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         CompanyService,
@@ -71,8 +72,8 @@ describe('CompaniesComponent', () => {
     expect(liElements.length).toBe(7);
     expect(badgeElements.length).toBe(7);
     expect(buttonElements.length).toBe(7);
-    expect(liElements[0].nativeElement.textContent.trim()).toContain('Statoil');
-    expect(liElements[6].nativeElement.textContent.trim()).toContain('Dell');
+    expect(liElements[0].nativeElement.textContent.trim()).toContain('Amazon');
+    expect(liElements[6].nativeElement.textContent.trim()).toContain('Statoil');
 
   }));
 

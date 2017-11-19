@@ -3,13 +3,12 @@ import { Router }            from '@angular/router';
 
 import { Company }           from './shared/company.model';
 import { CompanyService }    from './shared/company.service';
-import { sortNamesPipe }     from './shared/sort-names-pipe.pipe'
+import { SortNamesPipe }     from './shared/sort-names.pipe'
 
 @Component({
   selector: 'my-companies',
   templateUrl: './companies.component.html',
-  styleUrls: [ './companies.component.css' ],
-  pipes: [sortNamesPipe]
+  styleUrls: [ './companies.component.css' ]
 })
 export class CompaniesComponent implements OnInit {
   companies: Company[];

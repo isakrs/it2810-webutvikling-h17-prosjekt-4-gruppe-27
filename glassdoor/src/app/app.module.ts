@@ -3,7 +3,7 @@ import { NgModule }        from '@angular/core';
 import { FormsModule }     from '@angular/forms';
 import { HttpModule }      from '@angular/http';
 
-import { AppRoutingModule }       from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './shared/in-memory-data.service';
@@ -16,7 +16,7 @@ import { DashboardComponent }     from './dashboard/dashboard.component';
 import { CompanyService }         from './companies/shared/company.service';
 import { ReviewDetailComponent }  from './companies/reviews/review-detail/review-detail.component';
 import { ReviewsComponent }       from './companies/reviews/reviews.component';
-import { SortNamesPipePipe } from './companies/shared/sort-names-pipe.pipe';
+import { SortNamesPipe }          from './companies/shared/sort-names.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { SortNamesPipePipe } from './companies/shared/sort-names-pipe.pipe';
     DashboardComponent,
     ReviewDetailComponent,
     ReviewsComponent,
-    SortNamesPipePipe
+    SortNamesPipe
   ],
   imports: [
     BrowserModule,
