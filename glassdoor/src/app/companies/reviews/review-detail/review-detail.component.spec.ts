@@ -3,25 +3,22 @@ import { FormsModule }                      from '@angular/forms';
 import { HttpModule }                       from '@angular/http';
 import { RouterTestingModule }              from '@angular/router/testing';
 
-import { CompanyDetailComponent } from './company-detail.component';
-import { CompanyService }         from '../shared/company.service';
-import { ReviewsComponent }       from '../reviews/reviews.component';
-import { ReviewService }          from '../reviews/shared/review.service';
+import { ReviewDetailComponent } from './review-detail.component';
+import { ReviewService }         from '../shared/review.service';
 
+describe('ReviewDetailComponent', () => {
 
-describe('CompanyDetailComponent', () => {
-
-  let component:  CompanyDetailComponent;
-  let fixture:    ComponentFixture<CompanyDetailComponent>;
+  let component:  ReviewDetailComponent;
+  let fixture:    ComponentFixture<ReviewDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyDetailComponent, ReviewsComponent ],
+      declarations: [ ReviewDetailComponent ],
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
-      providers: [ CompanyService, ReviewService ]
+      providers: [ ReviewService ]
     })
     .compileComponents().then( () =>  {
-      fixture = TestBed.createComponent(CompanyDetailComponent);
+      fixture = TestBed.createComponent(ReviewDetailComponent);
       component = fixture.componentInstance;
     })
   }));

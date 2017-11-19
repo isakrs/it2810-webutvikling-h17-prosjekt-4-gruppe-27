@@ -1,0 +1,30 @@
+<div>
+  <label>Review rating:</label>
+  <input id="review-input-rating" #reviewRating />
+  <label>Review comment:</label>
+  <input id="review-input-comment" #reviewComment />
+  <button
+    class="add-review"
+    (click)="
+      add(reviewRating.value, reviewComment.value);
+      reviewRating.value='';
+      reviewComment.value=''
+    "
+    >
+    Add
+  </button>
+</div>
+<ul class="reviews">
+  <li *ngFor="let review of reviews" (click)="onSelect(review)"
+      [class.selected]="review === selectedReview">
+    <span class="badge">{{review.rating}}</span>
+    <span>{{review.comment}}</span>
+    <button class="delete"
+      (click)="delete(review); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div *ngIf="selectedReview">
+  <h2>
+    {{selectedReview.comment | uppercase}} is my review
+  </h2>
+</div>

@@ -3,6 +3,7 @@ import { Router }            from '@angular/router';
 
 import { Company }           from './shared/company.model';
 import { CompanyService }    from './shared/company.service';
+import { SortCompaniesPipe }     from './shared/sort-companies.pipe';
 
 @Component({
   selector: 'my-companies',
@@ -12,6 +13,7 @@ import { CompanyService }    from './shared/company.service';
 export class CompaniesComponent implements OnInit {
   companies: Company[];
   selectedCompany: Company;
+  sortValue: string;
 
   constructor(
     private companyService: CompanyService,
@@ -44,6 +46,7 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCompanies();
+    this.sortValue = "name";
   }
 
   onSelect(company: Company): void {

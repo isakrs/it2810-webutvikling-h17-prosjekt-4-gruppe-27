@@ -1,13 +1,15 @@
 import { ComponentFixture, async, fakeAsync, tick, TestBed } from '@angular/core/testing';
 import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Http, HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
-import { By } from '@angular/platform-browser';
+import { RouterModule }                         from '@angular/router';
+import { Http, HttpModule }                     from '@angular/http';
+import { APP_BASE_HREF }                        from '@angular/common';
+import { By }                                   from '@angular/platform-browser';
+import { FormsModule }                          from '@angular/forms';
 
 import { CompaniesComponent } from './companies.component';
-import { CompanyService } from './shared/company.service';
-import { Company } from './shared/company.model';
+import { CompanyService }     from './shared/company.service';
+import { Company }            from './shared/company.model';
+import { SortCompaniesPipe }  from './shared/sort-companies.pipe';
 
 describe('CompaniesComponent', () => {
 
@@ -17,19 +19,19 @@ describe('CompaniesComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {id: 1, name: 'Statoil'},
-    {id: 2, name: 'Amazon'},
-    {id: 3, name: 'Google'},
-    {id: 4, name: 'Kickstarter'},
-    {id: 5, name: 'Apple'},
-    {id: 7, name: 'Microsoft'},
-    {id: 8, name: 'Dell'}
+    {id: 1, name: 'Statoil',      averageRating: null, nComments: null},
+    {id: 2, name: 'Amazon',       averageRating: 3,    nComments: 3},
+    {id: 3, name: 'Google',       averageRating: 3.3,  nComments: 9},
+    {id: 4, name: 'Kickstarter',  averageRating: null, nComments: null},
+    {id: 5, name: 'Apple',        averageRating: 2.1,  nComments: 43},
+    {id: 7, name: 'Microsoft',    averageRating: null, nComments: null},
+    {id: 8, name: 'Dell',         averageRating: null, nComments: null}
   ];
 
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      declarations: [CompaniesComponent],
+      declarations: [CompaniesComponent, SortCompaniesPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         CompanyService,
@@ -37,7 +39,8 @@ describe('CompaniesComponent', () => {
       ],
       imports: [
         RouterModule.forRoot([]),
-        HttpModule
+        HttpModule,
+        FormsModule
       ]
     }).compileComponents();
 
@@ -71,8 +74,8 @@ describe('CompaniesComponent', () => {
     expect(liElements.length).toBe(7);
     expect(badgeElements.length).toBe(7);
     expect(buttonElements.length).toBe(7);
-    expect(liElements[0].nativeElement.textContent.trim()).toContain('Statoil');
-    expect(liElements[6].nativeElement.textContent.trim()).toContain('Dell');
+    expect(liElements[0].nativeElement.textContent.trim()).toContain('Amazon');
+    expect(liElements[6].nativeElement.textContent.trim()).toContain('Statoil');
 
   }));
 

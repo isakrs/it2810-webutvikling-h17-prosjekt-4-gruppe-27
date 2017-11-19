@@ -20,7 +20,6 @@ export class CompanyService {
                .catch(this.handleError);
   }
 
-
   getCompany(id: number): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)

@@ -12,7 +12,7 @@ import { Company }                  from '../companies/shared/company.model';
 
 
 describe('DashboardComponent', () => {
- 
+
  	let component: 	DashboardComponent;
   let fixture: 		ComponentFixture<DashboardComponent>;
 	let de:					DebugElement;
@@ -22,18 +22,18 @@ describe('DashboardComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {id: 1, name: 'DNB'},
-    {id: 2, name: 'Bekk'},
-    {id: 3, name: 'Kolonial.no'},
-    {id: 4, name: 'Blank'},
-    {id: 5, name: 'Accenture'},
-    {id: 7, name: 'Mnemonic'},
-    {id: 8, name: 'Statoil'}
+    {id: 1, name: 'DNB',          averageRating: null, nComments: null},
+    {id: 2, name: 'Bekk',         averageRating: null, nComments: null},
+    {id: 3, name: 'Kolonial.no',  averageRating: null, nComments: null},
+    {id: 4, name: 'Blank',        averageRating: 5,    nComments: 3},
+    {id: 5, name: 'Accenture',    averageRating: 3.4,  nComments: 100},
+    {id: 7, name: 'Mnemonic',     averageRating: null, nComments: null},
+    {id: 8, name: 'Statoil',      averageRating: 4,    nComments: 53}
   ];
 
   const mockCompaniesSmaller: Company[] =  [
-    {id: 1, name: 'DNB'},
-    {id: 2, name: 'Bekk'}
+    {id: 1, name: 'DNB',          averageRating: 3.2, nComments: 10},
+    {id: 2, name: 'Bekk',         averageRating: 4, nComments: 4}
   ];
 
   beforeEach(async(() => {

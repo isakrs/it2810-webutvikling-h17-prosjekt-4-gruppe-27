@@ -5,14 +5,14 @@ import { Http, Response, ResponseOptions,
 				 ConnectionBackend } 								from '@angular/http';
 import { ReflectiveInjector } 							from '@angular/core';
 
-import { CompanyService } 	from './company.service';
-import { Company } 					from './company.model';
+import { ReviewService } 	from './review.service';
+import { Review } 					from './review.model';
 
-describe('CompanyService', () => {
+describe('ReviewService', () => {
 
 	const mockResponse = [
-    {id: 0, name: 'DNB'},
-    {id: 1, name: 'Bekk'}
+    {id: 0, rating: 5, comment: 'DNB paid me well', idCompany: 1},
+    {id: 1, rating: 1, comment: 'paid shit.', idCompany: 2}
   ];
 
   beforeEach(() => {
@@ -20,34 +20,32 @@ describe('CompanyService', () => {
       {provide: ConnectionBackend, useClass: MockBackend},
       {provide: RequestOptions, useClass: BaseRequestOptions},
       Http,
-      CompanyService
+      ReviewService
     ]);
 
-    this.companyService = this.injector.get(CompanyService);
+    this.reviewService = this.injector.get(ReviewService);
     this.backend = this.injector.get(ConnectionBackend) as MockBackend;
     this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
-  it('should query current service url [company.service]', () => {
-    this.companyService.getCompanies();
-    expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/companies');
-  });
+  it('getReviews(idCompany=1) should return reviews', fakeAsync(() => {
 
-  it('getCompanies() should return companies', fakeAsync(() => {
-
-    let result: Company[];
+    let result: Review[];
 
     // note: had to add '.data' to companies here, if not result was undefined. Ref earlier discussion about json().data
-    this.companyService.getCompanies().then((companies) => result = companies.data);
+    this.reviewService.getReviews(1).then((reviews) => {
+      return result = reviews.data
+    });
     this.lastConnection.mockRespond(new Response(new ResponseOptions({
       body: JSON.stringify({data: mockResponse})
     })));
 
     tick();
-    expect(result.length).toBe(2);
+    expect(result.length).toBe(1);
     expect(result[0].id).toBe(0);
-    expect(result[0].name).toBe('DNB');
+    expect(result[0].idCompany).toBe(1);
+    expect(result[0].rating).toBe(5);
+    expect(result[0].comment).toBe('DNB paid me well');
 
   }));
 });
