@@ -10,7 +10,7 @@
   <li *ngFor="let company of companies" (click)="onSelect(company)"
       [class.selected]="company === selectedCompany">
     <span class="badge">{{company.id}}</span>
-    <span>{{company.name}}</span>
+    <span>{{company.name | sortNamesPipe}}</span>
     <button class="delete"
       (click)="delete(company); $event.stopPropagation()">x</button>
   </li>
