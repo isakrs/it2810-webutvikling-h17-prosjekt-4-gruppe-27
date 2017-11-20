@@ -5,14 +5,6 @@ import * as mongoose from 'mongoose'
 import {default as app} from './../../app'
 import * as _ from 'lodash'
 
-
-     /*               expect(response.body.averageRating, 'average rating should either be a number or null').to.satisfy(function(averageRating:any){
-                        return averageRating === null || typeof averageRating === 'number'
-                    })
-                    expect(response.body.nComments, 'ncomments should either be a number or null').to.satisfy(function(nComments:any){
-                        return nComments === null || typeof nComments === 'number'
-                    })*/
-
 let companyName = 'testTestTest1'
 let companyID = ''
 
