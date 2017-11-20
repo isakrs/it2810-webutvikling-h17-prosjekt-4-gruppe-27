@@ -39,7 +39,7 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.reviewService.getReviews(+params.get('id')))
+      .switchMap((params: ParamMap) => this.reviewService.getReviews(+params.get('_id')))
       .subscribe(reviews => this.reviews = reviews);
   }
 

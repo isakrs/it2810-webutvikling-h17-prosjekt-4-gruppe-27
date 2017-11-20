@@ -8,7 +8,7 @@ import { CompanyDetailComponent }	from './companies/company-detail/company-detai
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'detail/:id', component: CompanyDetailComponent },
+  { path: 'detail/:_id', component: CompanyDetailComponent },
   { path: 'companies',     component: CompaniesComponent }
 ];
 
