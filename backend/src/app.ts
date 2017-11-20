@@ -3,14 +3,16 @@ import mongoose = require('mongoose')
 import * as promise from 'promise'
 import apiRouter from './controllers/index'
 import * as morgan from 'morgan'
+import * as cors from 'cors'
 
 let port = process.env.PORT || 3000
 let app = express()
 let connectionString = 'mongodb://applicationUser:ehysb7TXc2G7esapvF@it2810-27.idi.ntnu.no:27017/glassdoor'
 
 //register middleware
+app.use(cors())
+//app.use(morgan('common'))
 app.use('/api', apiRouter)
-app.use(morgan('common'))
 mongoose.Promise = promise
 
 
