@@ -4,9 +4,9 @@ import { error } from 'util';
 import {calculateAvgRatingAndNumberOfComments,IavgRatingAnNumberOfComments} from './../../db/helpers/reviewHelper'
 import * as _ from 'lodash'
 
-
 let companyRouter: express.Router = express.Router()
 
+//Returns compani given its id
 companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
     try{
         let company = await Company.findById(req.params.id)
@@ -28,6 +28,7 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
     }
 })
 
+//returns all companies
 companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     try{
 
@@ -55,6 +56,7 @@ companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     }
 })
 
+//deletes a company given a id 
 companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>{
 
     try{
@@ -72,6 +74,7 @@ companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>
     }
 })
 
+//creates a new company
 companyRouter.post('/', async(req:express.Request, res: express.Response)=>{
     let company = new Company({name:req.body.name})
     try{
@@ -93,8 +96,5 @@ companyRouter.post('/', async(req:express.Request, res: express.Response)=>{
         res.send(JSON.stringify(e))
         return
     }
-
-
-
 })
 export default companyRouter
