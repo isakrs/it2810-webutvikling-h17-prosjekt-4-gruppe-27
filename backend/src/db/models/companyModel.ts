@@ -2,8 +2,15 @@ import * as mongoose from 'mongoose'
 
 let companySchema = new mongoose.Schema({
     name: {type: String, 
-        unique: true}
+        unique: true,
+        required:true
     },
+    averageRating:{type:Number,
+    default:null},
+    nComments:{type:Number,
+        default:null}
+    },
+ 
     {versionKey:false},
 )
 

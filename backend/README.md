@@ -201,10 +201,9 @@ headers: {'Content-type': 'application/json'}
 
 
 
-3. **Update company **
+3. **Update company**
 
 PUT
-
 F.eks. ved endring av navn.
 
 Returnerer oppdaterte company.
@@ -222,6 +221,5 @@ headers: {'Content-type': 'application/json'}
 ## User
 
 Kommer
-
 
 
