@@ -214,9 +214,5 @@ headers: {'Content-type': 'application/json'}
 
 Kommer
 
-## Sorting/Filtering
-
-Kommer mer
-
 
 
