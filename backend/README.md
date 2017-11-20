@@ -1,17 +1,17 @@
 ## Datamodeller
 
-####Eksempel på reviews
+#### Eksempel på reviews
 
 ```typescript
 reviews = [
-  {id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4},
-  {id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2},
-  {id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4},
-  {id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3},
-  {id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4},
-  {id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8} 
+  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
+  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4},
+  {_id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2},
+  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
+  {_id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4},
+  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3},
+  {_id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4},
+  {_id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8} 
 ]
 ```
 
