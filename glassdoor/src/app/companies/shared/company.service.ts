@@ -8,13 +8,13 @@ import { Company } from './company.model';
 @Injectable()
 export class CompanyService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}, );
   private companiesUrl = 'http://localhost:3000/api/company';  // URL to web api
 
   constructor(private http: Http) { }
 
   getCompanies(minRating?: number, minComments?: number): Promise<Company[]> {
-
+    console.log("getting companies")
     let url = this.companiesUrl
     if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
     else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
@@ -22,7 +22,11 @@ export class CompanyService {
 
     return this.http.get(url)
                .toPromise()
-               .then(response => response.json() as Company[])
+               .then(response => {
+                 console.log("response: ", response)
+                 return response.json() as Company[]
+               }
+                 )
                .catch(this.handleError);
   }
 
