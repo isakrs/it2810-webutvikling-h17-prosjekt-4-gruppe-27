@@ -113,6 +113,13 @@ nComments
 
 
 #### GET
+## Search
+GET
+Returnerer en liste over companies som matcher term på company.name. 
+```
+url: 'api/company/?name=${term}'
+```
+
 
 1. **Get all companies**
 
@@ -207,6 +214,8 @@ url: 'api/company/<id>'
 headers: {'Content-type': 'application/json'}
 {name: 'SBanken'}
 ```
+
+
 
 
 
