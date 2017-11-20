@@ -28,10 +28,29 @@ describe('CompanyService', () => {
     this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
-  it('should query current service url [company.service]', () => {
+  it('should query current service url (without minRating and minComments) [company.service]', () => {
     this.companyService.getCompanies();
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url).toBe('api/companies');
+  });
+
+	it('should query current service url with only minRating', () => {
+    this.companyService.getCompanies(4.4, undefined);
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url).toBe('api/companies/?minRating=4.4');
+  });
+
+  it('should query current service url with only minComments', () => {
+    this.companyService.getCompanies(undefined, 3);
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url).toBe('api/companies/?minComments=3');
+  });
+
+  it('should query current service url with both minRating and minComments', () => {
+    this.companyService.getCompanies(4.4, 2);
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url)
+    .toBe('api/companies/?minRating=4.4&minComments=2');
   });
 
   it('getCompanies() should return companies', fakeAsync(() => {
