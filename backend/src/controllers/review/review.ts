@@ -25,7 +25,6 @@ reviewRouter.get('/company/:id', async function(req:express.Request, res: expres
 
 reviewRouter.put('/:id', async function(req:express.Request, res: express.Response){
     try {
-        console.log(req.body)
         let review = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true})
         res.status(200).send(JSON.stringify(review))
     } catch (error) {
