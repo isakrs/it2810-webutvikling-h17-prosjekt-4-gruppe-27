@@ -9,17 +9,17 @@ import { Review } from './review.model';
 export class ReviewService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private reviewsUrl = 'api/reviews';  // URL to web api
+  private reviewsUrl = 'api/review';  // URL to web api
 
   constructor(private http: Http) { }
 
   getReviews(idCompany: number): Promise<Review[]> {
-    return this.http.get(this.reviewsUrl)
+    const url = `${this.reviewsUrl}/company/${idCompany}`;
+    return this.http.get(url)
       .toPromise()
       .then(response => {
-        let res = response.json().filter(review => review.idCompany === idCompany);
-        return res as Review[]}
-        )
+        return response.json() as Review[]
+        })
       .catch(this.handleError);
   }
 
