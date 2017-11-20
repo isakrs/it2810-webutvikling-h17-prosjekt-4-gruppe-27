@@ -1,11 +1,15 @@
 import * as mongoose from 'mongoose'
 import Review from './../models/reviewModel'
+import Company from './../models/companyModel'
 
 interface IavgRatingAnNumberOfComments{
     averageRating:number
     nComments:number
 }
 
+async function updateCompanyStats(updatedResults:IavgRatingAnNumberOfComments, companyID:string){
+    await Company.findByIdAndUpdate(companyID,updatedResults,{new:true})
+}
 
 async function calculateAvgRatingAndNumberOfComments(companyID:string){
         try {
@@ -17,8 +21,17 @@ async function calculateAvgRatingAndNumberOfComments(companyID:string){
                     averageRating:{$avg:'$rating'}
                 }} 
             ])
-            let result = aggreagtetResult[0] as IavgRatingAnNumberOfComments
+            
+            let result:any  = aggreagtetResult[0]
+            if(!result){
+                return {
+                    nComments:null,
+                    averageRating:null
+                }
+            }
+            delete result['_id']
             return result
+        
             
         } catch (error) {
             throw error
@@ -28,5 +41,6 @@ async function calculateAvgRatingAndNumberOfComments(companyID:string){
 
 export {
     calculateAvgRatingAndNumberOfComments,
-    IavgRatingAnNumberOfComments
+    IavgRatingAnNumberOfComments,
+    updateCompanyStats
 }
