@@ -2,7 +2,8 @@ import * as mongoose from 'mongoose'
 
 let companySchema = new mongoose.Schema({
     name: {type: String, 
-        unique: true}
+        unique: true,
+        required:true}
     },
     {versionKey:false},
 )
