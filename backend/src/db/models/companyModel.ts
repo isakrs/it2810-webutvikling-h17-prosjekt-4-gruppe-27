@@ -3,8 +3,12 @@ import * as mongoose from 'mongoose'
 let companySchema = new mongoose.Schema({
     name: {type: String, 
         unique: true,
-        required:true}
+        required:true
     },
+    averageRating: Number,
+    nComments:Number
+    },
+ 
     {versionKey:false},
 )
 
