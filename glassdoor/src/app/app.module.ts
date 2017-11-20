@@ -35,7 +35,9 @@ import { CompanyFilterComponent } from './companies/company-filter/company-filte
     BrowserModule,
     FormsModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService, {
+      passThruUnknownUrl: true
+    }),
     AppRoutingModule
   ],
   providers: [ CompanyService ],
