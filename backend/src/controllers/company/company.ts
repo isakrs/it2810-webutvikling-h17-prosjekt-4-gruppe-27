@@ -1,21 +1,26 @@
 import * as express from 'express'
 import {default as Company} from './../../db/models/companyModel'
 import { error } from 'util';
-
+import {calculateAvgRatingAndNumberOfComments,IavgRatingAnNumberOfComments} from './../../db/helpers/reviewHelper'
+import * as _ from 'lodash'
 
 
 let companyRouter: express.Router = express.Router()
 
 companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
     try{
-
         let company = await Company.findById(req.params.id)
-
+        let review = await calculateAvgRatingAndNumberOfComments(req.params.id) as IavgRatingAnNumberOfComments
         if(!company){
             throw new Error('company does not exist')
         }
-
-        return res.status(200).send(JSON.stringify(company))
+        if(!review){
+            review = {
+                averageRating:null,
+                nComments:null
+            }
+        }
+        return res.status(200).send(JSON.stringify({...company.toObject(),...review}))
 
     }catch(e){
 
@@ -27,12 +32,22 @@ companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     try{
 
         let companies = await Company.find({})
-
         if(!companies){
             throw new Error('company does not exist')
         }
 
-        return res.status(200).send(JSON.stringify(companies))
+        let companieResponse = await Promise.all( _.map(companies, async function(company){
+            let review = await calculateAvgRatingAndNumberOfComments(company._id) as IavgRatingAnNumberOfComments 
+            if(!review){
+                review = {
+                    averageRating:null,
+                    nComments:null
+                }
+            }
+            return {...company.toObject(), ...review}
+        }))
+        console.log(companieResponse)
+        return res.status(200).send(JSON.stringify(companieResponse))
 
     }catch(e){
 

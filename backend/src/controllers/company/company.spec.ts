@@ -3,6 +3,7 @@ import * as mocha from 'mocha'
 import * as supertest from 'supertest'
 import * as mongoose from 'mongoose'
 import {default as app} from './../../app'
+import * as _ from 'lodash'
 
 
      /*               expect(response.body.averageRating, 'average rating should either be a number or null').to.satisfy(function(averageRating:any){
@@ -44,6 +45,7 @@ describe('testing api/company', function(){
                 expect(response.body, 'does not have name and _id').have.all.keys('name','_id')
                 expect(response.body.name, 'does not have the same name?').to.equal(companyName)
                 companyID = response.body._id
+               
                               
             })
             .then(function(){
@@ -52,9 +54,9 @@ describe('testing api/company', function(){
                 .expect(200)
                 .then(function(response){
                     expect(response.body, 'is not an object').to.be.an('object')
-                    expect(response.body, 'does not have name and _id').have.all.keys('name','_id')
+                    expect(response.body, 'does not have name and _id').have.all.keys('name','_id', 'averageRating', 'nComments')
                     expect(response.body.name, 'does not have the same name?').to.equal(companyName)
-                    expect(response.body._id).to.equal(companyID)     
+                    expect(response.body._id).to.equal(companyID)   
                 })
             })
         })
