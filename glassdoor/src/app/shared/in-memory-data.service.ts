@@ -7,10 +7,10 @@ export class InMemoryDataService implements InMemoryDbService {
       {_id: 3,   name: 'Kolonial.no',  averageRating: 4.1,   nComments: 12},
       {_id: 4,   name: 'Blank',        averageRating: 5,     nComments: 2},
       {_id: 5,   name: 'Accenture',    averageRating: null,  nComments: null},
-      {_id: 7,   name: 'Mnemonic',     averageRating: null,  nComments: null},
-      {_id: 8,   name: 'Statoil',      averageRating: 4.5,   nComments: 8},
-      {_id: 9,   name: 'Microsoft',    averageRating: 4.7,   nComments: 10},
-      {_id: 10,  name: 'Palantir',     averageRating: null,  nComments: null}
+      {_id: 6,   name: 'Mnemonic',     averageRating: null,  nComments: null},
+      {_id: 7,   name: 'Statoil',      averageRating: 4.5,   nComments: 8},
+      {_id: 8,   name: 'Microsoft',    averageRating: 4.7,   nComments: 10},
+      {_id: 9,   name: 'Palantir',     averageRating: null,  nComments: null}
     ];
     const reviews = [
       {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
