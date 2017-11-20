@@ -11,8 +11,8 @@ import { Review } 					from './review.model';
 describe('ReviewService', () => {
 
 	const mockResponse = [
-    {id: 0, rating: 5, comment: 'DNB paid me well', idCompany: 1},
-    {id: 1, rating: 1, comment: 'paid shit.', idCompany: 2}
+    {_id: 0, rating: 5, comment: 'DNB paid me well', idCompany: 1},
+    {_id: 1, rating: 1, comment: 'paid shit.', idCompany: 2}
   ];
 
   beforeEach(() => {
@@ -42,7 +42,7 @@ describe('ReviewService', () => {
 
     tick();
     expect(result.length).toBe(1);
-    expect(result[0].id).toBe(0);
+    expect(result[0]._id).toBe(0);
     expect(result[0].idCompany).toBe(1);
     expect(result[0].rating).toBe(5);
     expect(result[0].comment).toBe('DNB paid me well');

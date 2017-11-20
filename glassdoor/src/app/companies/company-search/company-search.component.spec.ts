@@ -21,10 +21,10 @@ describe('CompanySearchComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {id: 1, name: 'McKinsey Consulting', averageRating: 3.9,   nComments: 10},
-    {id: 2, name: 'Bekk Consulting',     averageRating: 3.2,   nComments: 8},
-    {id: 3, name: 'Spire Consulting',    averageRating: null,  nComments: null},
-    {id: 7, name: 'Google Consulting',   averageRating: null,  nComments: null}
+    {_id: 1, name: 'McKinsey Consulting', averageRating: 3.9,   nComments: 10},
+    {_id: 2, name: 'Bekk Consulting',     averageRating: 3.2,   nComments: 8},
+    {_id: 3, name: 'Spire Consulting',    averageRating: null,  nComments: null},
+    {_id: 7, name: 'Google Consulting',   averageRating: null,  nComments: null}
   ];
 
   beforeEach(async(() => {

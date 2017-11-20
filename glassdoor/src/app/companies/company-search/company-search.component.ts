@@ -36,9 +36,9 @@ export class CompanySearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.companies = this.searchTerms
-      .debounceTime(300)        
-      .distinctUntilChanged()  
-      .switchMap(term => term   
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => term
         ? this.companySearchService.search(term)
         : Observable.of<Company[]>([]))
       .catch(error => {
@@ -49,7 +49,7 @@ export class CompanySearchComponent implements OnInit {
   }
 
   gotoDetail(company: Company): void {
-    let link = ['/detail', company.id];
+    let link = ['/detail', company._id];
     this.router.navigate(link);
   }
 }

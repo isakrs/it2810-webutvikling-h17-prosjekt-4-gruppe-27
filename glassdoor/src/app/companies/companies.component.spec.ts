@@ -19,13 +19,13 @@ describe('CompaniesComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {id: 1, name: 'Statoil',      averageRating: null, nComments: null},
-    {id: 2, name: 'Amazon',       averageRating: 3,    nComments: 3},
-    {id: 3, name: 'Google',       averageRating: 3.3,  nComments: 9},
-    {id: 4, name: 'Kickstarter',  averageRating: null, nComments: null},
-    {id: 5, name: 'Apple',        averageRating: 2.1,  nComments: 43},
-    {id: 7, name: 'Microsoft',    averageRating: null, nComments: null},
-    {id: 8, name: 'Dell',         averageRating: null, nComments: null}
+    {_id: 1, name: 'Statoil',      averageRating: null, nComments: null},
+    {_id: 2, name: 'Amazon',       averageRating: 3,    nComments: 3},
+    {_id: 3, name: 'Google',       averageRating: 3.3,  nComments: 9},
+    {_id: 4, name: 'Kickstarter',  averageRating: null, nComments: null},
+    {_id: 5, name: 'Apple',        averageRating: 2.1,  nComments: 43},
+    {_id: 7, name: 'Microsoft',    averageRating: null, nComments: null},
+    {_id: 8, name: 'Dell',         averageRating: null, nComments: null}
   ];
 
   beforeEach(async(() => {

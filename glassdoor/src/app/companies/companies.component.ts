@@ -44,7 +44,7 @@ export class CompaniesComponent implements OnInit {
 
   delete(company: Company): void {
     this.companyService
-        .delete(company.id)
+        .delete(company._id)
         .then(() => {
           this.companies = this.companies.filter(c => c !== company);
           if (this.selectedCompany === company) { this.selectedCompany = null; }
@@ -61,6 +61,6 @@ export class CompaniesComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedCompany.id]);
+    this.router.navigate(['/detail', this.selectedCompany._id]);
   }
 }

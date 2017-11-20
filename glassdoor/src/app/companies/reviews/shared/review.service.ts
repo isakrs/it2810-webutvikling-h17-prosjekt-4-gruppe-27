@@ -43,7 +43,7 @@ export class ReviewService {
   }
 
   update(review: Review): Promise<Review> {
-    const url = `${this.reviewsUrl}/${review.id}`;
+    const url = `${this.reviewsUrl}/${review._id}`;
     return this.http
       .put(url, JSON.stringify(review), {headers: this.headers})
       .toPromise()

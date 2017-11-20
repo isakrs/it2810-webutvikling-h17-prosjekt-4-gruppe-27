@@ -30,7 +30,7 @@ export class ReviewsComponent implements OnInit {
 
   delete(review: Review): void {
     this.reviewService
-        .delete(review.id)
+        .delete(review._id)
         .then(() => {
           this.reviews = this.reviews.filter(r => r !== review);
           if (this.selectedReview === review) { this.selectedReview = null; }

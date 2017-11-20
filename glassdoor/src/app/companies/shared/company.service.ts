@@ -51,7 +51,7 @@ export class CompanyService {
   }
 
   update(company: Company): Promise<Company> {
-    const url = `${this.companiesUrl}/${company.id}`;
+    const url = `${this.companiesUrl}/${company._id}`;
     return this.http
       .put(url, JSON.stringify(company), {headers: this.headers})
       .toPromise()

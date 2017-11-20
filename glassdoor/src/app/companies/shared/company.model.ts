@@ -1,5 +1,5 @@
 export class Company {
-  id: number;
+  _id: number;
   name: string;
   averageRating?: number;
   nComments?: number;
