@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
-import { Company }           from './shared/company.model';
-import { CompanyService }    from './shared/company.service';
-import { SortCompaniesPipe }     from './shared/sort-companies.pipe';
+import { Company }                from './shared/company.model';
+import { CompanyService }         from './shared/company.service';
+import { SortCompaniesPipe }      from './shared/sort-companies.pipe';
+import { CompanyFilterComponent}  from './company-filter/company-filter.component';
 
 @Component({
   selector: 'my-companies',
@@ -16,12 +17,18 @@ export class CompaniesComponent implements OnInit {
   sortValue: string;
 
   constructor(
-    private companyService: CompanyService,
-    private router: Router) { }
+    private companyService:       CompanyService,
+    private router:               Router
+  ) { }
 
-  getCompanies(): void {
+  getCompanies(filter?): void {
+    let minRating; let minComments;
+    if (filter) {
+      minRating = filter.minRating;
+      minComments = filter.minComments;
+    }
     this.companyService
-        .getCompanies()
+        .getCompanies(minRating, minComments)
         .then(companies => this.companies = companies);
   }
 

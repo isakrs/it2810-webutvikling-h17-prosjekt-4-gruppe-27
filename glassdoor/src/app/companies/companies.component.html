@@ -1,17 +1,22 @@
 <h2>My Companies</h2>
+
 <div>
   <label>Company name:</label>
-  <input id="company-input" #companyName />
+  <input id="company-input" #companyName/>
   <button class="add-company" (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
 </div>
+
+<app-company-filter (changeFilterClicked)="getCompanies($event)"></app-company-filter>
+
 <label>Sort by:</label>
 <select [(ngModel)]="sortValue">
   <option value="name">Name</option>
   <option value="averageRating">Rating</option>
   <option value="nComments">Comments</option>
 </select>
+
 <ul class="companies">
   <li *ngFor="let company of companies | sortNames:sortValue" (click)="onSelect(company)"
       [class.selected]="company === selectedCompany">
@@ -21,6 +26,7 @@
       (click)="delete(company); $event.stopPropagation()">x</button>
   </li>
 </ul>
+
 <div *ngIf="selectedCompany">
   <h2>
     {{selectedCompany.name | uppercase}} is my company

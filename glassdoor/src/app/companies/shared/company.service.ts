@@ -13,8 +13,14 @@ export class CompanyService {
 
   constructor(private http: Http) { }
 
-  getCompanies(): Promise<Company[]> {
-    return this.http.get(this.companiesUrl)
+  getCompanies(minRating?: number, minComments?: number): Promise<Company[]> {
+
+    let url = this.companiesUrl
+    if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
+    else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
+    else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
+
+    return this.http.get(url)
                .toPromise()
                .then(response => response.json() as Company[])
                .catch(this.handleError);
