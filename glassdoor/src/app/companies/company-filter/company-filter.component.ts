@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-company-filter',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./company-filter.component.css']
 })
 export class CompanyFilterComponent implements OnInit {
+  @Output() changeFilterClicked = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  changeFilter(minRating: number, minComments: number): void {
+    this.changeFilterClicked.emit({
+      minRating: minRating, minComments: minComments
+    });
   }
 
 }

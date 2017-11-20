@@ -1,3 +1,18 @@
-<p>
-  company-filter works!
-</p>
+<div>
+  <label>Min rating:</label>
+  <select (change)="changeFilter(minRating.value, minComments.value)" #minRating>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+</div>
+<div>
+  <label>Min comment:</label>
+  <select (change)="changeFilter(minRating.value, minComments.value)" #minComments>
+    <option value="0">0</option>
+    <option value="10">10</option>
+    <option value="100">100</option>
+  </select>
+</div>
