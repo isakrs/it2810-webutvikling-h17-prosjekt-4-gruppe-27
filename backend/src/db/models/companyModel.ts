@@ -5,8 +5,10 @@ let companySchema = new mongoose.Schema({
         unique: true,
         required:true
     },
-    averageRating: Number,
-    nComments:Number
+    averageRating:{type:Number,
+    default:null},
+    nComments:{type:Number,
+        default:null}
     },
  
     {versionKey:false},

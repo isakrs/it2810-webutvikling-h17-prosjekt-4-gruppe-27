@@ -10,20 +10,11 @@ let companyRouter: express.Router = express.Router()
 companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
     try{
         let company = await Company.findById(req.params.id)
-        let review = await calculateAvgRatingAndNumberOfComments(req.params.id) as IavgRatingAnNumberOfComments
         if(!company){
             throw new Error('company does not exist')
         }
-        if(!review){
-            review = {
-                averageRating:null,
-                nComments:null
-            }
-        }
-        return res.status(200).send(JSON.stringify({...company.toObject(),...review}))
-
+        return res.status(200).send(JSON.stringify(company))
     }catch(e){
-
         return res.status(400).send(JSON.stringify({error:e.message}))
     }
 })
@@ -31,25 +22,11 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
 //returns all companies
 companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     try{
-
         let companies = await Company.find({})
         if(!companies){
             throw new Error('company does not exist')
         }
-
-        let companieResponse = await Promise.all( _.map(companies, async function(company){
-            let review = await calculateAvgRatingAndNumberOfComments(company._id) as IavgRatingAnNumberOfComments 
-            if(!review){
-                review = {
-                    averageRating:null,
-                    nComments:null
-                }
-            }
-            return {...company.toObject(), ...review}
-        }))
-        console.log(companieResponse)
-        return res.status(200).send(JSON.stringify(companieResponse))
-
+        return res.status(200).send(JSON.stringify(companies))
     }catch(e){
 
         return res.status(400).send(JSON.stringify({error:e.message}))
@@ -58,15 +35,15 @@ companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
 
 //deletes a company given a id 
 companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>{
-
     try{
     let deletedComp = await Company.findByIdAndRemove(req.params.id)
     if(!deletedComp){
         let error:Error = new Error('The companany does not exist')
         throw error
     }
-    res.status(200).send(JSON.stringify({message:`company ${req.params.id} is now deleted`}))
-    return
+    res.status(200)
+    res.send(JSON.stringify({message:`company ${req.params.id} is now deleted`}))
+   return
     }catch(e){
         res.status(400)
         res.send(JSON.stringify(e.message))
@@ -84,17 +61,14 @@ companyRouter.post('/', async(req:express.Request, res: express.Response)=>{
             throw error
         }
     }catch(error){
-        res.status(400).send(JSON.stringify(error.message))
-        return
+       return res.status(400).send(JSON.stringify(error.message))
     }
     try{
         await company.save()
-        res.status(200).send(JSON.stringify(company))
-        return
+       return res.status(200).send(JSON.stringify(company))
     }catch(e){
-        res.status(501)
-        res.send(JSON.stringify(e))
-        return
+    
+        return res.status(400).send(JSON.stringify(e))
     }
 })
 export default companyRouter
