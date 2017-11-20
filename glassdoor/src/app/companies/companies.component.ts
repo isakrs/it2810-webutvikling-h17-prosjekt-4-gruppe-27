@@ -4,6 +4,7 @@ import { Router }            from '@angular/router';
 import { Company }                from './shared/company.model';
 import { CompanyService }         from './shared/company.service';
 import { SortCompaniesPipe }      from './shared/sort-companies.pipe';
+import { CompanyFilterComponent } from './company-filter/company-filter.component';
 
 @Component({
   selector: 'my-companies',

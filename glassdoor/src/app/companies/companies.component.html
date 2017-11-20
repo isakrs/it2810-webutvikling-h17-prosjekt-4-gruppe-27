@@ -8,13 +8,14 @@
   </button>
 </div>
 
+<app-company-filter></app-company-filter>
+
 <label>Sort by:</label>
 <select [(ngModel)]="sortValue">
   <option value="name">Name</option>
   <option value="averageRating">Rating</option>
   <option value="nComments">Comments</option>
 </select>
-
 
 <ul class="companies">
   <li *ngFor="let company of companies | sortNames:sortValue" (click)="onSelect(company)"
