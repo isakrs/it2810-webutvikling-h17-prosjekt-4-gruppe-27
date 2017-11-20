@@ -9,7 +9,7 @@ import { Company } from './company.model';
 export class CompanyService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private companiesUrl = 'api/companies';  // URL to web api
+  private companiesUrl = 'api/company';  // URL to web api
 
   constructor(private http: Http) { }
 
