@@ -50,7 +50,7 @@ describe('testing login', function(){
 
     it('should receive a valid token if credential are correct', async function(){
         let response = await supertest(app).post('/auth/login').send(user).expect(200)
-        expect(response.body).to.have.keys('token')
+        expect(response.body).to.have.keys('token','username')
         let decoded:any = jwt.verify(response.body.token,'superSecret')
         expect(decoded).to.include.keys('userId')
         expect(decoded.userId).to.equal(userM._id.toString())
