@@ -10,6 +10,7 @@ import { Review } 					from './review.model';
 
 describe('ReviewService', () => {
 
+  const baseURL = 'http://localhost:3000';
 	const mockResponse = [
     {_id: '0', rating: 5, comment: 'DNB paid me well', idCompany: '1'},
     {_id: '1', rating: 1, comment: 'paid shit.', idCompany: '1'}

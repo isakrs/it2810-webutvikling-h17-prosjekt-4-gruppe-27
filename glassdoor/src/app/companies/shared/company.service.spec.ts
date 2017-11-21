@@ -10,6 +10,7 @@ import { Company } 					from './company.model';
 
 describe('CompanyService', () => {
 
+  const baseURL = 'http://localhost:3000';
 	const mockResponse = [
     {_id: '0', name: 'DNB'},
     {_id: '1', name: 'Bekk'}
@@ -31,26 +32,29 @@ describe('CompanyService', () => {
   it('should query current service url (without minRating and minComments) [company.service]', () => {
     this.companyService.getCompanies();
     expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/company');
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/company`);
   });
 
 	it('should query current service url with only minRating', () => {
     this.companyService.getCompanies(4.4, undefined);
     expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/company/?minRating=4.4');
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/company/?minRating=4.4`);
   });
 
   it('should query current service url with only minComments', () => {
     this.companyService.getCompanies(undefined, 3);
     expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/company/?minComments=3');
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/company/?minComments=3`);
   });
 
   it('should query current service url with both minRating and minComments', () => {
     this.companyService.getCompanies(4.4, 2);
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe('api/company/?minRating=4.4&minComments=2');
+    .toBe(`${baseURL}/api/company/?minRating=4.4&minComments=2`);
   });
 
   it('getCompanies() should return companies', fakeAsync(() => {
