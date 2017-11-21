@@ -2,12 +2,13 @@ import * as express from 'express'
 import {default as Company} from './../../db/models/companyModel'
 import { error } from 'util';
 import {calculateAvgRatingAndNumberOfComments,IavgRatingAnNumberOfComments} from './../../db/helpers/reviewHelper'
+import * as companyHelpers from './../../db/helpers/companyHelper'
 import * as _ from 'lodash'
 
 let companyRouter: express.Router = express.Router()
 
 //Returns compani given its id
-companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
+companyRouter.get('/:id', async (req:express.Request, res:express.Response,next)=>{
     try{
         let company = await Company.findById(req.params.id)
         if(!company){
@@ -21,11 +22,24 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response)=>{
 
 //returns all companies
 companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
+    let query = req.query
+    console.log(query)
     try{
-        let companies = await Company.find({})
-        if(!companies){
-            throw new Error('company does not exist')
+        let companies
+        if (_.has(query,'minRating')&&_.has(query,'minComments')){
+            companies = await companyHelpers.findCompaniesMinRatingMinComments(query.minRating, query.minComments)
+            return res.status(200).send(JSON.stringify(companies))
         }
+
+        if (_.has(query,'minRating')){
+            companies = await companyHelpers.findCompaniesMinRating(query.minRating)
+            return res.status(200).send(JSON.stringify(companies))
+        }
+        if (_.has(query,'minComments')){
+            companies = await companyHelpers.findCompaniesMinComments(query.minComments)
+            return res.status(200).send(JSON.stringify(companies))
+        }
+        companies = await Company.find({})
         return res.status(200).send(JSON.stringify(companies))
     }catch(e){
 
