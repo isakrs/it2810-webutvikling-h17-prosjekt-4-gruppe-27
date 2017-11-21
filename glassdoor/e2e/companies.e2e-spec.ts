@@ -1,6 +1,6 @@
-import { CompaniesPage } from './companies.po';
-
 import { browser, protractor, element, by } from 'protractor';
+
+import { CompaniesPage } from './companies.po';
 
 describe('Companies page', () => {
 
