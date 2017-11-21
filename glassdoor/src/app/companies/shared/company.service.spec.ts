@@ -11,8 +11,8 @@ import { Company } 					from './company.model';
 describe('CompanyService', () => {
 
 	const mockResponse = [
-    {_id: 0, name: 'DNB'},
-    {_id: 1, name: 'Bekk'}
+    {_id: '0', name: 'DNB'},
+    {_id: '1', name: 'Bekk'}
   ];
 
   beforeEach(() => {
@@ -65,7 +65,7 @@ describe('CompanyService', () => {
 
     tick();
     expect(result.length).toBe(2);
-    expect(result[0]._id).toBe(0);
+    expect(result[0]._id).toBe('0');
     expect(result[0].name).toBe('DNB');
 
   }));

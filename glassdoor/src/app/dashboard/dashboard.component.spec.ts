@@ -21,18 +21,18 @@ describe('DashboardComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {_id: 1, name: 'DNB',          averageRating: null, nComments: null},
-    {_id: 2, name: 'Bekk',         averageRating: null, nComments: null},
-    {_id: 3, name: 'Kolonial.no',  averageRating: null, nComments: null},
-    {_id: 4, name: 'Blank',        averageRating: 5,    nComments: 3},
-    {_id: 5, name: 'Accenture',    averageRating: 3.4,  nComments: 100},
-    {_id: 7, name: 'Mnemonic',     averageRating: null, nComments: null},
-    {_id: 8, name: 'Statoil',      averageRating: 4,    nComments: 53}
+    {_id: '1', name: 'DNB',          averageRating: null, nComments: null},
+    {_id: '2', name: 'Bekk',         averageRating: null, nComments: null},
+    {_id: '3', name: 'Kolonial.no',  averageRating: null, nComments: null},
+    {_id: '4', name: 'Blank',        averageRating: 5,    nComments: 3},
+    {_id: '5', name: 'Accenture',    averageRating: 3.4,  nComments: 100},
+    {_id: '7', name: 'Mnemonic',     averageRating: null, nComments: null},
+    {_id: '8', name: 'Statoil',      averageRating: 4,    nComments: 53}
   ];
 
   const mockCompaniesSmaller: Company[] =  [
-    {_id: 1, name: 'DNB',          averageRating: 3.2, nComments: 10},
-    {_id: 2, name: 'Bekk',         averageRating: 4, nComments: 4}
+    {_id: '1', name: 'DNB',          averageRating: 3.2, nComments: 10},
+    {_id: '2', name: 'Bekk',         averageRating: 4, nComments: 4}
   ];
 
   beforeEach(async(() => {

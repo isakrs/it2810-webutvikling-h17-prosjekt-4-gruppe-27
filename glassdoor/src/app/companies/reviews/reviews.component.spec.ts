@@ -17,10 +17,10 @@ describe('ReviewsComponent', () => {
   let spy: any;
 
   const mockCompanies: Review[] =  [
-    {_id: 1, rating: 5, comment: 'Statoil gave me a great summer', idCompany: 1},
-    {_id: 2, rating: 4, comment: 'enjoyable.', idCompany: 3},
-    {_id: 3, rating: 5, comment: 'Blank gave me a great summer', idCompany: 3},
-    {_id: 4, rating: 1, comment: 'Pays shit.', idCompany: 1}
+    {_id: '1', rating: 5, comment: 'Statoil gave me a great summer', idCompany: '1'},
+    {_id: '2', rating: 4, comment: 'enjoyable.', idCompany: '3'},
+    {_id: '3', rating: 5, comment: 'Blank gave me a great summer', idCompany: '3'},
+    {_id: '4', rating: 1, comment: 'Pays shit.', idCompany: '1'}
   ];
 
   beforeEach(async(() => {
