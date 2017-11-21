@@ -29,6 +29,35 @@ describe('ReviewService', () => {
     this.backend.connections.subscribe((connection: any) => this.lastConnection = connection);
   });
 
+
+  it('should query current service url with getReviews("1")' , () => {
+    this.reviewService.getReviews('1');
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/review/company/1`);
+  });
+
+  it('should query current service url delete("1")' , () => {
+    this.reviewService.delete('1');
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/review/1`);
+  });
+
+  it('should query current service url with create("3", "very good", "2")', () => {
+    this.reviewService.create('3', 'very good', '2');
+    expect(this.lastConnection).toBeDefined();
+    expect(this.lastConnection.request.url)
+    .toBe(`${baseURL}/api/review`);
+  });
+
+  // it('should query current service url with update("0")', () => {
+  //   this.reviewService.create(mockResponse[0]);
+  //   expect(this.lastConnection).toBeDefined();
+  //   expect(this.lastConnection.request.url)
+  //   .toBe(`${baseURL}/api/review/0`);
+  // });
+
   it('getReviews(idCompany=1) should return reviews', fakeAsync(() => {
 
     let result: Review[];
