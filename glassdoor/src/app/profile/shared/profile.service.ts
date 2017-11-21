@@ -12,7 +12,7 @@ export class ProfileService {
 
   constructor(private http: Http, private router: Router) { }
 
-  onLogin(username: string, password: string) {
+  onLogin(username: string, password: string): Promise<any> {
   	const params = JSON.stringify({username: username, password: password});
   	const url = `${this.profileURL}/login`;
   	return this.http
@@ -24,9 +24,9 @@ export class ProfileService {
   		.catch(this.handleError);
   }
 
-  onRegister(username: string, password: string) {
+  onRegister(username: string, password: string): Promise<any> {
   	const params = JSON.stringify({username: username, password: password});
-  	const url = `${this.profileURL}/register`;
+  	const url = `${this.profileURL}/signup`;
   	return this.http
   		.post(url, params, {headers: this.headers})
   		.toPromise()
