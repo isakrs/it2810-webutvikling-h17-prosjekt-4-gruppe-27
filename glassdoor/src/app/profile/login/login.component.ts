@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProfileService } from '../shared/profile.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
