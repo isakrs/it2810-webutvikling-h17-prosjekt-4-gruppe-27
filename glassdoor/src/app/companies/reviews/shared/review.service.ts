@@ -13,7 +13,7 @@ export class ReviewService {
 
   constructor(private http: Http) { }
 
-  getReviews(idCompany: number): Promise<Review[]> {
+  getReviews(idCompany: string): Promise<Review[]> {
     const url = `${this.reviewsUrl}/company/${idCompany}`;
     return this.http.get(url)
       .toPromise()
@@ -23,7 +23,7 @@ export class ReviewService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<Review> {
+  delete(id: string): Promise<Review> {
     const url = `${this.reviewsUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()

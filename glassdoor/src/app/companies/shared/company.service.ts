@@ -30,7 +30,7 @@ export class CompanyService {
                .catch(this.handleError);
   }
 
-  getCompany(id: number): Promise<Company> {
+  getCompany(id: string): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
@@ -38,7 +38,7 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<Company> {
+  delete(id: string): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
