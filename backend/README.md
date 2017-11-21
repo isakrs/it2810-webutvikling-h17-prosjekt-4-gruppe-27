@@ -230,4 +230,5 @@ data = [
 ]
 ```
 
-
+### For operasjoner som krever auth 
+  * ta med header 'Authorization': 'Bearer <token>'
