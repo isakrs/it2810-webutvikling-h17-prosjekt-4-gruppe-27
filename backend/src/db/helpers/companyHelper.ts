@@ -20,9 +20,15 @@ async function findCompaniesMinComments(minComments:number){
     })
 }
 
-
+async function searchByName(searchTerm:string){
+    return await Company.find({
+        name:new RegExp(`^${searchTerm}`)
+    }
+    )
+}
 export {
     findCompaniesMinRatingMinComments,
     findCompaniesMinRating,
-    findCompaniesMinComments
+    findCompaniesMinComments,
+    searchByName
 }

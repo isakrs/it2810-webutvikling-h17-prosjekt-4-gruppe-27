@@ -21,6 +21,11 @@ let reviewSchema = new mongoose.Schema({
         versionKey:false
     }
 )
+let name
+if (process.env.NODE_ENV === 'test'){
+    name = 'Reviewtest'
+}
 
-let Review = mongoose.model('Review', reviewSchema)
+let Review = mongoose.model(name, reviewSchema)
+
 export default Review

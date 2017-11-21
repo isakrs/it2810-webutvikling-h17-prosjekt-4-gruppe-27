@@ -23,9 +23,12 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response,next)
 //returns all companies
 companyRouter.get('/', async (req:express.Request, res:express.Response)=>{
     let query = req.query
-    console.log(query)
     try{
         let companies
+        if (_.has(query,'name')){
+            companies = await companyHelpers.searchByName(query.name)
+            return res.status(200).send(JSON.stringify(companies))
+        }
         if (_.has(query,'minRating')&&_.has(query,'minComments')){
             companies = await companyHelpers.findCompaniesMinRatingMinComments(query.minRating, query.minComments)
             return res.status(200).send(JSON.stringify(companies))
