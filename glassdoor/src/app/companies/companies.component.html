@@ -26,10 +26,3 @@
       (click)="delete(company); $event.stopPropagation()">x</button>
   </li>
 </ul>
-
-<div *ngIf="selectedCompany">
-  <h2>
-    {{selectedCompany.name | uppercase}} is my company
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>
