@@ -4,8 +4,9 @@ let reviewRouter = express.Router()
 import {calculateAvgRatingAndNumberOfComments, updateCompanyStats, IavgRatingAnNumberOfComments} from './../../db/helpers/reviewHelper'
 
 //calculate rating 
-reviewRouter.post('/', async function(req:express.Request, res: express.Response){
+reviewRouter.post('/', async function(req:any, res: express.Response){
     try {
+        
         let review = new Review(req.body)
         await review.validate()
         await review.save()

@@ -34,10 +34,26 @@ describe('testing reveiew /api/review', function(){
             return supertest(app)
             .post('/api/review')
             .send(badTestReview)
-            .expect(400)
+            .expect(401)
         })
 
-        it('should be able to create a review if company exists and attributes are correct',function(){
+        it('should not be able to create a review if company exists and attributes are correct but not signed in',function(){
+            let testReview2 = {
+                rating: 4,
+                comment : 'comment',
+                idCompany: company._id
+            }
+            return supertest(app)
+            .post('/api/review')
+            .send(testReview2)
+            .expect(401)
+            .then(function(response){
+                expect(response.body, 'does not _id , rating , comment, idCompany').have.all.keys('comment','_id', 'rating', 'idCompany')
+                return Review.findByIdAndRemove(response.body._id)
+            })
+        })
+
+        it('should be able to create a review if company exists and attributes are correct and user signed in',function(){
             let testReview2 = {
                 rating: 4,
                 comment : 'comment',
@@ -53,6 +69,8 @@ describe('testing reveiew /api/review', function(){
             })
         })
     })
+
+    
 
     describe('GET api/review/company/:id',function(){
         let companyTest2 = new Company({name:'test2'})
