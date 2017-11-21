@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginComponent }			from './login/login.component';
 import { MyPageComponent }		from './my-page/my-page.component';
 import { User }								from './shared/user.model';
+import { ProfileService } 		from './shared/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,8 +16,7 @@ export class ProfileComponent implements OnInit {
 	user: User;
 	token: string;
 
-
-  constructor() {}
+  constructor(private profileService: ProfileService) {}
 
   ngOnInit() {
   	const session = JSON.parse(localStorage.getItem('session'));
@@ -27,11 +27,10 @@ export class ProfileComponent implements OnInit {
 		if (session === null || session.auth === false) {
 			this.isLoggedIn = false;
 		} else {
-			// this.isLoggedIn = this.profileService.validateToken(session.token);
+			// this.isLoggedIn = this.profileService.isTokenValid(session.token);
 			this.auth = session.auth;
 			this.user = session.user;
 			this.token = session.token;
 		}
 	}
-
 }
