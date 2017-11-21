@@ -51,7 +51,6 @@ export class ProfileService {
   }
 
   onLogOut(): void {
-    console.log("session expired"); // for demo purposes only
   	localStorage.removeItem('session');
   	this.router.navigate(['/']);
   	location.reload()

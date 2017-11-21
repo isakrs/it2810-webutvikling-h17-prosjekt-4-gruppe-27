@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   onLogin(username: string, password: string): void {
   	this.profileService.onLogin(username, password)
   	.then(res => {
-  	console.log("res from login: ", res);
-
-  	});
+  		localStorage.setItem('session', JSON.stringify(res.json()));
+  	})
+  	.catch(this.handleError);
   }
 
   onRegister(username: string, password: string): void {
