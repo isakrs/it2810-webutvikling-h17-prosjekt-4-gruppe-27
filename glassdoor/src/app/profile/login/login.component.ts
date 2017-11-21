@@ -19,13 +19,11 @@ export class LoginComponent implements OnInit {
   	.then(res => {
   		localStorage.setItem('session', JSON.stringify(res.json()));
   	})
-  	.catch(this.handleError);
   }
 
+  // TODO: add handling of register
   onRegister(username: string, password: string): void {
-  	this.profileService.onRegister(username, password)
-  	.then(res => {
-  		console.log("res from register: ", res);
-  	});
+  	this.profileService.onRegister(username, password);
   }
+
 }
