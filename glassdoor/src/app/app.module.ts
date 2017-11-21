@@ -18,6 +18,10 @@ import { ReviewDetailComponent }  from './companies/reviews/review-detail/review
 import { ReviewsComponent }       from './companies/reviews/reviews.component';
 import { SortCompaniesPipe }      from './companies/shared/sort-companies.pipe';
 import { CompanyFilterComponent } from './companies/company-filter/company-filter.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './profile/login/login.component';
+import { RegisterComponent } from './profile/register/register.component';
+import { MyPageComponent } from './profile/my-page/my-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { CompanyFilterComponent } from './companies/company-filter/company-filte
     ReviewDetailComponent,
     ReviewsComponent,
     SortCompaniesPipe,
-    CompanyFilterComponent
+    CompanyFilterComponent,
+    ProfileComponent,
+    LoginComponent,
+    RegisterComponent,
+    MyPageComponent
   ],
   imports: [
     BrowserModule,
