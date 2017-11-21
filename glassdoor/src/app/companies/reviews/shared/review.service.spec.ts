@@ -12,7 +12,7 @@ describe('ReviewService', () => {
 
 	const mockResponse = [
     {_id: '0', rating: 5, comment: 'DNB paid me well', idCompany: '1'},
-    {_id: '1', rating: 1, comment: 'paid shit.', idCompany: '2'}
+    {_id: '1', rating: 1, comment: 'paid shit.', idCompany: '1'}
   ];
 
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe('ReviewService', () => {
     })));
 
     tick();
-    expect(result.length).toBe(1);
+    expect(result.length).toBe(2);
     expect(result[0]._id).toBe('0');
     expect(result[0].idCompany).toBe('1');
     expect(result[0].rating).toBe(5);
