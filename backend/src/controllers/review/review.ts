@@ -9,8 +9,8 @@ reviewRouter.post('/', async function(req:express.Request, res: express.Response
         let review = new Review(req.body)
         await review.validate()
         await review.save()
-        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
-        await updateCompanyStats(updatedReviews,req.params.id)
+        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.body.idCompany)
+        await updateCompanyStats(updatedReviews,req.body.idCompany)
         return res.status(200).send(JSON.stringify(review))
     } catch (error) {
         return res.status(400).send()
@@ -21,7 +21,7 @@ reviewRouter.post('/', async function(req:express.Request, res: express.Response
 reviewRouter.get('/company/:id', async function(req:express.Request, res: express.Response){
     try {
         let reviews= await Review.find({idCompany:req.params.id})
-        return res.set(200).send(JSON.stringify([...reviews]))
+        return res.set(200).send(JSON.stringify(reviews))
     } catch (error) {
         return res.status(400).send()
     }
