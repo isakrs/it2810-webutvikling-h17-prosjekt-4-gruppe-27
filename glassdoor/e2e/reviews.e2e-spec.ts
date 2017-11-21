@@ -14,7 +14,7 @@ describe('Review section of Company Detail Page', () => {
   it('should add and remove reviews', async() => {
 
     // Navigating to google page
-    rSec.navigateTo("5a13f584a599139e9e648632");
+    rSec.navigateTo("5a1432104ccf10a954f78e51");
 
     // Store number of Reviews at this time
     await rSec.noReviews().then(num => nReviews=num);
