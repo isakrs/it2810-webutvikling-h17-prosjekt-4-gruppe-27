@@ -125,9 +125,9 @@ describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ w
             ])
     })
 
-    it('should search based on term, only return relevant', async function(){
+    it('should search based on term, only return relevant term bainba', async function(){
         let response  = await supertest(app).get('/api/company/?name=bainba').expect(200)
-        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.have.lengthOf(1)
         expect(response.body).to.be.an('array')
         expect(response.body).to.have.deep.members([
             {_id:comp3._id.toString(),

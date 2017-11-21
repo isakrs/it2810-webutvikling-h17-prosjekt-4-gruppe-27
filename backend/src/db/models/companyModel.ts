@@ -17,6 +17,8 @@ let name = 'Company'
 if (process.env.NODE_ENV === 'test'){
     name = 'Companytest'
 }
+
+
 let Company = mongoose.model(name,companySchema)
 
 export default Company
