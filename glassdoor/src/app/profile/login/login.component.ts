@@ -15,12 +15,17 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(username: string, password: string): void {
-  	const res = this.profileService.onLogin(username, password);
+  	this.profileService.onLogin(username, password)
+  	.then(res => {
   	console.log("res from login: ", res);
+
+  	});
   }
 
   onRegister(username: string, password: string): void {
-  	const res = this.profileService.onRegister(username, password);
-  	console.log("res from register: ", res);
+  	this.profileService.onRegister(username, password)
+  	.then(res => {
+  		console.log("res from register: ", res);
+  	});
   }
 }

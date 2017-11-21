@@ -27,7 +27,8 @@ export class ProfileComponent implements OnInit {
 		if (session === null || session.auth === false) {
 			this.isLoggedIn = false;
 		} else {
-			// this.isLoggedIn = this.profileService.isTokenValid(session.token);
+			this.profileService.isTokenValid(session.token)
+			.then(isLoggedIn => this.isLoggedIn = isLoggedIn);
 			this.auth = session.auth;
 			this.user = session.user;
 			this.token = session.token;
