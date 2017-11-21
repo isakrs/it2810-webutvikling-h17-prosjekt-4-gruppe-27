@@ -20,7 +20,6 @@ import { SortCompaniesPipe }      from './companies/shared/sort-companies.pipe';
 import { CompanyFilterComponent } from './companies/company-filter/company-filter.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './profile/login/login.component';
-import { RegisterComponent } from './profile/register/register.component';
 import { MyPageComponent } from './profile/my-page/my-page.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { MyPageComponent } from './profile/my-page/my-page.component';
     CompanyFilterComponent,
     ProfileComponent,
     LoginComponent,
-    RegisterComponent,
     MyPageComponent
   ],
   imports: [
