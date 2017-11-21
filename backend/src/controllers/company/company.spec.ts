@@ -16,20 +16,20 @@ describe('testing api/company', function(){
     })
 })
 
-describe('testing GET api/company',function(){
+describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ with searchTerms',function(){
     let comp1:any = new Company({
-        name:'name1',
+        name:'evry',
         averageRating: 1,
         nComments: 5
     })
 
     let comp2:any = new Company({
-        name:'name2',
+        name:'bain',
         averageRating: 2,
         nComments: 2
     })
     let comp3:any = new Company({
-        name:'name3',
+        name:'bainbain',
         averageRating: 1,
         nComments: 6
     })
@@ -94,6 +94,49 @@ describe('testing GET api/company',function(){
             ])
     })
 
+    it('should search based on term', async function(){
+        let response  = await supertest(app).get('/api/company/?name=evry').expect(200)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.lengthOf(1)
+        expect(response.body).to.have.deep.members([
+            {_id:comp1._id.toString(),
+            averageRating:comp1.averageRating,
+            nComments:comp1.nComments,
+            name:comp1.name
+            }
+            ])
+    })
+
+    it('should search based on term and only return relevant', async function(){
+        let response  = await supertest(app).get('/api/company/?name=bai').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp2._id.toString(),
+            averageRating:comp2.averageRating,
+            nComments:comp2.nComments,
+            name:comp2.name
+            },
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
+
+    it('should search based on term, only return relevant', async function(){
+        let response  = await supertest(app).get('/api/company/?name=bainba').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
     
 })
 
