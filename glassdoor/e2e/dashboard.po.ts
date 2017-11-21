@@ -10,7 +10,7 @@ export class DashboardPage {
   }
 
   searchFor(term: string) {
-    this.searchInput.sendKeys('kolo');
+    this.searchInput.sendKeys('Kolo');
   }
 
   getSearchResults() {

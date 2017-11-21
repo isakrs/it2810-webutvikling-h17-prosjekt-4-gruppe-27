@@ -1,25 +1,34 @@
-import { CompaniesPage } from './companies.po';
 import { browser, protractor, element, by } from 'protractor';
+
+import { CompaniesPage } from './companies.po';
 
 describe('Companies page', () => {
 
-  let cPage: CompaniesPage;
+  let cPage:      CompaniesPage;
+  let nCompanies: number;
 
-  beforeEach(() => {
+  beforeEach(async() => {
     cPage = new CompaniesPage();
   });
 
-  it('should add and remove companies', () => {
+  it('should add and remove companies', async() => {
 
     cPage.navigateTo();
 
-    expect(cPage.noCompanies()).toBe(9);
+    // Store number of companies at this time
+    await cPage.noCompanies().then(num => {
+      nCompanies=num
+    });
 
-    cPage.addCompany('Cognite');
-    expect(cPage.noCompanies()).toBe(10);
+    expect(cPage.noCompanies()).toBeGreaterThan(0);
 
-    cPage.delCompany(9);
-    expect(cPage.noCompanies()).toBe(9);
+    // add a test company
+    cPage.addCompany('e2e-test');
+    expect(cPage.noCompanies()).toBe(nCompanies+1);
+
+    // delete the added test company (will be the last index)
+    cPage.delCompany(nCompanies);
+    expect(cPage.noCompanies()).toBe(nCompanies);
 
   });
 

@@ -216,6 +216,7 @@ url: 'api/review/user/<id>'
 
 Returnerer _id, username og reviews gjort av denne brukeren
 
+
 ```json
 data = [
   {
@@ -228,6 +229,5 @@ data = [
   } 
 ]
 ```
-
 
 

@@ -9,21 +9,21 @@ export class ReviewsSection {
   private reviewInputComment = element(by.css('#review-input-comment'));
   private reviewInputSubmit = element(by.css('.add-review'));
 
-  navigateTo(id: number) {
-    return browser.get('/detail/${number}');
+  navigateTo(idCompany: string) {
+    return browser.get(`/detail/${idCompany}`);
   }
 
-  noReviews() {
+  async noReviews() {
     return this.reviews.count();
   }
 
-  addReview(rating: number, comment: string) {
+  async addReview(rating: number, comment: string) {
     this.reviewInputRating.sendKeys(rating);
     this.reviewInputComment.sendKeys(comment);
     this.reviewInputSubmit.click();
   }
 
-  delReview(index: number) {
+  async delReview(index: number) {
     this.delBttns.get(index).click();
   }
 

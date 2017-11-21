@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Review }           from './shared/review.model';
 import { ReviewService }    from './shared/review.service';
+import { Company }          from '../shared/company.model';
 
 @Component({
   selector: 'reviews',
@@ -10,6 +11,7 @@ import { ReviewService }    from './shared/review.service';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
+  @Input() company: Company;
   reviews: Review[];
   selectedReview: Review;
 
@@ -21,7 +23,7 @@ export class ReviewsComponent implements OnInit {
   add(rating: number, comment: string): void {
     comment = comment.trim();
     if (!(rating >= 1.0 && rating <= 5.0  && comment)) { return; }
-    this.reviewService.create(rating, comment)
+    this.reviewService.create(rating, comment, this.company._id)
       .then(review => {
         this.reviews.push(review);
         this.selectedReview = null;
@@ -30,7 +32,7 @@ export class ReviewsComponent implements OnInit {
 
   delete(review: Review): void {
     this.reviewService
-        .delete(review.id)
+        .delete(review._id)
         .then(() => {
           this.reviews = this.reviews.filter(r => r !== review);
           if (this.selectedReview === review) { this.selectedReview = null; }
@@ -39,7 +41,7 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.reviewService.getReviews(+params.get('id')))
+      .switchMap((params: ParamMap) => this.reviewService.getReviews(params.get('_id')))
       .subscribe(reviews => this.reviews = reviews);
   }
 

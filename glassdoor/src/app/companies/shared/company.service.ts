@@ -8,8 +8,8 @@ import { Company } from './company.model';
 @Injectable()
 export class CompanyService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private companiesUrl = 'api/companies';  // URL to web api
+  private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}, );
+  private companiesUrl = 'http://localhost:3000/api/company';  // URL to web api
 
   constructor(private http: Http) { }
 
@@ -26,7 +26,7 @@ export class CompanyService {
                .catch(this.handleError);
   }
 
-  getCompany(id: number): Promise<Company> {
+  getCompany(id: string): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
@@ -34,7 +34,7 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<Company> {
+  delete(id: string): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
@@ -51,7 +51,7 @@ export class CompanyService {
   }
 
   update(company: Company): Promise<Company> {
-    const url = `${this.companiesUrl}/${company.id}`;
+    const url = `${this.companiesUrl}/${company._id}`;
     return this.http
       .put(url, JSON.stringify(company), {headers: this.headers})
       .toPromise()

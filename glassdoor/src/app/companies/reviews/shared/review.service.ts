@@ -9,21 +9,19 @@ import { Review } from './review.model';
 export class ReviewService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private reviewsUrl = 'api/reviews';  // URL to web api
+  private reviewsUrl = 'http://localhost:3000/api/review';  // URL to web api
 
   constructor(private http: Http) { }
 
-  getReviews(idCompany: number): Promise<Review[]> {
-    return this.http.get(this.reviewsUrl)
+  getReviews(idCompany: string): Promise<Review[]> {
+    const url = `${this.reviewsUrl}/company/${idCompany}`;
+    return this.http.get(url)
       .toPromise()
-      .then(response => {
-        let res = response.json().filter(review => review.idCompany === idCompany);
-        return res as Review[]}
-        )
+      .then(response => response.json() as Review[])
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<Review> {
+  delete(id: string): Promise<Review> {
     const url = `${this.reviewsUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
@@ -31,11 +29,11 @@ export class ReviewService {
       .catch(this.handleError);
   }
 
-  create(rating: number, comment: string): Promise<Review> {
+  create(rating: number, comment: string, idCompany: string): Promise<Review> {
     return this.http
       .post(
         this.reviewsUrl,
-        JSON.stringify({rating: rating, comment: comment}),
+        JSON.stringify({rating: rating, comment: comment, idCompany: idCompany}),
         {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Review)
@@ -43,7 +41,7 @@ export class ReviewService {
   }
 
   update(review: Review): Promise<Review> {
-    const url = `${this.reviewsUrl}/${review.id}`;
+    const url = `${this.reviewsUrl}/${review._id}`;
     return this.http
       .put(url, JSON.stringify(review), {headers: this.headers})
       .toPromise()

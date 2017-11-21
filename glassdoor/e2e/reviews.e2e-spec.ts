@@ -4,23 +4,30 @@ import { ReviewsSection }     from './reviews.po';
 
 describe('Review section of Company Detail Page', () => {
 
-  let rSec: ReviewsSection;
+  let rSec:     ReviewsSection;
+  let nReviews: number;
 
-  beforeEach(() => {
+  beforeEach(async() => {
     rSec = new ReviewsSection();
   });
 
-  it('should add and remove reviews', () => {
+  it('should add and remove reviews', async() => {
 
-    rSec.navigateTo(3);
+    // Navigating to google page
+    rSec.navigateTo("5a1432104ccf10a954f78e51");
 
-    expect(rSec.noReviews()).toBe(0);
+    // Store number of Reviews at this time
+    await rSec.noReviews().then(num => nReviews=num);
 
-    rSec.addReview(3, 'Fairly happy about my internship here');
-    expect(rSec.noReviews()).toBe(1);
+    expect(rSec.noReviews()).toBe(nReviews);
 
-    rSec.delReview(0);
-    expect(rSec.noReviews()).toBe(0);
+    // add a test review
+    rSec.addReview(3, 'Test. Fairly happy about my internship here');
+    expect(rSec.noReviews()).toBe(nReviews+1);
+
+    // delete the added test review (will be the last index)
+    rSec.delReview(nReviews);
+    expect(rSec.noReviews()).toBe(nReviews);
 
   });
 
