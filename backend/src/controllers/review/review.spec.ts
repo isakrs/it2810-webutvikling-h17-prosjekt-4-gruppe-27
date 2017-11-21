@@ -134,42 +134,63 @@ describe('testing reveiew /api/review', function(){
     })
 
     describe('testing UPDATE /api/review/:id',function(){
-        let company1 = new Company({name:'test'})
-        let review1 = new Review(
-            {
-                idCompany:company1._id,
-                rating:1,
-                comment: 'some comment'
-            })
+        let company1 = new Company({name:'test'})    
         let review1Updated = {
             idCompany:company1._id,
             rating:4,
             comment: 'very good'
         }
         
+
+        let user1 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token1 = jwt.sign({userId:user1._id}, 'superSecret', { expiresIn:'24h'})
+
+        let user2 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+        
+        let review1 = new Review(
+            {
+                idCompany:company1._id,
+                rating:1,
+                comment: 'some comment',
+                user:user1._id
+            })
         before(async function(){
            await company1.save()
            await review1.save()
+           await Promise.all([user1.save(), user2.save()])
         })
 
         after(async function(){
             await Review.findByIdAndRemove(review1._id)
             await Company.findByIdAndRemove(company1._id)
+            await Promise.all([User.Model.findByIdAndRemove(user1._id), User.Model.findByIdAndRemove(user2._id)])
         })
 
-        it('should update a record provided right attributes', function(){
-            return supertest(app)
-            .put(`/api/review/${review1._id}`)
-            .send(review1Updated)
-            .expect(200)
-            .then(function(response){
-                expect(response.body, 'does not _id , rating , comment, idCompany').have.all.keys('comment','_id', 'rating', 'idCompany')
+        it('should not be able to update record provided right attributes missing login', async function(){
+            await supertest(app).put(`/api/review/${review1._id}`).send(review1Updated).expect(401) 
+        })
+
+        it('should not be able to update record provided right attributes with login but not same user', async function(){
+            await supertest(app).put(`/api/review/${review1._id}`).set({Authorization:`Bearer ${token2}`}).send(review1Updated).expect(401)
+        })
+
+        it('should be able to update a record provided right attributes and sgined in and same user', async function(){
+            let response = await supertest(app).put(`/api/review/${review1._id}`).set({Authorization:`Bearer ${token1}`}).send(review1Updated).expect(200)
+                expect(response.body, 'does not _id , rating , comment, idCompany and user').have.all.keys('comment','_id', 'rating', 'idCompany','user')
                 expect(response.body.comment).to.equal(review1Updated.comment)
                 expect(response.body.rating).to.equal(review1Updated.rating)
                 expect(response.body.idCompany).to.equal(review1Updated.idCompany.toString())
                 expect(response.body._id).to.equal(review1._id.toString())
                 expect(response.body.idCompany).equal(company1._id.toString())
-            })
         })
     })
 
