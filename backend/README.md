@@ -4,14 +4,14 @@
 
 ```typescript
 reviews = [
-  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4},
-  {_id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2},
-  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {_id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4},
-  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3},
-  {_id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4},
-  {_id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8} 
+  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
+  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, idUser: 1, username: isak},
+  {_id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2, idUser: 2, username: jdawg},
+  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 3, username: gimli},
+  {_id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4, idUser: 0, username: marius},
+  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3, idUser: 4, username: gloin},
+  {_id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4, idUser: 4, username: gloin},
+  {_id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8,    	idUser: 5, username: tore} 
 ]
 ```
 
@@ -50,9 +50,9 @@ GET url: 'api/reviews/3' skal returnere:
 
 ```typescript
 [
-  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3},
-  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3}
+  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
+  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
+  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3, idUser: 2, username: jdawg}
 ]
 ```
 
@@ -71,10 +71,10 @@ Returnerer nye review
 ```typescript
 url: 'api/review'
 headers: {'Content-type': 'application/json'}
-data: {rating: 3, comment: 'Loved working here.', idCompany: 8}
+data: {rating: 3, comment: 'Loved working here.', idCompany: 8, idUser: 0, username: marius}
 ```
 
-1. **Delete review by id**
+2. **Delete review by id**
 
 DELETE
 
@@ -83,20 +83,6 @@ url: 'api/review/<id>'
 headers: {'Content-type': 'application/json'}
 data: {idCompany: 3}
 ```
-
-1. **Update review by id**
-
-PUT
-
-Returnerer oppdaterte review
-
-```typescript
-url: 'api/review/<id>'
-headers: {'Content-type': 'application/json'}
-data: {_id: 0, rating: 3, comment: 'I guess it was okay.', idCompany: 3}
-```
-
-
 
 ### Companies
 
@@ -222,5 +208,32 @@ headers: {'Content-type': 'application/json'}
 
 ## User
 
-Kommer
+Datamodell
+
+```typescript
+{
+  _id: string,
+  username: string,
+  password: string
+}
+```
+
+#### GET 
+
+Get user's reviews
+
+```typescript
+url: 'api/user/<id>/reviews'
+```
+
+Returnerer  reviews gjort av denne brukeren
+
+```json
+data = [
+    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, 		idUser: 0, username: marius},
+  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 		idUser: 0, username: marius}
+  ]
+```
+
+
 
