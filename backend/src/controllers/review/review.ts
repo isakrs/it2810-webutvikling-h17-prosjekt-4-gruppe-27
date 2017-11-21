@@ -1,15 +1,19 @@
 import * as express from 'express'
 import Review from './../../db/models/reviewModel'
+import User from './../../db/models/userModel'
 let reviewRouter = express.Router()
 import {calculateAvgRatingAndNumberOfComments, updateCompanyStats, IavgRatingAnNumberOfComments} from './../../db/helpers/reviewHelper'
 
 //calculate rating 
 reviewRouter.post('/', async function(req:any, res: express.Response){
     try {
-        
-        let review = new Review(req.body)
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        let review = new Review({...req.body,user:req.authed.user.userId})
         await review.validate()
         await review.save()
+        review = await Review.findOne({_id:review._id}).populate('user','username')
         let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.body.idCompany)
         await updateCompanyStats(updatedReviews,req.body.idCompany)
         return res.status(200).send(JSON.stringify(review))

@@ -4,8 +4,10 @@ import * as mongoose from 'mongoose'
 import * as _ from 'lodash'
 import Company from  './../../db/models/companyModel'
 import Review from './../../db/models/reviewModel'
+import User from './../../db/models/userModel'
 import {expect} from 'chai'
 import {default as app} from './../../app'
+import * as jwt from 'jsonwebtoken'
 
 describe('testing reveiew /api/review', function(){
 
@@ -16,17 +18,25 @@ describe('testing reveiew /api/review', function(){
         let company = new Company(testCompany)  
         let companyName = 'reviewTest'
         let companyID = ''
-        
+        let user = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token = jwt.sign({userId:user._id}, 'superSecret', { expiresIn:'24h'})
+
         before( async function(){
             company = await company.save()
+            await user.save()
         })
     
         after( async function(){
             await Company.findByIdAndRemove(company._id)
+            await User.Model.findByIdAndRemove(user._id)
         })
         
         
-        it('should return 400 if not valid attributes POST /review', function(){
+        it('should return 401 if not valid attributes POST /review and not logged in', function(){
             let badTestReview = {
                 rating:4,
                 comment:'some comment',
@@ -47,26 +57,27 @@ describe('testing reveiew /api/review', function(){
             .post('/api/review')
             .send(testReview2)
             .expect(401)
-            .then(function(response){
-                expect(response.body, 'does not _id , rating , comment, idCompany').have.all.keys('comment','_id', 'rating', 'idCompany')
-                return Review.findByIdAndRemove(response.body._id)
-            })
         })
 
-        it('should be able to create a review if company exists and attributes are correct and user signed in',function(){
+        it('should be able to create a review if company exists and attributes are correct and user signed in',async function(){
             let testReview2 = {
                 rating: 4,
                 comment : 'comment',
                 idCompany: company._id
             }
-            return supertest(app)
-            .post('/api/review')
-            .send(testReview2)
-            .expect(200)
-            .then(function(response){
-                expect(response.body, 'does not _id , rating , comment, idCompany').have.all.keys('comment','_id', 'rating', 'idCompany')
-                return Review.findByIdAndRemove(response.body._id)
-            })
+            let response = await supertest(app).post('/api/review').set({Authorization:`Bearer ${token}`}).send(testReview2).expect(200)
+            expect(response.body, 'does not _id , rating , comment, idCompany').have.all.keys('comment','_id', 'rating', 'idCompany', 'user')
+            expect(response.body.user).have.all.keys('username', '_id')
+            await Review.findByIdAndRemove(response.body._id)
+        })
+
+        it('should give 400 if not correct attrb, but signed in',async function(){
+            let testReview2 = {
+                comment : 'comment',
+                idCompany: company._id
+            }
+            let response = await supertest(app).post('/api/review').set({Authorization:`Bearer ${token}`}).send(testReview2).expect(400)
+            await Review.findByIdAndRemove(response.body._id)
         })
     })
 

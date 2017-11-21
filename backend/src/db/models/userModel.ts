@@ -14,4 +14,5 @@ if (process.env.NODE_ENV === 'test'){
 
 let User = mongoose.model(name, userSchema)
 
-export default User
+export default {Model:User,
+    name:name}
