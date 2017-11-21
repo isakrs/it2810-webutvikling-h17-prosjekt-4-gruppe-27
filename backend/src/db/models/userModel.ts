@@ -6,6 +6,12 @@ let userSchema = new mongoose.Schema({
     password:String
 })
 
-let User = mongoose.model('user', userSchema)
+let name = 'user'
+if (process.env.NODE_ENV === 'test'){
+    name = 'usertest'
+}
+
+
+let User = mongoose.model(name, userSchema)
 
 export default User
