@@ -21,7 +21,7 @@ let reviewSchema = new mongoose.Schema({
         versionKey:false
     }
 )
-let name
+let name ='Review'
 if (process.env.NODE_ENV === 'test'){
     name = 'Reviewtest'
 }
