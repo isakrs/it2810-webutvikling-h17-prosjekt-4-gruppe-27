@@ -58,9 +58,6 @@ export class CompaniesComponent implements OnInit {
 
   onSelect(company: Company): void {
     this.selectedCompany = company;
-  }
-
-  gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedCompany._id]);
   }
 }
