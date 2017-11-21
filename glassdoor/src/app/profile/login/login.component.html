@@ -1,7 +1,7 @@
 <div>
 	<label>Log in</label>
-	<input type="text" placeholder="username" required >
-	<input type="password" placeholder="password" required >
-	<button (click)="onLogin()">Log in</button>
-  <button (click)="onRegister()">Register</button>
+	<input type="text" placeholder="username" required #username>
+	<input type="password" placeholder="password" required #password>
+	<button (click)="onLogin(username.value, password.value)">Log in</button>
+  <button (click)="onRegister(username.value, password.value)">Register</button>
 </div>

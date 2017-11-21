@@ -9,17 +9,18 @@ import { ProfileService } from '../shared/profile.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private profileService: ProfileService) {}
 
   ngOnInit() {
   }
 
   onLogin(username: string, password: string): void {
-  	// Do login
+  	const res = this.profileService.onLogin(username, password);
+  	console.log("res from login: ", res);
   }
 
   onRegister(username: string, password: string): void {
-  	// Do regisger
+  	const res = this.profileService.onRegister(username, password);
+  	console.log("res from register: ", res);
   }
-
 }
