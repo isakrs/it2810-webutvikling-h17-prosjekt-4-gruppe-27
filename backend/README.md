@@ -114,7 +114,7 @@ nComments
 
 #### GET
 
-## Search
+#####  Search
 
 GET
 Returnerer en liste over companies som matcher term på company.name. 
