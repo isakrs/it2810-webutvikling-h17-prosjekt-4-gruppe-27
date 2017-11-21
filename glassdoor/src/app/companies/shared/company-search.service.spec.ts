@@ -29,6 +29,6 @@ describe('CompanySearchService', () => {
   it('should query current service url', () => {
     this.companySearchService.search('test');
     expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/companies/?name=test');
+    expect(this.lastConnection.request.url).toBe('api/company/?name=test');
   });
 });
