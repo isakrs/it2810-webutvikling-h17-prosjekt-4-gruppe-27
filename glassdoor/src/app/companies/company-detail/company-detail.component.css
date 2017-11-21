@@ -1,6 +1,6 @@
 label {
   display: inline-block;
-  width: 3em;
+  width: 6em;
   margin: .5em 0;
   color: #607D8B;
   font-weight: bold;
@@ -12,6 +12,7 @@ input {
 }
 button {
   margin-top: 20px;
+  margin-bottom: 30px;
   font-family: Arial;
   background-color: #eee;
   border: none;
@@ -24,6 +25,6 @@ button:hover {
 }
 button:disabled {
   background-color: #eee;
-  color: #ccc; 
+  color: #ccc;
   cursor: auto;
 }

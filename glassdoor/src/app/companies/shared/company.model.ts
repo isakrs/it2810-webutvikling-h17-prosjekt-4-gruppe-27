@@ -1,4 +1,6 @@
 export class Company {
-  id: number;
+  _id: string;
   name: string;
+  averageRating?: number;
+  nComments?: number;
 }

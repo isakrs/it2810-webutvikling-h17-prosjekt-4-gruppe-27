@@ -12,16 +12,16 @@ export class CompaniesPage {
     return browser.get('/companies');
   }
 
-  noCompanies() {
+  async noCompanies() {
     return this.companies.count();
   }
 
-  addCompany(name: string) {
+  async addCompany(name: string) {
     this.companyInput.sendKeys(name);
     this.companyInputSubmit.click();
   }
 
-  delCompany(index: number) {
+  async delCompany(index: number) {
     this.delBttns.get(index).click();
   }
 

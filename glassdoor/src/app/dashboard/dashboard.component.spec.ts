@@ -10,9 +10,8 @@ import { CompanySearchComponent }   from '../companies/company-search/company-se
 import { CompanyService }           from '../companies/shared/company.service';
 import { Company }                  from '../companies/shared/company.model';
 
-
 describe('DashboardComponent', () => {
- 
+
  	let component: 	DashboardComponent;
   let fixture: 		ComponentFixture<DashboardComponent>;
 	let de:					DebugElement;
@@ -22,18 +21,18 @@ describe('DashboardComponent', () => {
   let spy: any;
 
   const mockCompanies: Company[] =  [
-    {id: 1, name: 'DNB'},
-    {id: 2, name: 'Bekk'},
-    {id: 3, name: 'Kolonial.no'},
-    {id: 4, name: 'Blank'},
-    {id: 5, name: 'Accenture'},
-    {id: 7, name: 'Mnemonic'},
-    {id: 8, name: 'Statoil'}
+    {_id: '1', name: 'DNB',          averageRating: null, nComments: null},
+    {_id: '2', name: 'Bekk',         averageRating: null, nComments: null},
+    {_id: '3', name: 'Kolonial.no',  averageRating: null, nComments: null},
+    {_id: '4', name: 'Blank',        averageRating: 5,    nComments: 3},
+    {_id: '5', name: 'Accenture',    averageRating: 3.4,  nComments: 100},
+    {_id: '7', name: 'Mnemonic',     averageRating: null, nComments: null},
+    {_id: '8', name: 'Statoil',      averageRating: 4,    nComments: 53}
   ];
 
   const mockCompaniesSmaller: Company[] =  [
-    {id: 1, name: 'DNB'},
-    {id: 2, name: 'Bekk'}
+    {_id: '1', name: 'DNB',          averageRating: 3.2, nComments: 10},
+    {_id: '2', name: 'Bekk',         averageRating: 4, nComments: 4}
   ];
 
   beforeEach(async(() => {
@@ -81,7 +80,6 @@ describe('DashboardComponent', () => {
     expect(deElements[3].nativeElement.textContent).toBe('Accenture');
   }));
 
-
   it(`should work with less than 5 entries`, fakeAsync( () => {
     spy = spyOn(companyService, 'getCompanies').and.returnValue(Promise.resolve(mockCompaniesSmaller));
     fixture.detectChanges();
@@ -93,8 +91,5 @@ describe('DashboardComponent', () => {
     expect(deElements.length).toBe(1);
     expect(deElements[0].nativeElement.textContent).toBe('Bekk');
   }));
-
-
-
 
 });

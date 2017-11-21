@@ -1,15 +1,14 @@
 import { TestBed, inject, fakeAsync, tick }       from '@angular/core/testing';
 import { MockBackend, MockConnection }            from '@angular/http/testing';
 import { ReflectiveInjector }                     from '@angular/core';
-import { 
-  Http, 
+import {
+  Http,
   Response,
   ResponseOptions,
   BaseRequestOptions,
   RequestOptions,
   ConnectionBackend
   } from '@angular/http';
-
 
 import { CompanySearchService } from './company-search.service';
 
@@ -30,6 +29,7 @@ describe('CompanySearchService', () => {
   it('should query current service url', () => {
     this.companySearchService.search('test');
     expect(this.lastConnection).toBeDefined();
-    expect(this.lastConnection.request.url).toBe('api/companies/?name=test');
+    expect(this.lastConnection.request.url)
+    .toBe('http://localhost:3000/api/company/?name=test');
   });
 });
