@@ -72,7 +72,7 @@ describe('CompaniesComponent', () => {
             .queryAll(By.css('ul.companies li button.delete'));
 
     expect(liElements.length).toBe(7);
-    expect(badgeElements.length).toBe(7);
+    expect(badgeElements.length).toBe(3);
     expect(buttonElements.length).toBe(7);
     expect(liElements[0].nativeElement.textContent.trim()).toContain('Amazon');
     expect(liElements[6].nativeElement.textContent.trim()).toContain('Statoil');
