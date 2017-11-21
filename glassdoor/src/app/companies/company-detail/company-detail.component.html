@@ -8,7 +8,7 @@
     <input [(ngModel)]="company.name" placeholder="name" />
   </div>
   <div *ngIf="company.averageRating">
-    <label>Rating: </label>{{company.averageRating}}
+    <label>Rating: </label>{{company.averageRating.toFixed(1)}}
   </div>
   <div *ngIf="company.nComments">
     <label>Comments:</label>{{company.nComments}}
