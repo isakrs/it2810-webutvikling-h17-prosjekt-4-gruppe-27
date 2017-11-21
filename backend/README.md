@@ -2,14 +2,14 @@
 
 #### Eksempel på reviews
 
-```json
+```typescript
 reviews = [
   {
-    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3,    user: {_id: 0, username: marius}
-  },  
+    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		user: {_id: "0", username: "marius"}
+  },	
   {
-    _id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 
-    user: {_id: 1, username: isak}
+    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
+  	user: {_id: 1, username: isak}
   } 
 ]
 ```
@@ -20,13 +20,9 @@ reviews = [
 
 ```typescript
 companies = [
-  {_id: 1, name: 'Statoil',      averageRating: null, nComments: null},
-  {_id: 2, name: 'Amazon',       averageRating: 3,    nComments: 3},
-  {_id: 3, name: 'Google',       averageRating: 3.3,  nComments: 9},
-  {_id: 4, name: 'Kickstarter',  averageRating: null, nComments: null},
-  {_id: 5, name: 'Apple',        averageRating: 2.1,  nComments: 43},
-  {_id: 7, name: 'Microsoft',    averageRating: null, nComments: null},
-  {_id: 8, name: 'Dell',         averageRating: null, nComments: null}
+  {_id: "1", name: "Statoil",      averageRating: null, nComments: null},
+  {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
+  {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
 ]
 ```
 
@@ -49,9 +45,9 @@ GET url: 'api/reviews/3' skal returnere:
 
 ```typescript
 [
-  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
-  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
-  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3, idUser: 2, username: jdawg}
+  {_id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", idUser: "0", username: "marius"},
+  {_id: "3", rating: 5, comment: "Loved this place.",   idCompany: "3", idUser: "0", username: "marius"},
+  {_id: "5", rating: 1, comment: "sucks.",              idCompany: "3", idUser: "2", username: "jdawg"}
 ]
 ```
 
@@ -70,7 +66,7 @@ Returnerer nye review
 ```typescript
 url: 'api/review'
 headers: {'Content-type': 'application/json'}
-data: {rating: 3, comment: 'Loved working here.', idCompany: 8, idUser: 0, username: marius}
+data: {rating: 3, comment: "Loved working here.", idCompany: "8", idUser: "0", username: "marius"}
 ```
 
 2. **Delete review by id**
@@ -80,7 +76,6 @@ DELETE
 ```typescript
 url: 'api/review/<id>'
 headers: {'Content-type': 'application/json'}
-data: {idCompany: 3}
 ```
 
 ### Companies
@@ -118,13 +113,9 @@ som returner alle companies:
 
 ```typescript
 [
-  {_id: 1, name: 'Statoil',      averageRating: null, nComments: null},
-  {_id: 2, name: 'Amazon',       averageRating: 3,    nComments: 3},
-  {_id: 3, name: 'Google',       averageRating: 3.3,  nComments: 9},
-  {_id: 4, name: 'Kickstarter',  averageRating: null, nComments: null},
-  {_id: 5, name: 'Apple',        averageRating: 2.1,  nComments: 43},
-  {_id: 7, name: 'Microsoft',    averageRating: null, nComments: null},
-  {_id: 8, name: 'Dell',         averageRating: null, nComments: null}
+  {_id: "1", name: "Statoil",      averageRating: null, nComments: null},
+  {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
+  {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
 ]
 ```
 
@@ -137,7 +128,7 @@ url: 'api/company/<id>'
 som returner (for GET url: 'api/companies/1'):
 
 ```typescript
-{_id: 1, name: 'DNB', averageRating: 2.2, nComments: 14}
+{_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
 ```
 
 1. **Filter companies**
@@ -229,11 +220,12 @@ Returnerer _id, username og reviews gjort av denne brukeren
 ```json
 data = [
   {
-    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3,    user: {_id: 0, username: marius}
-  },  
-  {
-    _id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 
+    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
     user: {_id: 0, username: marius}
+  },	
+  {
+    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
+  	user: {_id: "0", username: "marius"}
   } 
 ]
 ```
