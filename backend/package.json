@@ -14,11 +14,13 @@
   "author": "johannzv",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^7.2.3",
     "@types/morgan": "^1.7.35",
     "@types/promise": "^7.1.30",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.2",
     "morgan": "^1.9.0",

@@ -5,7 +5,7 @@ import { Http, Response, ResponseOptions,
 				 ConnectionBackend } 								from '@angular/http';
 import { ReflectiveInjector } 							from '@angular/core';
 
-import { ReviewService } 	from './review.service';
+import { ReviewService } 		from './review.service';
 import { Review } 					from './review.model';
 
 describe('ReviewService', () => {
