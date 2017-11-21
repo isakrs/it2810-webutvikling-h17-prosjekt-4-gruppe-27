@@ -14,7 +14,7 @@ export class CompanyService {
   constructor(private http: Http) { }
 
   getCompanies(minRating?: number, minComments?: number): Promise<Company[]> {
-    console.log("getting companies")
+
     let url = this.companiesUrl
     if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
     else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
@@ -22,11 +22,7 @@ export class CompanyService {
 
     return this.http.get(url)
                .toPromise()
-               .then(response => {
-                 console.log("response: ", response)
-                 return response.json() as Company[]
-               }
-                 )
+               .then(response => response.json() as Company[])
                .catch(this.handleError);
   }
 
