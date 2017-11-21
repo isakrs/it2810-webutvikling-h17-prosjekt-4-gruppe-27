@@ -51,10 +51,6 @@ describe('ReviewsComponent', () => {
     expect(comp).toBeTruthy();
   });
 
-
-
-
-
   /* Add, delete and update functionality will be tested as E2E tests. */
 
 });
