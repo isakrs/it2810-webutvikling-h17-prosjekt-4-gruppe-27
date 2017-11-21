@@ -2,6 +2,7 @@ import * as express from "express"
 import mongoose = require('mongoose')
 import * as promise from 'promise'
 import apiRouter from './controllers/index'
+import AuthRouter from './controllers/auth/authRouter'
 import * as morgan from 'morgan'
 import * as cors from 'cors'
 
@@ -12,6 +13,7 @@ let connectionString = 'mongodb://applicationUser:ehysb7TXc2G7esapvF@it2810-27.i
 //register middleware
 app.use(cors())
 //app.use(morgan('common'))
+app.use('/auth', AuthRouter)
 app.use('/api', apiRouter)
 mongoose.Promise = promise
 
