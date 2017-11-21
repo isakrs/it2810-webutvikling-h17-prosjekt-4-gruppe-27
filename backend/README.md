@@ -2,16 +2,15 @@
 
 #### Eksempel på reviews
 
-```typescript
+```json
 reviews = [
-  {_id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 0, username: marius},
-  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, idUser: 1, username: isak},
-  {_id: 2, rating: 4, comment: 'Loved working here.', idCompany: 2, idUser: 2, username: jdawg},
-  {_id: 3, rating: 5, comment: 'Loved working here.', idCompany: 3, idUser: 3, username: gimli},
-  {_id: 4, rating: 2, comment: 'Loved working here.', idCompany: 4, idUser: 0, username: marius},
-  {_id: 5, rating: 1, comment: 'Loved working here.', idCompany: 3, idUser: 4, username: gloin},
-  {_id: 6, rating: 3, comment: 'Loved working here.', idCompany: 4, idUser: 4, username: gloin},
-  {_id: 7, rating: 3, comment: 'Loved working here.', idCompany: 8,    	idUser: 5, username: tore} 
+  {
+    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, 		user: {_id: 0, username: marius}
+  },	
+  {
+    _id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 
+  	user: {_id: 1, username: isak}
+  } 
 ]
 ```
 
@@ -218,21 +217,24 @@ Datamodell
 }
 ```
 
-#### GET 
-
-Get user's reviews
+#### GET
 
 ```typescript
-url: 'api/user/<id>/reviews'
+url: 'api/review/user/<id>'
 ```
 
-Returnerer  reviews gjort av denne brukeren
+Returnerer _id, username og reviews gjort av denne brukeren
 
 ```json
 data = [
-    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, 		idUser: 0, username: marius},
-  {_id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 		idUser: 0, username: marius}
-  ]
+  {
+    _id: 0, rating: 5, comment: 'Loved working here.', idCompany: 3, 		user: {_id: 0, username: marius}
+  },	
+  {
+    _id: 1, rating: 3, comment: 'Loved working here.', idCompany: 4, 
+  	user: {_id: 0, username: marius}
+  } 
+]
 ```
 
 
