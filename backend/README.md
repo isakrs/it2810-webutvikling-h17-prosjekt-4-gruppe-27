@@ -51,6 +51,30 @@ GET url: 'api/reviews/3' skal returnere:
 ]
 ```
 
+#### GET
+
+1. **Get a user's reviews**
+
+```typescript
+url: 'api/review/user'
+headers: {'Authorization': 'Bearer <token>'}
+```
+
+Returnerer _id, username og reviews gjort av denne brukeren
+
+```json
+data = [
+  {
+    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
+    user: {_id: 0, username: marius}
+  },	
+  {
+    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
+  	user: {_id: "0", username: "marius"}
+  } 
+]
+```
+
 
 
 #### POST
@@ -208,27 +232,45 @@ Datamodell
 }
 ```
 
-#### GET
+#### POST
+
+1. **Login**
 
 ```typescript
-url: 'api/review/user/<id>'
+url: 'auth/login'
+headers: {'Content-Type': 'application/json'}
+{username: 'marius', password: 'password'}
 ```
 
-Returnerer _id, username og reviews gjort av denne brukeren
+Returnerer username og token
 
-
-```json
+```
 data = [
   {
-    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
-    user: {_id: 0, username: marius}
-  },	
-  {
-    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
-  	user: {_id: "0", username: "marius"}
-  } 
+    username: 'marius',
+    token: 'abc123123123',
+  }
 ]
 ```
 
-### For operasjoner som krever auth 
-  * ta med header 'Authorization': 'Bearer <token>'
+2. **Register**
+
+```typescript
+url: 'auth/signup'
+headers: {'Content-Type': 'application/json'}
+{username: 'marius', password: 'password'}
+```
+
+Returnerer ingen data men respons 200
+
+3. **Auth**
+
+Validerer token
+
+```typescript
+url: 'auth/verify'
+headers: {'Authorization': 'Bearer <token>'}
+```
+
+Returner ingen data men respons 200.
+
