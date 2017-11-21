@@ -31,11 +31,11 @@ export class ReviewService {
       .catch(this.handleError);
   }
 
-  create(rating: number, comment: string): Promise<Review> {
+  create(rating: number, comment: string, idCompany: string): Promise<Review> {
     return this.http
       .post(
         this.reviewsUrl,
-        JSON.stringify({rating: rating, comment: comment}),
+        JSON.stringify({rating: rating, comment: comment, idCompany: idCompany}),
         {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Review)
