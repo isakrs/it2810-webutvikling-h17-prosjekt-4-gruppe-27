@@ -17,9 +17,7 @@ export class ReviewService {
     const url = `${this.reviewsUrl}/company/${idCompany}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => {
-        return response.json() as Review[]
-        })
+      .then(response => response.json() as Review[])
       .catch(this.handleError);
   }
 
