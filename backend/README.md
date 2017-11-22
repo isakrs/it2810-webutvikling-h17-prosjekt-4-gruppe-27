@@ -1,4 +1,4 @@
-#kjører på it2810-27.idi.ntnu.no:8084/
+# kjører på it2810-27.idi.ntnu.no:8084/
 
 ## Datamodeller
 
@@ -36,7 +36,7 @@ companies = [
 
 #### GET
 
-1. **Get reviews by idCompany**
+**Get reviews by idCompany**
 
 ```typescript
 url: 'api/review/company/<idCompany>'
@@ -55,7 +55,7 @@ GET url: 'api/reviews/3' skal returnere:
 
 #### GET
 
-1. **Get a user's reviews**
+**Get a user's reviews**
 
 ```typescript
 url: 'api/review/user'
@@ -64,7 +64,7 @@ headers: {'Authorization': 'Bearer <token>'}
 
 Returnerer _id, username og reviews gjort av denne brukeren
 
-```json
+```typescript
 data = [
   {
     _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
@@ -81,7 +81,7 @@ data = [
 
 #### POST
 
-1. **Create new review**
+**Create new review**
 
 POST
 
@@ -101,7 +101,7 @@ Returnerer nye review:
 
 
 
-2. **Delete review by id**
+**Delete review by id**
 
 DELETE
 
@@ -126,16 +126,17 @@ nComments
 
 #### GET
 
-1. **Search**
+**Search**
 
 Returnerer en liste over companies som matcher term på company.name. 
 
 term er ikke case-sensetivt. det vil si Google og google vil være likt
+
 ```
 url: 'api/company/?name=${term}'
 ```
 
-2. **Get all companies**
+**Get all companies**
 
 ```typescript
 url: 'api/company'
@@ -151,7 +152,7 @@ som returner alle companies:
 ]
 ```
 
-3. **Get company by id**
+**Get company by id**
 
 ```typescript
 url: 'api/company/<id>'
@@ -163,7 +164,7 @@ som returner (for GET url: 'api/companies/1'):
 {_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
 ```
 
-4. **Filter companies**
+**Filter companies**
 
 Filtrering på >= minRating og/eller >= minComments 
 
@@ -179,7 +180,7 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
-5. **Get top companies**
+**Get top companies**
 
 Returnerer top N companies basert på average rating. 
 
@@ -187,7 +188,7 @@ Returnerer top N companies basert på average rating.
 url: api/company/?top=<N>
 ```
 
-6. **Pagination**
+**Pagination**
 
 Returnerer companies mellom skip og size
 
@@ -195,7 +196,7 @@ Returnerer companies mellom skip og size
 url: api/company/?skip=5&size=10
 ```
 
-8. **Chaining av filtering og pagination**
+**Chaining av filtering og pagination**
 
 Det hadde vært supernice om man kunne chainet disse query'ene
 
@@ -207,8 +208,10 @@ url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
 
 #### POST
 
-1. **Create new company**
-###krever auth
+**Create new company**
+
+### krever auth
+
 Generer en unik id.
 
 Returnerer nye company
@@ -221,9 +224,10 @@ headers: {'Content-type': 'application/json'}
 
 
 
-2. **Delete company by id**
+**Delete company by id**
 
-###krever auth
+### krever auth
+
 DELETE
 
 ```typescript
@@ -236,7 +240,7 @@ headers: {'Content-type': 'application/json'}
 
 
 
-3. **Update company**
+**Update company**
 
 Krever auth
 PUT
@@ -271,7 +275,7 @@ Datamodell
 
 #### POST
 
-1. **Login**
+**Login**
 
 ```typescript
 url: 'auth/login'
@@ -290,7 +294,7 @@ data = [
 ]
 ```
 
-2. **Register**
+**Register**
 
 ```typescript
 url: 'auth/signup'
@@ -300,7 +304,7 @@ headers: {'Content-Type': 'application/json'}
 
 Returnerer ingen data men respons 200
 
-3. **Auth**
+**Auth**
 
 Validerer token
 
@@ -310,4 +314,3 @@ headers: {'Authorization': 'Bearer <token>'}
 ```
 
 Returner ingen data men respons 200.
-
