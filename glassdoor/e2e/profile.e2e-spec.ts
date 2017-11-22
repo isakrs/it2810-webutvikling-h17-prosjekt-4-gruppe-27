@@ -21,6 +21,11 @@ describe('glassdoor App', () => {
     expect(page.getWelcomeMessage())
     .toEqual(`Welcome ${existingUser.username}`);
 
+    // make sure not are not forgotten when you enter profile page again.
+    page.navigateTo();
+    expect(page.getWelcomeMessage())
+    .toEqual(`Welcome ${existingUser.username}`);
+
     // TODO: log out user
   });
 
@@ -30,6 +35,11 @@ describe('glassdoor App', () => {
 
     browser.sleep(1000);
 
+    expect(page.getWelcomeMessage())
+    .toEqual(`Welcome ${newUser.username}`);
+
+    // make sure not are not forgotten when you enter profile page again.
+    page.navigateTo();
     expect(page.getWelcomeMessage())
     .toEqual(`Welcome ${newUser.username}`);
 
