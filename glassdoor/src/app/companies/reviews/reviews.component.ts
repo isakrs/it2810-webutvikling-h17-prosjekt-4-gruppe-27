@@ -14,6 +14,7 @@ import { ReviewDetailComponent } from './review-detail/review-detail.component';
 export class ReviewsComponent implements OnInit {
   @Input() company: Company;
   @Output() reviewsChanged = new EventEmitter<any>();
+  username: string;
 
   reviews: Review[];
   selectedReview: Review;
@@ -22,6 +23,7 @@ export class ReviewsComponent implements OnInit {
     private reviewService: ReviewService,
     private route: ActivatedRoute
   ) { }
+
 
   add(rating: number, comment: string): void {
     comment = comment.trim();
@@ -48,6 +50,16 @@ export class ReviewsComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.reviewService.getReviews(params.get('_id')))
       .subscribe(reviews => this.reviews = reviews);
+
+    this.getUsername();
+  }
+
+  private getUsername(): void {
+    this.username = '';
+     const session = JSON.parse(localStorage.getItem('session'));
+     if (session !== null) {
+       this.username = session.username;
+     }
   }
 
   onSelect(review: Review): void {
