@@ -1,7 +1,12 @@
-<div>
-	<label>Log in</label>
-	<input type="text" placeholder="username" required #username>
-	<input type="password" placeholder="password" required #password>
-	<button (click)="onLogin(username.value, password.value)">Log in</button>
-  <button (click)="onRegister(username.value, password.value)">Register</button>
-</div>
+<label>Log in</label>
+<form ngNativeValidate >
+	<div>
+		<input type="text" placeholder="username" required #username >
+		<input type="password" placeholder="password" required #password >
+  		<button type="submit" (click)="onLogin(username.value, password.value)">Log in</button>
+  		<button type="submit" (click)="onRegister(username.value, password.value)">Register</button>
+	</div>
+</form>
+
+
+
