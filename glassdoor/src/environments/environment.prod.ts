@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: true;
 
-  apiUrl: 'http://it2810-27.idi.ntnu.no:8084'
+  apiUrl: 'http://it2810-27.idi.ntnu.no:8084';
 };
