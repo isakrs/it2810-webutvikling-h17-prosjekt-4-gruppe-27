@@ -19,6 +19,11 @@ import { ReviewsComponent }       from './companies/reviews/reviews.component';
 import { SortCompaniesPipe }      from './companies/shared/sort-companies.pipe';
 import { CompanyFilterComponent } from './companies/company-filter/company-filter.component';
 
+import { ProfileComponent }       from './profile/profile.component';
+import { LoginComponent }         from './profile/login/login.component';
+import { MyPageComponent }        from './profile/my-page/my-page.component';
+import { ProfileService }         from './profile/shared/profile.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,10 @@ import { CompanyFilterComponent } from './companies/company-filter/company-filte
     ReviewDetailComponent,
     ReviewsComponent,
     SortCompaniesPipe,
-    CompanyFilterComponent
+    CompanyFilterComponent,
+    ProfileComponent,
+    LoginComponent,
+    MyPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,7 @@ import { CompanyFilterComponent } from './companies/company-filter/company-filte
     }),
     AppRoutingModule
   ],
-  providers: [ CompanyService ],
+  providers: [ CompanyService, ProfileService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
