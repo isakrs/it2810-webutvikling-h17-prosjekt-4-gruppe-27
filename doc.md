@@ -47,7 +47,7 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 #### ~~Iterasjon: 3~~
 
-~~Legg til støtte for flere stjerneannmeldinger (gjennomsnitt) og støtte for flere kommentarer. ~~
+~~Legg til støtte for flere stjerneannmeldinger (gjennomsnitt) og støtte for flere kommentarer.~~
 
 #### ~~Iterasjon: 4~~
 
