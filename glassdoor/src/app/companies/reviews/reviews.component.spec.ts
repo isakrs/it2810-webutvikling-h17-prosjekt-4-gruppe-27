@@ -9,6 +9,8 @@ import { ReviewsComponent }       from './reviews.component';
 import { ReviewService }          from './shared/review.service';
 import { Review }                 from './shared/review.model';
 import { ReviewDetailComponent }  from './review-detail/review-detail.component';
+import { ProfileService }         from '../../profile/shared/profile.service';
+
 
 describe('ReviewsComponent', () => {
 
@@ -24,6 +26,7 @@ describe('ReviewsComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         ReviewService,
+        ProfileService,
         {provide: APP_BASE_HREF, useValue: '/'}
       ],
       imports: [

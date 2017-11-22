@@ -10,6 +10,8 @@ import { CompaniesComponent } from './companies.component';
 import { CompanyService }     from './shared/company.service';
 import { Company }            from './shared/company.model';
 import { SortCompaniesPipe }  from './shared/sort-companies.pipe';
+import { ProfileService }     from '../profile/shared/profile.service';
+
 
 describe('CompaniesComponent', () => {
 
@@ -35,6 +37,7 @@ describe('CompaniesComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         CompanyService,
+        ProfileService,
         {provide: APP_BASE_HREF, useValue: '/'}
       ],
       imports: [
