@@ -198,17 +198,29 @@ describe('Testing DELETE /api/company/:id',function(){
         name:'test1',
     })
 
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
     
     before(async function(){
-        await company1.save()
+        await Promise.all([company1.save(), user2.save()])
     })
-    it('should be able to delete a company', function(){
-        return supertest(app)
-        .delete(`/api/company/${company1._id}`)
-        .expect(200)
-        .then(async function(){
-            let result = await Company.findById(company1._id)
-            expect(result).to.be.null
-        })
+
+    after(async function(){
+        await Promise.all([User.Model.findByIdAndRemove(user2._id)])
     })
+    it('shouls be able to delete if signed in an company id is correct', async function(){
+        await supertest(app).delete(`/api/company/${company1._id}`).set({Authorization:`Bearer ${token2}`}).send().expect(200)
+    })
+    it('should not be able to delete a company if not signed in', async function(){
+        await supertest(app).delete(`/api/company/${company1._id}`).expect(401)
+    })
+
+    it('should not be able to delete if company does not exist, but user is authed', async function(){
+        await supertest(app).delete(`/api/company/${1111111}`).set({Authorization:`Bearer ${token2}`}).expect(400)
+    })
+
 })

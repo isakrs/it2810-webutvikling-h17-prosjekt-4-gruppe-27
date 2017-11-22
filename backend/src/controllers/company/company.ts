@@ -51,20 +51,20 @@ companyRouter.get('/', async (req:any, res:express.Response)=>{
 })
 
 //deletes a company given a id 
-companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>{
+companyRouter.delete('/:id', async function(req:any, res: express.Response){
     try{
-    let deletedComp = await Company.findByIdAndRemove(req.params.id)
-    if(!deletedComp){
-        let error:Error = new Error('The companany does not exist')
-        throw error
-    }
-    res.status(200)
-    res.send(JSON.stringify({message:`company ${req.params.id} is now deleted`}))
-   return
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        let deletedComp = await Company.findByIdAndRemove(req.params.id)
+        if(!deletedComp){
+            let error:Error = new Error('The companany does not exist')
+            throw error
+        }
+        return  res.status(200).send(JSON.stringify({message:`company ${req.params.id} is now deleted`}))
     }catch(e){
         res.status(400)
-        res.send(JSON.stringify(e.message))
-        return
+        return res.send(JSON.stringify(e.message))
     }
 })
 
@@ -72,7 +72,6 @@ companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>
 companyRouter.post('/', async(req:any, res: express.Response)=>{
     
     try{
-
         if (!req.authed.isAuthed){
             return res.status(401).send()
         }
