@@ -5,7 +5,8 @@ import * as mongoose from 'mongoose'
 import {default as app} from './../../app'
 import * as _ from 'lodash'
 import Company from './../../db/models/companyModel'
-
+import User from './../../db/models/userModel'
+import * as jwt from 'jsonwebtoken'
 
 let companyName = 'testTestTest1'
 let companyID = ''
@@ -141,23 +142,54 @@ describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ w
 })
 
 describe('testing POST api/company ', function(){
-    let companyName ='comp1'
-    it('should create a new company and retrive the same company', function(){     
-        return supertest(app)
-        .post('/api/company')
-        .send({
-            name: companyName
-        })
-        .expect(200)
-        .then(async function(response){
-            expect(response.body, 'is not an object').to.be.an('object')
-            expect(response.body, 'does not have name and _id').have.all.keys('name','_id', 'averageRating', 'nComments')
-            expect(response.body.name, 'does not have the same name?').to.equal(companyName) 
-            let company:any  = await Company.findById(response.body._id) 
-            expect(company._id.toString()).to.equal(response.body._id)
-            expect(company.name.toString()).to.equal(response.body.name)
-            await Company.findByIdAndRemove(company._id)          
-        })
+    let company4 = {
+        name:'some Name'
+    }
+    let company4id:string
+
+    let company5 = {
+        name:'some naMe'
+    }
+    let company6 = {
+        name:'SOMe name'
+    }
+    let company7 = {
+        name:'SomE Name'
+    }
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+  
+
+    before(async function(){
+        await user2.save()
+    })
+
+    after(async function(){
+        await Promise.all([User.Model.findByIdAndRemove(user2._id), Company.findByIdAndRemove(company4id)])
+    })
+
+    it('should not be able to create company if not signed in', async function(){
+        await  supertest(app).post('/api/company').send(company4).expect(401)
+    })
+
+    it('should create a new compnay if logged in', async function(){     
+       let respone =  await supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company4).expect(200)
+       company4id = respone.body._id
+       expect(respone.body).to.have.all.keys('name','_id','nComments','averageRating')
+    })
+
+    it('should not be able to create a company with the same name', async function(){
+        let respone =  await supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company4).expect(400)
+    })
+
+    it('should not be possible to create a company with another caseSensitivity', async function(){
+        await Promise.all([supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company5).expect(400),
+         supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company6).expect(400),
+         supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company7).expect(400)])
     })
 })
 
@@ -165,6 +197,8 @@ describe('Testing DELETE /api/company/:id',function(){
     let company1 = new Company({
         name:'test1',
     })
+
+    
     before(async function(){
         await company1.save()
     })

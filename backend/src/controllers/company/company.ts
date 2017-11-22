@@ -69,23 +69,25 @@ companyRouter.delete('/:id', async(req:express.Request, res: express.Response)=>
 })
 
 //creates a new company
-companyRouter.post('/', async(req:express.Request, res: express.Response)=>{
-    let company = new Company({name:req.body.name})
+companyRouter.post('/', async(req:any, res: express.Response)=>{
+    
     try{
-        let existingCompany = await Company.findOne({name:req.body.name})
+
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        let company = new Company({name:req.body.name})
+        let existingCompany = await Company.findOne({name:{
+            $regex: new RegExp(req.body.name,'i')}})
         if(existingCompany){
             let error:Error = new Error('company allready exist')
             throw error
         }
+        await company.save()
+        return res.status(200).send(JSON.stringify(company))
+
     }catch(error){
        return res.status(400).send(JSON.stringify(error.message))
-    }
-    try{
-        await company.save()
-       return res.status(200).send(JSON.stringify(company))
-    }catch(e){
-    
-        return res.status(400).send(JSON.stringify(e))
     }
 })
 export default companyRouter
