@@ -33,6 +33,13 @@ export class CompaniesComponent implements OnInit {
         .then(companies => this.companies = companies);
   }
 
+  getNextPageCompanies(): void {
+    this.companyService
+      .getCompanies(undefined, undefined, true)
+      .then(companies => this.companies = companies);
+  }
+
+
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
