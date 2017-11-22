@@ -12,8 +12,7 @@ import { ProfileService } 		from './shared/profile.service';
 })
 export class ProfileComponent implements OnInit {
 	isLoggedIn: boolean;
-	auth: boolean;
-	user: User;
+	username: string;
 	token: string;
 
   constructor(private profileService: ProfileService) {}
@@ -29,8 +28,7 @@ export class ProfileComponent implements OnInit {
 		} else {
 			this.profileService.isTokenValid(session.token)
 			.then(isLoggedIn => this.isLoggedIn = isLoggedIn);
-			this.auth = session.auth;
-			this.user = session.user;
+			this.username = session.username;
 			this.token = session.token;
 		}
 	}

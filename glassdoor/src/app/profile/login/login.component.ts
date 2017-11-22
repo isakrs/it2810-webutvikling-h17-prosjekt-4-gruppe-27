@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   // TODO: add handling of register
   onRegister(username: string, password: string): void {
   	this.profileService.onRegister(username, password);
+    this.onLogin(username, password);
   }
 
 }

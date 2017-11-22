@@ -21,7 +21,8 @@ export class ProfileService {
   		.post(url, params, {headers: this.headers})
   		.toPromise()
   		.then((data) => {
-  			return data
+        this.navigateTo('profile');
+  			return data;
   		})
   		.catch(this.handleError);
   }
@@ -54,8 +55,12 @@ export class ProfileService {
 
   onLogOut(): void {
   	localStorage.removeItem('session');
-  	this.router.navigate(['/']);
-  	location.reload()
+  	this.navigateTo('')
+  }
+
+  private navigateTo(path: string): void {
+    this.router.navigate([`/${path}`]);
+    location.reload()
   }
 
   private handleError(error: any): Promise<any> {
