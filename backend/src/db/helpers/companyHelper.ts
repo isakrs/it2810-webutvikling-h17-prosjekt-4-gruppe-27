@@ -39,5 +39,6 @@ export {
     findCompaniesMinRating,
     findCompaniesMinComments,
     searchByName,
-    findFromAndLimit
+    findFromAndLimit,
+    findTopCompaniesBasedOnAverage
 }

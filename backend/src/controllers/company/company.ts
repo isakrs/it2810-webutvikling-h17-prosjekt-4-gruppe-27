@@ -26,12 +26,12 @@ companyRouter.get('/', async (req:any, res:express.Response)=>{
     
     try{
         let companies
-        if('from' in query && 'size'){
-            companies = await companyHelpers.findFromAndLimit(query.from,query.size)
+        if('skip' in query && 'size'){
+            companies = await companyHelpers.findFromAndLimit(parseInt(query.skip) ,parseInt(query.size))
             return res.status(200).send(JSON.stringify(companies))
         }
         if('top' in query){
-            companies = await companyHelpers.findTopCompaniesBasedOnAverage(query.top)
+            companies = await companyHelpers.findTopCompaniesBasedOnAverage(parseInt(query.top))
             return res.status(200).send(JSON.stringify(companies))
         }
         
