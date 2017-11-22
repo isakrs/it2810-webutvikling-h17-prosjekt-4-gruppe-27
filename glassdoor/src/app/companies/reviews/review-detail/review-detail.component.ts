@@ -15,8 +15,4 @@ export class ReviewDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  save(): void {
-    this.reviewService.update(this.review);
-  }
 }
