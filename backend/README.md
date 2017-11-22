@@ -64,7 +64,7 @@ headers: {'Authorization': 'Bearer <token>'}
 
 Returnerer _id, username og reviews gjort av denne brukeren
 
-```json
+```typescript
 data = [
   {
     _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
