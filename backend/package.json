@@ -4,6 +4,7 @@
   "description": "backend for clone of glassdoor",
   "main": "index.js",
   "scripts": {
+    "start":"tsc && node ./built/app.js",
     "watch-tsc": "tsc -w",
     "watch-built-serve": "nodemon --watch ./built ./built/app.js",
     "concurrently": "concurrently",
