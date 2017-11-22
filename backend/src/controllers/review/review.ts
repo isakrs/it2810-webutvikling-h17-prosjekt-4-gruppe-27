@@ -33,9 +33,16 @@ reviewRouter.get('/company/:id', async function(req:express.Request, res: expres
 })
 
 //TODO update rating 
-reviewRouter.put('/:id', async function(req:express.Request, res: express.Response){
+reviewRouter.put('/:id', async function(req:any, res: express.Response){
     try {
-        let review = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true})
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        let review:any = await Review.findById(req.params.id).populate('user','username')
+        if(review.user._id.toString() !== req.authed.user.userId){
+            return res.status(401).send()
+        }
+        review = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true})
         let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
         await updateCompanyStats(updatedReviews,req.params.id)
         res.status(200).send(JSON.stringify(review))
@@ -44,9 +51,16 @@ reviewRouter.put('/:id', async function(req:express.Request, res: express.Respon
     }
 })
 
-reviewRouter.delete('/:id', async function(req:express.Request, res: express.Response){
+reviewRouter.delete('/:id', async function(req:any, res: express.Response){
     try {
-       let review = await Review.findByIdAndRemove(req.params.id)
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        let review:any = await Review.findById(req.params.id).populate('user','username')
+        if(review.user._id.toString() !== req.authed.user.userId){
+            return res.status(401).send()
+        }
+        review = await Review.findByIdAndRemove(req.params.id)
        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
        await updateCompanyStats(updatedReviews,req.params.id)
         res.status(200).send(JSON.stringify(review))

@@ -196,26 +196,54 @@ describe('testing reveiew /api/review', function(){
 
     describe('testing DELETE /api/review/:id',function(){
         let company1 = new Company({name:'test'})
+        let user1 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token1 = jwt.sign({userId:user1._id}, 'superSecret', { expiresIn:'24h'})
+
+        let user2 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+        
         let review1 = new Review(
             {
                 idCompany:company1._id,
                 rating:1,
-                comment: 'some comment'
+                comment: 'some comment',
+                user:user1._id
             })
         
         before(async function(){
             await company1.save()
             await review1.save()
+            await Promise.all([user1.save(), user2.save()])
         })
 
         after(async function(){
             await Company.findByIdAndRemove(company1._id)
+            await Promise.all([User.Model.findByIdAndRemove(user1._id), User.Model.findByIdAndRemove(user2._id)])
         })
 
-        it('should delete /api/review/:id',function(){
-            return supertest(app)
-            .delete(`/api/review/${review1._id}`)
-            .expect(200)
+        it('should delete not be able to delete without cred',async function(){
+            await supertest(app).delete(`/api/review/${review1._id}`).expect(401)
+        })
+
+        it('should not be able to delete if not same user', async function(){
+            await supertest(app).delete(`/api/review/${review1._id}`).set({Authorization:`Bearer ${token2}`}).expect(401)
+        })
+
+        it('should return 400 if wrong id, but right user', async function(){
+            await supertest(app).delete(`/api/review/${124234}`).set({Authorization:`Bearer ${token1}`}).expect(400)
+        })
+
+        it('should delete if signed in, correct user is deleting and right review id', async function(){
+            await supertest(app).delete(`/api/review/${review1._id}`).set({Authorization:`Bearer ${token1}`}).expect(200)
+
         })
     
     })
