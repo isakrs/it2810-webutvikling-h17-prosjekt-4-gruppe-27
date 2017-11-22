@@ -19,7 +19,7 @@ describe('ReviewsComponent', () => {
   beforeEach(async(() => {
 
     TestBed.configureTestingModule({
-      declarations: [ReviewsComponent],
+      declarations: [ReviewsComponent, ReviewDetailComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         ReviewService,
