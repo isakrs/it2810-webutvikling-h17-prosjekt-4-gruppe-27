@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Review }                from './shared/review.model';
 import { ReviewService }         from './shared/review.service';
 import { Company }               from '../shared/company.model';
 import { ReviewDetailComponent } from './review-detail/review-detail.component';
+import { ProfileService }        from '../../profile/shared/profile.service';
 
 @Component({
   selector: 'reviews',
@@ -19,9 +20,13 @@ export class ReviewsComponent implements OnInit {
   reviews: Review[];
   selectedReview: Review;
 
+  isLoggedIn: boolean;
+
   constructor(
     private reviewService: ReviewService,
-    private route: ActivatedRoute
+    private profileService: ProfileService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
 
@@ -52,6 +57,11 @@ export class ReviewsComponent implements OnInit {
       .subscribe(reviews => this.reviews = reviews);
 
     this.getUsername();
+    const session = JSON.parse(localStorage.getItem('session'));
+  }
+
+  onSelect(review: Review): void {
+    this.selectedReview = review;
   }
 
   private getUsername(): void {
@@ -60,9 +70,17 @@ export class ReviewsComponent implements OnInit {
      if (session !== null) {
        this.username = session.username;
      }
+     this.checkSession(session);
   }
 
-  onSelect(review: Review): void {
-    this.selectedReview = review;
+  private checkSession(session: any): void {
+    if (session === null) {
+      this.isLoggedIn = false;
+    } else {
+      this.profileService.isTokenValid(session.token)
+        .then(isLoggedIn => this.isLoggedIn = isLoggedIn);
+    }
   }
+
+  
 }

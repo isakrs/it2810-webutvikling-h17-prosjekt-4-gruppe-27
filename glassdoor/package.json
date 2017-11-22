@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "production": "ng build --prod && node serve.js",
     "serve":"ng build && node serve.js"
   },
   "private": true,
