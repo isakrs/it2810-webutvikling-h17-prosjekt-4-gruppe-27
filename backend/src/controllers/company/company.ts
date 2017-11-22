@@ -23,8 +23,18 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response,next)
 //returns all companies
 companyRouter.get('/', async (req:any, res:express.Response)=>{
     let query = req.query
+    
     try{
         let companies
+        if('from' in query && 'size'){
+            companies = await companyHelpers.findFromAndLimit(query.from,query.size)
+            return res.status(200).send(JSON.stringify(companies))
+        }
+        if('top' in query){
+            companies = await companyHelpers.findTopCompaniesBasedOnAverage(query.top)
+            return res.status(200).send(JSON.stringify(companies))
+        }
+        
         if (_.has(query,'name')){
             companies = await companyHelpers.searchByName(query.name)
             return res.status(200).send(JSON.stringify(companies))
