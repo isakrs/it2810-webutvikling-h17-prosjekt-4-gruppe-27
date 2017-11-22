@@ -38,6 +38,14 @@ export class ReviewService {
       .catch(this.handleError);
   }
 
+  getReviewsOfUser(): Promise<Review[]> {
+    const url = `${this.reviewsUrl}/user`;
+    return this.http.get(url, {headers: this.headers})
+      .toPromise()
+      .then(response => response.json() as Review[])
+      .catch(this.handleError);
+  }
+
   delete(id: string): Promise<Review> {
     const url = `${this.reviewsUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
