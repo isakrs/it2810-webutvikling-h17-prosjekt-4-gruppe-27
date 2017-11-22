@@ -23,6 +23,7 @@ import { ProfileComponent }       from './profile/profile.component';
 import { LoginComponent }         from './profile/login/login.component';
 import { MyPageComponent }        from './profile/my-page/my-page.component';
 import { ProfileService }         from './profile/shared/profile.service';
+import { LogoutComponent } from './profile/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProfileService }         from './profile/shared/profile.service';
     CompanyFilterComponent,
     ProfileComponent,
     LoginComponent,
-    MyPageComponent
+    MyPageComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
