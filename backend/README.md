@@ -1,3 +1,5 @@
+# kjører på it2810-27.idi.ntnu.no:8084/
+
 ## Datamodeller
 
 #### Eksempel på reviews
@@ -85,21 +87,27 @@ POST
 
 Backend genererer ny unik id til review.
 
-Returnerer nye review
-
 ```typescript
 url: 'api/review'
-headers: {'Content-type': 'application/json'}
-data: {rating: 3, comment: "Loved working here.", idCompany: "8", idUser: "0", username: "marius"}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
+body: {rating: 3, comment: "Loved working here.", idCompany: "8"}
 ```
 
-2. **Delete review by id**
+Returnerer nye review: 
+
+```typescript
+{rating: 3, comment: "Loved working here.", idCompany: "8", user: {_id: "0", username: "marius"}}
+```
+
+
+
+1. **Delete review by id**
 
 DELETE
 
 ```typescript
 url: 'api/review/<id>'
-headers: {'Content-type': 'application/json'}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
 ```
 
 ### Companies
@@ -118,10 +126,11 @@ nComments
 
 #### GET
 
-#####  Search
+1. **Search**
 
-GET
 Returnerer en liste over companies som matcher term på company.name. 
+
+term er ikke case-sensetivt. det vil si Google og google vil være likt
 
 ```
 url: 'api/company/?name=${term}'
@@ -171,11 +180,37 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
+1. **Get top companies**
+
+Returnerer top N companies basert på average rating. 
+
+```typescript
+url: api/company/?top=<N>
+```
+
+1. **Pagination**
+
+Returnerer companies mellom skip og size
+
+```typescript
+url: api/company/?skip=5&size=10
+```
+
+1. **Chaining av filtering og pagination**
+
+Det hadde vært supernice om man kunne chainet disse query'ene
+
+```typescript
+url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
+```
+
 
 
 #### POST
 
 1. **Create new company**
+
+### krever auth
 
 Generer en unik id.
 
@@ -191,6 +226,8 @@ headers: {'Content-type': 'application/json'}
 
 1. **Delete company by id**
 
+### krever auth
+
 DELETE
 
 ```typescript
@@ -205,14 +242,18 @@ headers: {'Content-type': 'application/json'}
 
 1. **Update company**
 
+Krever auth
 PUT
-F.eks. ved endring av navn.
-
-Returnerer oppdaterte company.
 
 ```typescript
 url: 'api/company/<id>'
 headers: {'Content-type': 'application/json'}
+body: {name: 'SBanken'}
+```
+
+Returnerer oppdaterte company name
+
+```typescript
 {name: 'SBanken'}
 ```
 
@@ -253,7 +294,7 @@ data = [
 ]
 ```
 
-2. **Register**
+1. **Register**
 
 ```typescript
 url: 'auth/signup'
@@ -263,7 +304,7 @@ headers: {'Content-Type': 'application/json'}
 
 Returnerer ingen data men respons 200
 
-3. **Auth**
+1. **Auth**
 
 Validerer token
 
