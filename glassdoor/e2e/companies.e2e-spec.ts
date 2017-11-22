@@ -1,7 +1,7 @@
 import { browser, protractor, element, by } from 'protractor';
 
 import { CompaniesPage } from './companies.po';
-import { ProfilePage } from './profile.po';
+import { ProfilePage }   from './profile.po';
 
 describe('Companies page', () => {
 
