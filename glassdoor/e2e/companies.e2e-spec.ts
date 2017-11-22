@@ -16,7 +16,7 @@ describe('Companies page', () => {
     pPage = new ProfilePage();
   });
 
-  it('should let user add and remove companies', async() => {
+  it('should let user add companies', async() => {
 
     // log in user
     pPage.navigateTo();
@@ -26,21 +26,11 @@ describe('Companies page', () => {
     // navigate to companies page
     cPage.navigateTo();
 
-    // Store number of companies at this time
-    await cPage.noCompanies().then(num => {
-      nCompanies=num
-    });
-
     // check that there exists companies
     expect(cPage.noCompanies()).toBeGreaterThan(0);
 
     // add a test company
-    cPage.addCompany('e2e-test');
-    expect(cPage.noCompanies()).toBe(nCompanies+1);
-
-    // delete the added test company (will be the last index)
-    cPage.delCompany(nCompanies);
-    expect(cPage.noCompanies()).toBe(nCompanies);
+    cPage.addCompany('e2eTestCompany');
 
     // logout user
     pPage.logout();
