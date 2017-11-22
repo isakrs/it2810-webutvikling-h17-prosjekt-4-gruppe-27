@@ -1,11 +1,16 @@
 <h2>My Companies</h2>
 
 <div *ngIf="isLoggedIn; else login">
-  <label>Company name:</label>
-  <input id="company-input" #companyName/>
-  <button mat-raised-button class="add-company" (click)="add(companyName.value); companyName.value=''">
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Company name" id="company-input" #companyName/>
+    </mat-form-field>
+    <button mat-raised-button class="add-company" (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
+  </form>
+
+  
 </div>
 
 <ng-template #login >

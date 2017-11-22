@@ -1,18 +1,22 @@
 <div *ngIf="isLoggedIn; else login" >
-  <label>Review rating:</label>
-  <input id="review-input-rating" #reviewRating />
-  <label>Review comment:</label>
-  <input id="review-input-comment" #reviewComment />
-  <button mat-raised-button
-    class="add-review"
-    (click)="
-      add(reviewRating.value, reviewComment.value);
-      reviewRating.value='';
-      reviewComment.value=''
-    "
-    >
-    Add
-  </button>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Rating 1-5" id="review-input-rating" #reviewRating />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Comment" id="review-input-comment" #reviewComment />
+    </mat-form-field>
+    <button mat-raised-button
+      class="add-review"
+      (click)="
+        add(reviewRating.value, reviewComment.value);
+        reviewRating.value='';
+        reviewComment.value=''
+      "
+      >
+      Add
+    </button>
+  </form>
 </div>
 
 <ng-template #login >

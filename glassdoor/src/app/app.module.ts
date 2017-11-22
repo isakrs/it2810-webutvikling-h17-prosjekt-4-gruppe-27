@@ -25,7 +25,15 @@ import { MyPageComponent }        from './profile/my-page/my-page.component';
 import { ProfileService }         from './profile/shared/profile.service';
 import { LogoutComponent }        from './profile/logout/logout.component';
 
-import { MatButtonModule, MatListModule, MatCardModule, MatIconModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule,
+         MatListModule,
+         MatCardModule,
+         MatIconModule,
+         MatInputModule,
+         MatAutocompleteModule
+       } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -50,11 +58,14 @@ import { MatButtonModule, MatListModule, MatCardModule, MatIconModule } from '@a
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
       passThruUnknownUrl: true
     }),
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatButtonModule,
     MatListModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule
   ],
   providers: [ CompanyService, ProfileService ],
   bootstrap: [ AppComponent ]
