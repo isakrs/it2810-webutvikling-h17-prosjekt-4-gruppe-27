@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false;
+  production: false,
 
-  apiUrl: 'http://it2810-27.idi.ntnu.no:8084';
+  apiUrl: 'http://it2810-27.idi.ntnu.no:8084'
 };
