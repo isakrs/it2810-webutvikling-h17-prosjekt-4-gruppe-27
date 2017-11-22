@@ -1,13 +1,14 @@
 import { ComponentFixture, async, fakeAsync, tick, TestBed } from '@angular/core/testing';
-import { DebugElement, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Http, HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
-import { By } from '@angular/platform-browser';
+import { DebugElement, CUSTOM_ELEMENTS_SCHEMA }              from '@angular/core';
+import { RouterModule }                                      from '@angular/router';
+import { Http, HttpModule }                                  from '@angular/http';
+import { APP_BASE_HREF }                                     from '@angular/common';
+import { By }                                                from '@angular/platform-browser';
 
-import { ReviewsComponent } from './reviews.component';
-import { ReviewService } from './shared/review.service';
-import { Review } from './shared/review.model';
+import { ReviewsComponent }       from './reviews.component';
+import { ReviewService }          from './shared/review.service';
+import { Review }                 from './shared/review.model';
+import { ReviewDetailComponent }  from './review-detail/review-detail.component';
 
 describe('ReviewsComponent', () => {
 
