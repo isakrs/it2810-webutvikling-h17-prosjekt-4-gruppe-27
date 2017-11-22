@@ -22,7 +22,7 @@ async function findCompaniesMinComments(minComments:number){
 
 async function searchByName(searchTerm:string){
     return await Company.find({
-        name:new RegExp(`^${searchTerm}`)
+        name:new RegExp(`${searchTerm}`,'i')
     }
     )
 }

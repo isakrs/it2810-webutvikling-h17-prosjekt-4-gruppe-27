@@ -125,6 +125,41 @@ describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ w
                 }
             ])
     })
+    it('should search based on term and only return relevant, should be case insensitive', async function(){
+        let response  = await supertest(app).get('/api/company/?name=BaI').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp2._id.toString(),
+            averageRating:comp2.averageRating,
+            nComments:comp2.nComments,
+            name:comp2.name
+            },
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
+
+    it('should search based on term and only return relevant, should be case insensitive', async function(){
+        let response  = await supertest(app).get('/api/company/?name=BaIn').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp2._id.toString(),
+            averageRating:comp2.averageRating,
+            nComments:comp2.nComments,
+            name:comp2.name
+            },
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
 
     it('should search based on term, only return relevant term bainba', async function(){
         let response  = await supertest(app).get('/api/company/?name=bainba').expect(200)
