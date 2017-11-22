@@ -32,16 +32,15 @@ export class CompanyService {
 
   getCompanies(minRating?: number, minComments?: number, next?: boolean): Promise<Company[]> {
 
+    let skip = 0;
     let url = this.companiesUrl
 
-    if (next) {
-      let skip = 5;
-      url += `/?skip=${skip}&size=10`;
-    } else {
-      if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
-      else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
-      else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
-    }
+    if (next) skip = 5;
+    url += `/?skip=${skip}&size=5`;
+
+    if      (minRating  && !minComments) url += `&minRating=${minRating}`;
+    else if (!minRating && minComments)  url += `&minComments=${minComments}`;
+    else if (minRating  && minComments)  url += `&minRating=${minRating}&minComments=${minComments}`;
 
     return this.http.get(url)
       .toPromise()
