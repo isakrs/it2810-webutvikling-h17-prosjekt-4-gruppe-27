@@ -23,8 +23,8 @@ describe('Review section of Company Detail Page', () => {
     pPage.login(existingUser);
     browser.sleep(1000);
 
-    // Navigating to google page (This page is sure). It was made by test user
-    rSec.navigateTo("5a13f584a599139e9e648632");
+    // Navigating to google's (_id) page
+    rSec.navigateTo("5a15a9ce8d97c9a66efe43f4");
 
     // Store number of Reviews at this time
     await rSec.noReviews().then(num => nReviews=num);
