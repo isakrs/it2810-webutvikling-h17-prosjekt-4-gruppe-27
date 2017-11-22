@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'http://it2810-27.idi.ntnu.no:8084'
+  apiUrl: 'http://it2810-27.idi.ntnu.no:8074'
 };

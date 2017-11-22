@@ -50,6 +50,7 @@ export class CompaniesComponent implements OnInit {
       .then(company => {
         this.companies.push(company);
         this.selectedCompany = null;
+        this.getCompanies();
       });
   }
 
@@ -59,6 +60,7 @@ export class CompaniesComponent implements OnInit {
         .then(() => {
           this.companies = this.companies.filter(c => c !== company);
           if (this.selectedCompany === company) { this.selectedCompany = null; }
+          this.getCompanies();
         });
   }
 
