@@ -1,4 +1,4 @@
-import { Component, OnInit }        from '@angular/core';
+import { Component, OnInit, Input }        from '@angular/core';
 
 import { Review }    	from '../shared/review.model';
 import { ReviewService } 	from '../shared/review.service';
@@ -9,14 +9,10 @@ import { ReviewService } 	from '../shared/review.service';
   styleUrls: ['./review-detail.component.css']
 })
 export class ReviewDetailComponent implements OnInit {
-  review: Review;
+  @Input() review: Review;
 
   constructor(private reviewService: ReviewService) {}
 
   ngOnInit(): void {
-  }
-
-  save(): void {
-    this.reviewService.update(this.review);
   }
 }

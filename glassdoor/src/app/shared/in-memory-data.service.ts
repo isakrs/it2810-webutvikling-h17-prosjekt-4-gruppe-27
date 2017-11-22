@@ -22,6 +22,20 @@ export class InMemoryDataService implements InMemoryDbService {
       {_id: '6', rating: 3, comment: 'Loved working here.', idCompany: '4'},
       {_id: '7', rating: 3, comment: 'Loved working here.', idCompany: '8'}
     ];
-    return {companies, reviews};
+    const users = [
+      {
+        _id: '0', id: 0, username: 'marius', password: 'password123', reviews: [
+          {_id: '0', rating: 5, comment: 'Loved working here.', idCompany: '3'},
+          {_id: '1', rating: 3, comment: 'Kinda liked working here', idCompany: '4'},
+        ]
+      },
+      {
+        _id: '1', id: 1, username: 'isak', password: '12345', reviews: [
+          {_id: '2', rating: 1, comment: 'Hated working here', idCompany: '1'},
+          {_id: '3', rating: 1, comment: 'Also hated working here', idCompany: '1'},
+      ]
+      },
+    ];
+    return {companies, reviews, users};
   }
 }

@@ -5,12 +5,14 @@ import { Http, Response, ResponseOptions,
 				 ConnectionBackend } 								from '@angular/http';
 import { ReflectiveInjector } 							from '@angular/core';
 
+import { environment } from '../../../../environments/environment';
+
 import { ReviewService } 		from './review.service';
 import { Review } 					from './review.model';
 
 describe('ReviewService', () => {
 
-  const baseURL = 'http://localhost:3000';
+  const apiUrl = environment.apiUrl;
 	const mockResponse = [
     {_id: '0', rating: 5, comment: 'DNB paid me well', idCompany: '1'},
     {_id: '1', rating: 1, comment: 'paid shit.', idCompany: '1'}
@@ -34,28 +36,28 @@ describe('ReviewService', () => {
     this.reviewService.getReviews('1');
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${baseURL}/api/review/company/1`);
+    .toBe(`${apiUrl}/api/review/company/1`);
   });
 
   it('should query current service url delete("1")' , () => {
     this.reviewService.delete('1');
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${baseURL}/api/review/1`);
+    .toBe(`${apiUrl}/api/review/1`);
   });
 
   it('should query current service url with create("3", "very good", "2")', () => {
     this.reviewService.create('3', 'very good', '2');
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${baseURL}/api/review`);
+    .toBe(`${apiUrl}/api/review`);
   });
 
   // it('should query current service url with update("0")', () => {
   //   this.reviewService.create(mockResponse[0]);
   //   expect(this.lastConnection).toBeDefined();
   //   expect(this.lastConnection.request.url)
-  //   .toBe(`${baseURL}/api/review/0`);
+  //   .toBe(`${apiUrl}/api/review/0`);
   // });
 
   it('getReviews(idCompany=1) should return reviews', fakeAsync(() => {

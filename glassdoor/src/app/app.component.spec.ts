@@ -2,9 +2,11 @@ import { TestBed, async, ComponentFixture }   from '@angular/core/testing';
 import { RouterTestingModule }                from '@angular/router/testing';
 import { By }                                 from '@angular/platform-browser';
 import { DebugElement }                       from '@angular/core';
+import { HttpModule }                         from '@angular/http';
 
-import { AppComponent }  from './app.component';
-
+import { AppComponent }      from './app.component';
+import { LogoutComponent }   from './profile/logout/logout.component';
+import { ProfileService }    from './profile/shared/profile.service';
 
 describe('AppComponent', () => {
 
@@ -16,10 +18,13 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        LogoutComponent
       ],
+      providers: [ProfileService],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpModule
       ]
     }).compileComponents();
   }));

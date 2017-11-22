@@ -4,13 +4,25 @@
   "description": "backend for clone of glassdoor",
   "main": "index.js",
   "scripts": {
-    "start":"tsc && PORT=8084 node ./built/app.js",
+    "start": "tsc && PORT=8084 node ./built/app.js",
     "watch-tsc": "tsc -w",
     "watch-built-serve": "nodemon --watch ./built ./built/app.js",
     "concurrently": "concurrently",
     "nodemon": "nodemon",
     "dev": "npm run concurrently -k -p \"npm run watch-tsc\" -p \"npm run watch-built-serve\"",
-    "test": "NODE_ENV=test mocha --timeout 10000 -r ts-node/register src/**/*.spec.ts"
+    "test": "NODE_ENV=test nyc mocha --timeout 10000 --exit -r ts-node/register src/**/*.spec.ts "
+  },
+  "nyc":{
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ]
   },
   "author": "johannzv",
   "license": "ISC",
@@ -42,6 +54,7 @@
     "concurrently": "^3.5.0",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.1",
+    "nyc": "^11.3.0",
     "supertest": "^3.0.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",

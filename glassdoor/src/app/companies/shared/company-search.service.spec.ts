@@ -8,11 +8,16 @@ import {
   BaseRequestOptions,
   RequestOptions,
   ConnectionBackend
-  } from '@angular/http';
+} from '@angular/http';
+
+import { environment } from '../../../environments/environment';
 
 import { CompanySearchService } from './company-search.service';
 
 describe('CompanySearchService', () => {
+
+  const apiUrl = environment.apiUrl;
+
   beforeEach(() => {
     this.injector = ReflectiveInjector.resolveAndCreate([
       {provide: ConnectionBackend, useClass: MockBackend},
@@ -30,6 +35,6 @@ describe('CompanySearchService', () => {
     this.companySearchService.search('test');
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe('http://localhost:3000/api/company/?name=test');
+    .toBe(`${apiUrl}/api/company/?name=test`);
   });
 });

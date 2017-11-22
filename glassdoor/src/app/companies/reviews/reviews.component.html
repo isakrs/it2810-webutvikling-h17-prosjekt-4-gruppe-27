@@ -24,7 +24,5 @@
   </li>
 </ul>
 <div *ngIf="selectedReview">
-  <h2>
-    {{selectedReview.comment | uppercase}} is my review
-  </h2>
+  <app-review-detail [review]="selectedReview" ></app-review-detail>
 </div>

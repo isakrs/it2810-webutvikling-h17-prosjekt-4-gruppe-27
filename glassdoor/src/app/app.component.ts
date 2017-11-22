@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LogoutComponent } 	from './profile/logout/logout.component';
 
 @Component({
   selector: 'app-root',

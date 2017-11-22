@@ -4,8 +4,7 @@
     <label>id: </label>{{company._id}}
   </div>
   <div>
-    <label>name: </label>
-    <input [(ngModel)]="company.name" placeholder="name" />
+    <label>name:</label>{{company.name}}
   </div>
   <div *ngIf="company.averageRating">
     <label>Rating: </label>{{company.averageRating.toFixed(1)}}
@@ -14,6 +13,5 @@
     <label>Comments:</label>{{company.nComments}}
   </div>
   <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
 </div>
-<reviews [company]="company" ></reviews>
+<reviews (reviewsChanged)="getCompany()" [company]="company" ></reviews>
