@@ -79,7 +79,7 @@ data = [
 ```
 
 
- **Create new review**
+**Create new review**
 
 POST
 
@@ -253,7 +253,7 @@ body: {name: 'SBanken'}
 
 
 
-## User
+### User
 
 Data Model
 
