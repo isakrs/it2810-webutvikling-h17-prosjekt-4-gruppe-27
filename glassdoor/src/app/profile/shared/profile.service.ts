@@ -4,11 +4,13 @@ import { Router }         from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 
+import { environment }	from '../../environments/environment';
+
 @Injectable()
 export class ProfileService {
 
 	private headers = new Headers({'Content-Type': 'application/json'});
-	private profileURL = 'http://localhost:3000/auth';  // URL to web api
+	private profileURL = `${environment.apiUrl}/auth`;
 
   constructor(private http: Http, private router: Router) { }
 
