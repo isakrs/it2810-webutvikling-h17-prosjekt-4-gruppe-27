@@ -36,7 +36,7 @@ describe('Review section of Company Detail Page', () => {
     expect(rSec.noReviews()).toBe(nReviews+1);
 
     // delete the added test review (will be the last index)
-    rSec.delReview(nReviews);
+    rSec.delReview(nReviews-1);
     expect(rSec.noReviews()).toBe(nReviews);
 
     // log out user

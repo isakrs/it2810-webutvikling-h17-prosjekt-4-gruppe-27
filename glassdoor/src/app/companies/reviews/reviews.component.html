@@ -19,7 +19,7 @@
       [class.selected]="review === selectedReview">
     <span class="badge">{{review.rating}}</span>
     <span>{{review.comment}}</span>
-    <button class="delete"
+    <button *ngIf="username===review.user.username" class="delete"
       (click)="delete(review); $event.stopPropagation()">x</button>
   </li>
 </ul>
