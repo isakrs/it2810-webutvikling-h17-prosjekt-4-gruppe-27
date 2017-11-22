@@ -247,4 +247,67 @@ describe('testing reveiew /api/review', function(){
         })
     
     })
+
+    describe('testing GET /api/review/user', function(){
+
+        let company1 = new Company({name:'test'})
+        let user1 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let user2 = new User.Model({
+            username:'someNm',
+            password: 'pass'
+        })
+
+        let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+
+        let token1 = jwt.sign({userId:user1._id}, 'superSecret', { expiresIn:'24h'})
+        let review1 = new Review(
+            {
+                idCompany:company1._id,
+                rating:1,
+                comment: 'some comment',
+                user:user1._id
+            })
+        
+        let review2 = new Review(
+            {
+                idCompany:company1._id,
+                rating:1,
+                comment: 'some comment',
+                user:user1._id
+            })
+
+
+        before(async function(){
+            await Promise.all([company1.save(), review1.save(), review2.save(), user1.save(), user2.save()])
+
+        })
+
+        after(async function(){
+            await Promise.all([User.Model.findByIdAndRemove(user1._id),User.Model.findByIdAndRemove(user2._id), Review.findByIdAndRemove(review1), Review.findByIdAndRemove(review2), Company.findByIdAndRemove(company1._id)])
+        })
+
+        it('should return all reviews done by a user', async function(){
+            let response:any = await supertest(app).get('/api/review/user').set({Authorization:`Bearer ${token1}`}).send().expect(200)
+            expect(response.body).to.be.an('array')
+            expect(response.body).to.have.lengthOf(2)
+            expect(response.body[0]).to.have.all.keys('comment','_id', 'rating', 'idCompany','user')
+            expect(response.body[0].user).to.have.all.keys('_id', 'username')
+        })
+
+        it('should return 401 is user is not authed', async function(){
+             await supertest(app).get('/api/review/user').expect(401)
+        })
+
+        it('should return an empty array for a person that have not written any reviews', async function(){
+            let response:any = await supertest(app).get('/api/review/user').set({Authorization:`Bearer ${token2}`}).send().expect(200)
+            expect(response.body).to.be.an('array')
+            expect(response.body).to.have.lengthOf(0)
+        })
+
+
+    })
 })
