@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Review }           from './shared/review.model';
-import { ReviewService }    from './shared/review.service';
-import { Company }          from '../shared/company.model';
+import { Review }                from './shared/review.model';
+import { ReviewService }         from './shared/review.service';
+import { Company }               from '../shared/company.model';
+import { ReviewDetailComponent } from './review-detail/review-detail.component';
 
 @Component({
   selector: 'reviews',
