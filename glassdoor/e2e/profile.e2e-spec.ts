@@ -26,7 +26,7 @@ describe('glassdoor App', () => {
     expect(page.getWelcomeMessage())
     .toEqual(`Welcome ${existingUser.username}`);
 
-    // TODO: log out user
+    page.logout();
   });
 
   it('should register and welcome new user', () => {
@@ -43,7 +43,7 @@ describe('glassdoor App', () => {
     expect(page.getWelcomeMessage())
     .toEqual(`Welcome ${newUser.username}`);
 
-    // TODO: log out user
+    page.logout();
   });
 
 });

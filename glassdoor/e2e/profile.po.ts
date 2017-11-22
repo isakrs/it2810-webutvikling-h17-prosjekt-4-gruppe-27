@@ -9,6 +9,8 @@ export class ProfilePage {
 
   private welcomeMessage = element(by.css("#welcome-user"));
 
+  private logoutButton = element(by.css("#logout"));
+
   navigateTo() {
     return browser.get('/profile');
   }
@@ -29,5 +31,8 @@ export class ProfilePage {
     return this.welcomeMessage.getText();
   }
 
-  // TODO: make logout function
+  logout() {
+    this.logoutButton.click();
+  }
+
 }
