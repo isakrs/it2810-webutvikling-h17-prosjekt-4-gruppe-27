@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="isLoggedIn; else login" >
   <label>Review rating:</label>
   <input id="review-input-rating" #reviewRating />
   <label>Review comment:</label>
@@ -14,6 +14,14 @@
     Add
   </button>
 </div>
+
+<ng-template #login >
+  <div>
+    <label>Log in to add reviews</label>
+  </div>
+</ng-template>
+
+
 <ul class="reviews">
   <li *ngFor="let review of reviews" (click)="onSelect(review)"
       [class.selected]="review === selectedReview">
