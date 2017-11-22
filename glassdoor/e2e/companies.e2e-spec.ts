@@ -21,7 +21,7 @@ describe('Companies page', () => {
     // log in user
     pPage.navigateTo();
     pPage.login(existingUser);
-    browser.sleep(10000);
+    browser.sleep(1000);
 
     // navigate to companies page
     cPage.navigateTo();
