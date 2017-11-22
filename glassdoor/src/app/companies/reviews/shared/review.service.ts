@@ -10,8 +10,10 @@ import { Review } from './review.model';
 @Injectable()
 export class ReviewService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private reviewsUrl = `${environment.apiUrl}/api/review`;  // URL to web api
+  private reviewsUrl = `${environment.apiUrl}/api/review`;
+  private headers = new Headers({
+    'Content-Type': 'application/json'
+  });
 
   constructor(private http: Http) { }
 
