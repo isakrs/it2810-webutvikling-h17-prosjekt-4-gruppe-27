@@ -2,7 +2,7 @@ import { CompanyDetailPage } from './company-detail.po';
 import { DashboardPage } from './dashboard.po';
 import { browser, protractor, element, by } from 'protractor';
 
-describe('Company search', () => {
+describe('Company search on Dashboard Page', () => {
 
   let dPage: DashboardPage;
   let cdPage: CompanyDetailPage;

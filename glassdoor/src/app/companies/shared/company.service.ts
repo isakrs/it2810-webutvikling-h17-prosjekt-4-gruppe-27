@@ -7,7 +7,6 @@ import { environment }   from '../../../environments/environment';
 
 import { Company } from './company.model';
 
-
 @Injectable()
 export class CompanyService {
   private token: string;

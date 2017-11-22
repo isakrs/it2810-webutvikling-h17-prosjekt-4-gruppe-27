@@ -9,28 +9,38 @@ import { Review } from './review.model';
 
 @Injectable()
 export class ReviewService {
-  private token: string;
-  private session: any;
-  private headers: Headers;
-  private reviewsUrl = `${environment.apiUrl}/api/review`;  // URL to web api
+
+  private token:    string;
+  private session:  any;
+  private headers:  Headers;
+
+  private reviewsUrl = `${environment.apiUrl}/api/review`;
 
   constructor(private http: Http) {
     const session = JSON.parse(localStorage.getItem('session'));
     if (session !== null) {
       this.token = session.token;
     }
-    // Initialize headers. Token will be undefined if user is not logged in, but that's fine
-    // for some requests
-    this.headers = new Headers(
-      {'Content-Type': 'application/json',
+    // Initialize headers. Token will be undefined if user is not logged in
+    // This is handled by the API
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': `Bearer ${this.token}`}
-      );
+      'Authorization': `Bearer ${this.token}`
+    });
   }
 
   getReviews(idCompany: string): Promise<Review[]> {
     const url = `${this.reviewsUrl}/company/${idCompany}`;
     return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Review[])
+      .catch(this.handleError);
+  }
+
+  getReviewsOfUser(): Promise<Review[]> {
+    const url = `${this.reviewsUrl}/user`;
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Review[])
       .catch(this.handleError);
