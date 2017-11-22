@@ -1,3 +1,5 @@
+#kjører på it2810-27.idi.ntnu.no:8084/
+
 ## Datamodeller
 
 #### Eksempel på reviews
@@ -123,6 +125,10 @@ nComments
 GET
 Returnerer en liste over companies som matcher term på company.name. 
 
+term er ikke case-sensetivt. det vil si Gooogl og google vil være likt
+andre:
+søk er: ?top=x , hvor x er de x høeste baser på avgRating
+?skip=x&size=y både x og u er ints. skips sier noe om hvor mange man skal hoppe over, y er størrelsen på chunken man henter ut.
 ```
 url: 'api/company/?name=${term}'
 ```
@@ -176,7 +182,7 @@ url: api/companies/?minRating=4.4&minComments=2
 #### POST
 
 1. **Create new company**
-
+###krever auth
 Generer en unik id.
 
 Returnerer nye company
@@ -190,7 +196,7 @@ headers: {'Content-type': 'application/json'}
 
 
 1. **Delete company by id**
-
+###krever auth
 DELETE
 
 ```typescript
@@ -204,7 +210,7 @@ headers: {'Content-type': 'application/json'}
 
 
 1. **Update company**
-
+Krever auth
 PUT
 F.eks. ved endring av navn.
 
