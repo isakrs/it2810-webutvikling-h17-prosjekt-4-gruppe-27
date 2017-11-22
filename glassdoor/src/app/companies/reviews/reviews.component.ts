@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { Review }           from './shared/review.model';
-import { ReviewService }    from './shared/review.service';
-import { Company }          from '../shared/company.model';
+import { Review }                from './shared/review.model';
+import { ReviewService }         from './shared/review.service';
+import { Company }               from '../shared/company.model';
+import { ReviewDetailComponent } from './review-detail/review-detail.component';
 
 @Component({
   selector: 'reviews',
@@ -12,6 +13,8 @@ import { Company }          from '../shared/company.model';
 })
 export class ReviewsComponent implements OnInit {
   @Input() company: Company;
+  @Output() reviewsChanged = new EventEmitter<any>();
+
   reviews: Review[];
   selectedReview: Review;
 
@@ -27,6 +30,7 @@ export class ReviewsComponent implements OnInit {
       .then(review => {
         this.reviews.push(review);
         this.selectedReview = null;
+        this.reviewsChanged.emit();
       });
   }
 
@@ -36,6 +40,7 @@ export class ReviewsComponent implements OnInit {
         .then(() => {
           this.reviews = this.reviews.filter(r => r !== review);
           if (this.selectedReview === review) { this.selectedReview = null; }
+          this.reviewsChanged.emit();
         });
   }
 

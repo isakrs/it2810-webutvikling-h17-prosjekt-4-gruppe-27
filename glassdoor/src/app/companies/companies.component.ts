@@ -12,13 +12,14 @@ import { CompanyFilterComponent}  from './company-filter/company-filter.componen
   styleUrls: [ './companies.component.css' ]
 })
 export class CompaniesComponent implements OnInit {
+  
   companies: Company[];
   selectedCompany: Company;
   sortValue: string;
 
   constructor(
-    private companyService:       CompanyService,
-    private router:               Router
+    private companyService: CompanyService,
+    private router:         Router
   ) { }
 
   getCompanies(filter?): void {
@@ -31,6 +32,13 @@ export class CompaniesComponent implements OnInit {
         .getCompanies(minRating, minComments)
         .then(companies => this.companies = companies);
   }
+
+  getNextPageCompanies(): void {
+    this.companyService
+      .getCompanies(undefined, undefined, true)
+      .then(companies => this.companies = companies);
+  }
+
 
   add(name: string): void {
     name = name.trim();

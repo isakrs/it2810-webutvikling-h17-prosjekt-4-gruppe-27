@@ -23,7 +23,7 @@ describe('DashboardComponent', () => {
   const mockCompanies: Company[] =  [
     {_id: '1', name: 'DNB',          averageRating: null, nComments: null},
     {_id: '2', name: 'Bekk',         averageRating: null, nComments: null},
-    {_id: '3', name: 'Kolonial.no',  averageRating: null, nComments: null},
+    {_id: '3', name: 'Kolonial.no',  averageRating: 3.0, nComments: 1},
     {_id: '4', name: 'Blank',        averageRating: 5,    nComments: 3},
     {_id: '5', name: 'Accenture',    averageRating: 3.4,  nComments: 100},
     {_id: '7', name: 'Mnemonic',     averageRating: null, nComments: null},
@@ -33,6 +33,13 @@ describe('DashboardComponent', () => {
   const mockCompaniesSmaller: Company[] =  [
     {_id: '1', name: 'DNB',          averageRating: 3.2, nComments: 10},
     {_id: '2', name: 'Bekk',         averageRating: 4, nComments: 4}
+  ];
+
+  const mockCompaniesTop: Company[] =  [
+    {_id: '4', name: 'Blank',        averageRating: 5, nComments: 3},
+    {_id: '2', name: 'Bekk',         averageRating: 4, nComments: 53},
+    {_id: '5', name: 'Accenture',    averageRating: 3.4, nComments: 100},
+    {_id: '3', name: 'Bekk',         averageRating: 3.0, nComments: 1}
   ];
 
   beforeEach(async(() => {
@@ -58,15 +65,15 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-	it(`should display title 'Top Companies'`, () => {
+	it(`should display title 'Top 4 Companies'`, () => {
     de = fixture.debugElement.query(By.css('h3'));
     el = de.nativeElement;
-		expect(el.textContent).toEqual('Top Companies');
+		expect(el.textContent).toEqual('Top 4 Companies');
 	})
 
-  it('should display companies 2, 3, 4 and 5', fakeAsync(() => {
+  it('should display 4 companies', fakeAsync(() => {
     // Setup spy on the `getCompanies` method
-    spy = spyOn(companyService, 'getCompanies').and.returnValue(Promise.resolve(mockCompanies));
+    spy = spyOn(companyService, 'getTopCompanies').and.returnValue(Promise.resolve(mockCompaniesTop));
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
@@ -74,22 +81,19 @@ describe('DashboardComponent', () => {
     const deElements = fixture.debugElement.queryAll(By.css('.company h4'));
 
     expect(deElements.length).toBe(4);
-    expect(deElements[0].nativeElement.textContent).toBe('Bekk');
-    expect(deElements[1].nativeElement.textContent).toBe('Kolonial.no');
-    expect(deElements[2].nativeElement.textContent).toBe('Blank');
-    expect(deElements[3].nativeElement.textContent).toBe('Accenture');
+
   }));
 
-  it(`should work with less than 5 entries`, fakeAsync( () => {
-    spy = spyOn(companyService, 'getCompanies').and.returnValue(Promise.resolve(mockCompaniesSmaller));
+  it(`should work with less than 4 entries`, fakeAsync( () => {
+    spy = spyOn(companyService, 'getTopCompanies').and.returnValue(Promise.resolve(mockCompaniesSmaller));
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
 
     const deElements = fixture.debugElement.queryAll(By.css('.company h4'));
 
-    expect(deElements.length).toBe(1);
-    expect(deElements[0].nativeElement.textContent).toBe('Bekk');
+    expect(deElements.length).toBe(2);
+    expect(deElements[0].nativeElement.textContent).toBe('DNB');
   }));
 
 });

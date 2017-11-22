@@ -3,27 +3,48 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+import { environment }   from '../../../environments/environment';
+
 import { Company } from './company.model';
 
 @Injectable()
 export class CompanyService {
+  private token: string;
+  private session: any;
+  private headers: Headers;
+  private companiesUrl = `${environment.apiUrl}/api/company`;  // URL to web api
 
-  private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}, );
-  private companiesUrl = 'http://localhost:3000/api/company';  // URL to web api
+  constructor(private http: Http) {
+    const session = JSON.parse(localStorage.getItem('session'));
+    if (session !== null) {
+      this.token = session.token;
+    }
 
-  constructor(private http: Http) { }
+    // Initialize headers. Token will be undefined if user is not logged in, but that's fine
+    // for some requests
+    this.headers = new Headers(
+      {'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': `Bearer ${this.token}`}
+      );
+  }
 
-  getCompanies(minRating?: number, minComments?: number): Promise<Company[]> {
+  getCompanies(minRating?: number, minComments?: number, next?: boolean): Promise<Company[]> {
 
+    let skip = 0;
     let url = this.companiesUrl
-    if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
-    else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
-    else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
+
+    if (next) skip = 5;
+    url += `/?skip=${skip}&size=5`;
+
+    if      (minRating  && !minComments) url += `&minRating=${minRating}`;
+    else if (!minRating && minComments)  url += `&minComments=${minComments}`;
+    else if (minRating  && minComments)  url += `&minRating=${minRating}&minComments=${minComments}`;
 
     return this.http.get(url)
-               .toPromise()
-               .then(response => response.json() as Company[])
-               .catch(this.handleError);
+      .toPromise()
+      .then(response => response.json() as Company[])
+      .catch(this.handleError);
   }
 
   getCompany(id: string): Promise<Company> {
@@ -31,6 +52,14 @@ export class CompanyService {
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Company)
+      .catch(this.handleError);
+  }
+
+  getTopCompanies(): Promise<Company[]> {
+    const url = `${this.companiesUrl}/?top=4`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Company[])
       .catch(this.handleError);
   }
 
@@ -47,15 +76,6 @@ export class CompanyService {
       .post(this.companiesUrl, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(res => res.json() as Company)
-      .catch(this.handleError);
-  }
-
-  update(company: Company): Promise<Company> {
-    const url = `${this.companiesUrl}/${company._id}`;
-    return this.http
-      .put(url, JSON.stringify(company), {headers: this.headers})
-      .toPromise()
-      .then(() => company)
       .catch(this.handleError);
   }
 
