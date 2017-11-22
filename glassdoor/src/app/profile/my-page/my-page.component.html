@@ -1,3 +1,16 @@
 <p id="welcome-user">
   Welcome {{username}}
 </p>
+
+<div *ngIf="reviews">
+  <p>Your reviews:</p>
+  <ul class="reviews">
+    <li *ngFor="let review of reviews" (click)="onSelect(review)"
+        [class.selected]="review === selectedReview">
+      <span class="badge">{{review.rating}}</span>
+      <span>{{review.comment}}</span>
+      <button class="delete"
+        (click)="delete(review); $event.stopPropagation()">x</button>
+    </li>
+  </ul>
+</div>
