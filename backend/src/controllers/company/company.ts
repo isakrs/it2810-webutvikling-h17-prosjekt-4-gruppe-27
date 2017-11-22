@@ -22,7 +22,6 @@ companyRouter.get('/:id', async (req:express.Request, res:express.Response,next)
 
 //returns all companies
 companyRouter.get('/', async (req:any, res:express.Response)=>{
-    console.log(req.authed)
     let query = req.query
     try{
         let companies
