@@ -21,8 +21,8 @@ export class ReviewService {
     if (session !== null) {
       this.token = session.token;
     }
-    // Initialize headers. Token will be undefined if user is not logged in, but that's fine
-    // for some requests
+    // Initialize headers. Token will be undefined if user is not logged in
+    // This is handled by the API
     this.headers = new Headers({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
