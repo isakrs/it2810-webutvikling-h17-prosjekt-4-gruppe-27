@@ -5,7 +5,7 @@ import { ProfilePage } from './profile.po';
 describe('glassdoor App', () => {
   let page: ProfilePage;
 
-  const existingUser = {username: 'kurt', password: 'kurt'};
+  const existingUser = {username: 'testRobot', password: 'passTestRobot'};
   const newUser = {username: makeRandomString(20), password: makeRandomString(20)};
 
   beforeEach(() => {
