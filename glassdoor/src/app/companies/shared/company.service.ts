@@ -79,15 +79,6 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
-  update(company: Company): Promise<Company> {
-    const url = `${this.companiesUrl}/${company._id}`;
-    return this.http
-      .put(url, JSON.stringify({name: company.name}), {headers: this.headers})
-      .toPromise()
-      .then(() => company)
-      .catch(this.handleError);
-  }
-
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
