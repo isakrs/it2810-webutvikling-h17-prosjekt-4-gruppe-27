@@ -47,8 +47,8 @@ async function searchByName(searchTerm:string){
     )
 }
 
-async function findFromAndLimit(from:number, size:number){
-    return await Company.find({}).limit(size).skip(from)
+async function findFromAndLimit(skip:number, size:number){
+    return await Company.find({}).limit(size).skip(skip)
 }
 
 async function findTopCompaniesBasedOnAverage(top:number){
