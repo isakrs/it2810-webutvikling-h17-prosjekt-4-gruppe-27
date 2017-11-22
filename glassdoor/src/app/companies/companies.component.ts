@@ -54,16 +54,6 @@ export class CompaniesComponent implements OnInit {
       });
   }
 
-  delete(company: Company): void {
-    this.companyService
-        .delete(company._id)
-        .then(() => {
-          this.companies = this.companies.filter(c => c !== company);
-          if (this.selectedCompany === company) { this.selectedCompany = null; }
-          this.getCompanies();
-        });
-  }
-
   ngOnInit(): void {
     this.getCompanies();
     this.sortValue = "name";

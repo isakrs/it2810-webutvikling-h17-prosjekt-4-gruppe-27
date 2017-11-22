@@ -78,12 +78,9 @@ describe('CompaniesComponent', () => {
             .queryAll(By.css('mat-list.companies mat-list-item'));
     const badgeElements = fixture.debugElement
             .queryAll(By.css('mat-list.companies mat-list-item mat-card.badge'));
-    const buttonElements = fixture.debugElement
-            .queryAll(By.css('mat-list.companies mat-list-item button.delete'));
 
     expect(liElements.length).toBe(7);
     expect(badgeElements.length).toBe(3);
-    expect(buttonElements.length).toBe(7);
     expect(liElements[0].nativeElement.textContent.trim()).toContain('Amazon');
     expect(liElements[6].nativeElement.textContent.trim()).toContain('Statoil');
 

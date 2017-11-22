@@ -39,8 +39,6 @@
       <mat-card *ngIf="company.averageRating" class="badge">{{company.averageRating.toFixed(1)}}</mat-card>
     </mat-icon>
     <h3 matLine>{{company.name}}</h3>
-    <button mat-raised-button class="delete"
-      (click)="delete(company); $event.stopPropagation()">x</button>
   </mat-list-item>
 </mat-list>
 <button mat-raised-button (click)="getCompanies()">Previous page</button>
