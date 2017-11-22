@@ -26,22 +26,24 @@ companyRouter.get('/', async (req:any, res:express.Response)=>{
     
     try{
         let companies
-        if('skip' in query && 'size' in query && 'minRating' in query && 'minComments'){
+        if('skip' in query && 'size' in query && 'minRating' in query && 'minComments' in query){
+            console.log('calling this')
             companies = await companyHelpers.findFromAndLimitFilterMinRatingAndMinComments(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minRating), parseInt(query.minComments))
             return res.status(200).send(JSON.stringify(companies))
         }
 
-        if('skip' in query && 'size' in query && 'minRating'){
+        if('skip' in query && 'size' in query && 'minRating' in query){
             companies = await companyHelpers.findFromAndLimitFilterMinRating(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minRating))
             return res.status(200).send(JSON.stringify(companies))
         }
 
-        if('skip' in query && 'size' in query && 'minComments'){
+        if('skip' in query && 'size' in query && 'minComments' in query){
             companies = await companyHelpers.findFromAndLimitFilterMinComments(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minComments))
             return res.status(200).send(JSON.stringify(companies))
         }
 
         if('skip' in query && 'size' in query){
+            
             companies = await companyHelpers.findFromAndLimit(parseInt(query.skip) ,parseInt(query.size))
             return res.status(200).send(JSON.stringify(companies))
         }
