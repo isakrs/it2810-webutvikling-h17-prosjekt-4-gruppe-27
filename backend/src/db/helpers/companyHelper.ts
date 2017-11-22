@@ -22,13 +22,23 @@ async function findCompaniesMinComments(minComments:number){
 
 async function searchByName(searchTerm:string){
     return await Company.find({
-        name:new RegExp(`^${searchTerm}`)
+        name:new RegExp(`${searchTerm}`,'i')
     }
     )
+}
+
+async function findFromAndLimit(from:number, size:number){
+    return await Company.find({}).limit(size).skip(from)
+}
+
+async function findTopCompaniesBasedOnAverage(top:number){
+    return await Company.find({}).limit(top).sort({averageRating:-1})
 }
 export {
     findCompaniesMinRatingMinComments,
     findCompaniesMinRating,
     findCompaniesMinComments,
-    searchByName
+    searchByName,
+    findFromAndLimit,
+    findTopCompaniesBasedOnAverage
 }

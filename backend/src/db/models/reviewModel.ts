@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose'
-
+import { mongo } from 'mongoose';
+import User from './userModel'
 let reviewSchema = new mongoose.Schema({
     idCompany: {
         type: mongoose.Schema.Types.ObjectId,
@@ -15,11 +16,12 @@ let reviewSchema = new mongoose.Schema({
      comment: {
          type: String,
          required: true
-     }
+     },
+     user: {type: mongoose.Schema.Types.ObjectId, ref:User.name}
     },
     {
         versionKey:false
-    }
+    },
 )
 let name ='Review'
 if (process.env.NODE_ENV === 'test'){
