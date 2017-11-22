@@ -1,19 +1,19 @@
-import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
-import { MockBackend, MockConnection } 			from '@angular/http/testing';
+import { TestBed, inject, fakeAsync, tick }   from '@angular/core/testing';
+import { MockBackend, MockConnection }        from '@angular/http/testing';
 import { Http, Response, ResponseOptions,
-				 BaseRequestOptions, RequestOptions,
-				 ConnectionBackend } 								from '@angular/http';
-import { ReflectiveInjector } 							from '@angular/core';
+         BaseRequestOptions, RequestOptions,
+         ConnectionBackend }                   from '@angular/http';
+import { ReflectiveInjector }                  from '@angular/core';
 
-import { environment } from '../../../environments/environment';
+import { environment }     from '../../../environments/environment';
 
-import { CompanyService } 	from './company.service';
-import { Company } 					from './company.model';
+import { CompanyService }  from './company.service';
+import { Company }         from './company.model';
 
 describe('CompanyService', () => {
 
   const apiUrl = environment.apiUrl;
-	const mockResponse = [
+  const mockResponse = [
     {_id: '0', name: 'DNB'},
     {_id: '1', name: 'Bekk'}
   ];
@@ -35,28 +35,28 @@ describe('CompanyService', () => {
     this.companyService.getCompanies();
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${apiUrl}/api/company`);
+    .toBe(`${apiUrl}/api/company/?skip=0&size=5`);
   });
 
-	it('should query current service url with only minRating', () => {
+  it('should query current service url with only minRating', () => {
     this.companyService.getCompanies(4.4, undefined);
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${apiUrl}/api/company/?minRating=4.4`);
+    .toBe(`${apiUrl}/api/company/?skip=0&size=5&minRating=4.4`);
   });
 
   it('should query current service url with only minComments', () => {
     this.companyService.getCompanies(undefined, 3);
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${apiUrl}/api/company/?minComments=3`);
+    .toBe(`${apiUrl}/api/company/?skip=0&size=5&minComments=3`);
   });
 
   it('should query current service url with both minRating and minComments', () => {
     this.companyService.getCompanies(4.4, 2);
     expect(this.lastConnection).toBeDefined();
     expect(this.lastConnection.request.url)
-    .toBe(`${apiUrl}/api/company/?minRating=4.4&minComments=2`);
+    .toBe(`${apiUrl}/api/company/?skip=0&size=5&minRating=4.4&minComments=2`);
   });
 
   it('getCompanies() should return companies', fakeAsync(() => {

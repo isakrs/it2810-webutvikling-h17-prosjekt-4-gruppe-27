@@ -29,12 +29,17 @@ export class CompanyService {
       );
   }
 
-  getCompanies(minRating?: number, minComments?: number): Promise<Company[]> {
+  getCompanies(minRating?: number, minComments?: number, next?: boolean): Promise<Company[]> {
 
+    let skip = 0;
     let url = this.companiesUrl
-    if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
-    else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
-    else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
+
+    if (next) skip = 5;
+    url += `/?skip=${skip}&size=5`;
+
+    if      (minRating  && !minComments) url += `&minRating=${minRating}`;
+    else if (!minRating && minComments)  url += `&minComments=${minComments}`;
+    else if (minRating  && minComments)  url += `&minRating=${minRating}&minComments=${minComments}`;
 
     return this.http.get(url)
       .toPromise()
@@ -47,6 +52,14 @@ export class CompanyService {
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Company)
+      .catch(this.handleError);
+  }
+
+  getTopCompanies(): Promise<Company[]> {
+    const url = `${this.companiesUrl}/?top=4`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Company[])
       .catch(this.handleError);
   }
 

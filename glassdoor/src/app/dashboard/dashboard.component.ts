@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    this.companyService.getCompanies()
-      .then(companies => this.companies = companies.slice(1,5));
+    this.companyService.getTopCompanies()
+      .then(companies => this.companies = companies);
   }
 }
