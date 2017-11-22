@@ -1,6 +1,6 @@
-<h2>My Companies</h2>
+<h2>Companies</h2>
 
-<div *ngIf="isLoggedIn; else login">
+<mat-card *ngIf="isLoggedIn; else login">
   <form>
     <mat-form-field>
       <input matInput placeholder="Company name" id="company-input" #companyName/>
@@ -11,7 +11,7 @@
   </form>
 
   
-</div>
+</mat-card>
 
 <ng-template #login >
   <div>

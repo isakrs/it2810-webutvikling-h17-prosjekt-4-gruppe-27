@@ -1,3 +1,12 @@
+#review-input-comment {
+  width: 50%;
+}
+
+.add-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .selected {
   background-color: #CFD8DC !important;
   color: white;

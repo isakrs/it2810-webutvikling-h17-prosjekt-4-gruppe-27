@@ -1,10 +1,10 @@
-<div *ngIf="isLoggedIn; else login" >
-  <form>
+<mat-card *ngIf="isLoggedIn; else login" >
+  <form class="add-review">
     <mat-form-field>
       <input matInput placeholder="Rating 1-5" id="review-input-rating" #reviewRating />
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Comment" id="review-input-comment" #reviewComment />
+    <mat-form-field id="review-input-comment" >
+      <input matInput placeholder="Comment"  #reviewComment />
     </mat-form-field>
     <button mat-raised-button
       class="add-review"
@@ -17,7 +17,7 @@
       Add
     </button>
   </form>
-</div>
+</mat-card>
 
 <ng-template #login >
   <div>

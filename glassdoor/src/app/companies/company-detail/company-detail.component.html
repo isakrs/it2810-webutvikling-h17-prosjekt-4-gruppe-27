@@ -1,14 +1,13 @@
-<div *ngIf="company">
-  <h2>{{company.name}} details!</h2>
-  <div>
-    <label>Name:</label>{{company.name}}
-  </div>
+<mat-card *ngIf="company">
+  <mat-card-title>{{company.name}}</mat-card-title>
+  <mat-card-content>
   <div *ngIf="company.averageRating">
-    <label>Rating: </label>{{company.averageRating.toFixed(1)}}
+    <label>Average rating: </label>{{company.averageRating.toFixed(1)}}
   </div>
   <div *ngIf="company.nComments">
-    <label>Comments:</label>{{company.nComments}}
+    <label>Reviews:</label>
+      {{company.nComments}}
   </div>
-  <button mat-raised-button (click)="goBack()">Back</button>
-</div>
+  </mat-card-content>
+</mat-card>
 <reviews (reviewsChanged)="getCompany()" [company]="company" ></reviews>
