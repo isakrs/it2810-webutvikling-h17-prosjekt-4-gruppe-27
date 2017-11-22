@@ -4,7 +4,7 @@ import { Router }         from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 
-import { environment }	from '../../environments/environment';
+import { environment }	from '../../../environments/environment';
 
 @Injectable()
 export class ProfileService {
