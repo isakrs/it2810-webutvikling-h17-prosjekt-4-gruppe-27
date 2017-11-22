@@ -259,7 +259,6 @@ describe('Testing DELETE /api/company/:id',function(){
     })
 
 })
-/*
 describe('Testing company update name', function(){
     let comp1:any = new Company({
         name:'evry2',
@@ -285,7 +284,7 @@ describe('Testing company update name', function(){
     })
 
     after(async function(){
-        await Promise.all([Company.findByIdAndRemove(comp1._id), User.Model.findByIdAndRemove(user2._id)])
+        await Promise.all([Company.remove({}), User.Model.remove({})])
     })
 
     it('should not be possible to update a company if auth is not provided', async function(){
@@ -304,8 +303,7 @@ describe('Testing company update name', function(){
         await supertest(app).put(`/api/company/${comp1._id}`).set({Authorization:`Bearer ${token2}`}).send(comp1NewName).expect(200)
         let updatedComp:any = await Company.findById(comp1._id)
         expect(updatedComp).not.to.be.null
-        expect(updatedComp.name.toString()).to.equal(comp1NewName)
+        expect(updatedComp.name.toString()).to.equal(comp1NewName.name)
     })
 
 })
-*/

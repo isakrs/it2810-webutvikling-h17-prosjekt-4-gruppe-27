@@ -105,10 +105,14 @@ companyRouter.put('/:id', async function(req:any, res:express.Response){
         if (!req.authed.isAuthed){
             return res.status(401).send()
         }
-        if(!(name in req.body)){
+        
+        if(!('name' in req.body)){
             throw new Error('must have name')
         }
-       
+        let existingCompany = await Company.findById(req.params.id)
+        if(!existingCompany){
+            throw new Error('must have name')
+        }
         let companany = await Company.findByIdAndUpdate(req.params.id,req.body, {new:true})
         return res.status(200).send()
     } catch (error) {
