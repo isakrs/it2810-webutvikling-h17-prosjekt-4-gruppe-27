@@ -17,8 +17,8 @@ export class CompaniesComponent implements OnInit {
   sortValue: string;
 
   constructor(
-    private companyService:       CompanyService,
-    private router:               Router
+    private companyService: CompanyService,
+    private router:         Router
   ) { }
 
   getCompanies(filter?): void {
