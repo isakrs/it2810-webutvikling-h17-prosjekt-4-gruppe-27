@@ -24,7 +24,7 @@ describe('Review section of Company Detail Page', () => {
     browser.sleep(1000);
 
     // Navigating to google's (_id) page
-    rSec.navigateTo("5a15a9ce8d97c9a66efe43f4");
+    rSec.navigateTo("5a15b9317d44bcad8b253a9a");
 
     // Store number of Reviews at this time
     await rSec.noReviews().then(num => nReviews=num);

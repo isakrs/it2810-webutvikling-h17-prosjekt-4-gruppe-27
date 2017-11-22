@@ -259,3 +259,51 @@ describe('Testing DELETE /api/company/:id',function(){
     })
 
 })
+describe('Testing company update name', function(){
+    let comp1:any = new Company({
+        name:'evry2',
+        averageRating: 1,
+        nComments: 5
+    })
+
+    let comp1NewName = {
+        name:'evrynew'
+    }
+
+   
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+
+    before(async function(){
+        await Promise.all([comp1.save(), user2.save()])
+
+    })
+
+    after(async function(){
+        await Promise.all([Company.remove({}), User.Model.remove({})])
+    })
+
+    it('should not be possible to update a company if auth is not provided', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).send(comp1NewName).expect(401)
+    })
+
+    it('should not be possible to update a company if it does not exist', async function(){
+        await supertest(app).put(`/api/company/${324234234}`).set({Authorization:`Bearer ${token2}`}).send(comp1NewName).expect(400)
+    })
+
+    it('should not be possible to update a company if exists but body is not name and user is authed', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).set({Authorization:`Bearer ${token2}`}).send({other:1}).expect(400)
+    })
+
+    it('should be possible to update if exists and body is name and user is authed', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).set({Authorization:`Bearer ${token2}`}).send(comp1NewName).expect(200)
+        let updatedComp:any = await Company.findById(comp1._id)
+        expect(updatedComp).not.to.be.null
+        expect(updatedComp.name.toString()).to.equal(comp1NewName.name)
+    })
+
+})

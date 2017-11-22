@@ -26,7 +26,24 @@ companyRouter.get('/', async (req:any, res:express.Response)=>{
     
     try{
         let companies
-        if('skip' in query && 'size'){
+        if('skip' in query && 'size' in query && 'minRating' in query && 'minComments' in query){
+            console.log('calling this')
+            companies = await companyHelpers.findFromAndLimitFilterMinRatingAndMinComments(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minRating), parseInt(query.minComments))
+            return res.status(200).send(JSON.stringify(companies))
+        }
+
+        if('skip' in query && 'size' in query && 'minRating' in query){
+            companies = await companyHelpers.findFromAndLimitFilterMinRating(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minRating))
+            return res.status(200).send(JSON.stringify(companies))
+        }
+
+        if('skip' in query && 'size' in query && 'minComments' in query){
+            companies = await companyHelpers.findFromAndLimitFilterMinComments(parseInt(query.skip) ,parseInt(query.size), parseInt(query.minComments))
+            return res.status(200).send(JSON.stringify(companies))
+        }
+
+        if('skip' in query && 'size' in query){
+            
             companies = await companyHelpers.findFromAndLimit(parseInt(query.skip) ,parseInt(query.size))
             return res.status(200).send(JSON.stringify(companies))
         }
@@ -97,6 +114,27 @@ companyRouter.post('/', async(req:any, res: express.Response)=>{
 
     }catch(error){
        return res.status(400).send(JSON.stringify(error.message))
+    }
+})
+companyRouter.put('/:id', async function(req:any, res:express.Response){
+    try {
+        
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        
+        if(!('name' in req.body)){
+            throw new Error('must have name')
+        }
+        let existingCompany = await Company.findById(req.params.id)
+        if(!existingCompany){
+            throw new Error('must have name')
+        }
+        let companany = await Company.findByIdAndUpdate(req.params.id,req.body, {new:true})
+        return res.status(200).send()
+    } catch (error) {
+        
+        return res.status(400).send()
     }
 })
 export default companyRouter
