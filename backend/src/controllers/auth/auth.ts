@@ -5,8 +5,8 @@ let router:express.Router = express.Router()
 
 router.post('/signup',async function(req, res) {
     try {
-        let user = new User(req.body)
-        let exisitingUser = await User.findOne({username:req.body.username})
+        let user = new User.Model(req.body)
+        let exisitingUser = await User.Model.findOne({username:req.body.username})
         if(exisitingUser){
             throw new Error('user exists')
         }
@@ -25,7 +25,7 @@ router.post('/signup',async function(req, res) {
 router.post('/login', async function(req:express.Request,res:express.Response){
  
     try {
-        let user:any = await User.findOne({username:req.body.username, password:req.body.password})
+        let user:any = await User.Model.findOne({username:req.body.username, password:req.body.password})
        
         if(!user){
             throw new Error('user does not exist')

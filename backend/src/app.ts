@@ -13,7 +13,7 @@ let connectionString = 'mongodb://applicationUser:ehysb7TXc2G7esapvF@it2810-27.i
 
 //register middleware
 app.use(cors())
-//app.use(morgan('common'))
+app.use(morgan('common'))
 
 const options:bodyParser.OptionsJson ={
     type: 'application/json',

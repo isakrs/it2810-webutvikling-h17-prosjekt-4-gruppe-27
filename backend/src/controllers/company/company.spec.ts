@@ -5,7 +5,8 @@ import * as mongoose from 'mongoose'
 import {default as app} from './../../app'
 import * as _ from 'lodash'
 import Company from './../../db/models/companyModel'
-
+import User from './../../db/models/userModel'
+import * as jwt from 'jsonwebtoken'
 
 let companyName = 'testTestTest1'
 let companyID = ''
@@ -124,6 +125,41 @@ describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ w
                 }
             ])
     })
+    it('should search based on term and only return relevant, should be case insensitive', async function(){
+        let response  = await supertest(app).get('/api/company/?name=BaI').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp2._id.toString(),
+            averageRating:comp2.averageRating,
+            nComments:comp2.nComments,
+            name:comp2.name
+            },
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
+
+    it('should search based on term and only return relevant, should be case insensitive', async function(){
+        let response  = await supertest(app).get('/api/company/?name=BaIn').expect(200)
+        expect(response.body).to.have.lengthOf(2)
+        expect(response.body).to.be.an('array')
+        expect(response.body).to.have.deep.members([
+            {_id:comp2._id.toString(),
+            averageRating:comp2.averageRating,
+            nComments:comp2.nComments,
+            name:comp2.name
+            },
+            {_id:comp3._id.toString(),
+                averageRating:comp3.averageRating,
+                nComments:comp3.nComments,
+                name:comp3.name
+                }
+            ])
+    })
 
     it('should search based on term, only return relevant term bainba', async function(){
         let response  = await supertest(app).get('/api/company/?name=bainba').expect(200)
@@ -141,23 +177,54 @@ describe('testing GET api/company/:id , GET api/company/:id , GET api/company/ w
 })
 
 describe('testing POST api/company ', function(){
-    let companyName ='comp1'
-    it('should create a new company and retrive the same company', function(){     
-        return supertest(app)
-        .post('/api/company')
-        .send({
-            name: companyName
-        })
-        .expect(200)
-        .then(async function(response){
-            expect(response.body, 'is not an object').to.be.an('object')
-            expect(response.body, 'does not have name and _id').have.all.keys('name','_id', 'averageRating', 'nComments')
-            expect(response.body.name, 'does not have the same name?').to.equal(companyName) 
-            let company:any  = await Company.findById(response.body._id) 
-            expect(company._id.toString()).to.equal(response.body._id)
-            expect(company.name.toString()).to.equal(response.body.name)
-            await Company.findByIdAndRemove(company._id)          
-        })
+    let company4 = {
+        name:'some Name'
+    }
+    let company4id:string
+
+    let company5 = {
+        name:'some naMe'
+    }
+    let company6 = {
+        name:'SOMe name'
+    }
+    let company7 = {
+        name:'SomE Name'
+    }
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+  
+
+    before(async function(){
+        await user2.save()
+    })
+
+    after(async function(){
+        await Promise.all([User.Model.findByIdAndRemove(user2._id), Company.findByIdAndRemove(company4id)])
+    })
+
+    it('should not be able to create company if not signed in', async function(){
+        await  supertest(app).post('/api/company').send(company4).expect(401)
+    })
+
+    it('should create a new compnay if logged in', async function(){     
+       let respone =  await supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company4).expect(200)
+       company4id = respone.body._id
+       expect(respone.body).to.have.all.keys('name','_id','nComments','averageRating')
+    })
+
+    it('should not be able to create a company with the same name', async function(){
+        let respone =  await supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company4).expect(400)
+    })
+
+    it('should not be possible to create a company with another caseSensitivity', async function(){
+        await Promise.all([supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company5).expect(400),
+         supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company6).expect(400),
+         supertest(app).post('/api/company').set({Authorization:`Bearer ${token2}`}).send(company7).expect(400)])
     })
 })
 
@@ -165,16 +232,78 @@ describe('Testing DELETE /api/company/:id',function(){
     let company1 = new Company({
         name:'test1',
     })
+
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+    
     before(async function(){
-        await company1.save()
+        await Promise.all([company1.save(), user2.save()])
     })
-    it('should be able to delete a company', function(){
-        return supertest(app)
-        .delete(`/api/company/${company1._id}`)
-        .expect(200)
-        .then(async function(){
-            let result = await Company.findById(company1._id)
-            expect(result).to.be.null
-        })
+
+    after(async function(){
+        await Promise.all([User.Model.findByIdAndRemove(user2._id)])
     })
+    it('shouls be able to delete if signed in an company id is correct', async function(){
+        await supertest(app).delete(`/api/company/${company1._id}`).set({Authorization:`Bearer ${token2}`}).send().expect(200)
+    })
+    it('should not be able to delete a company if not signed in', async function(){
+        await supertest(app).delete(`/api/company/${company1._id}`).expect(401)
+    })
+
+    it('should not be able to delete if company does not exist, but user is authed', async function(){
+        await supertest(app).delete(`/api/company/${1111111}`).set({Authorization:`Bearer ${token2}`}).expect(400)
+    })
+
+})
+describe('Testing company update name', function(){
+    let comp1:any = new Company({
+        name:'evry2',
+        averageRating: 1,
+        nComments: 5
+    })
+
+    let comp1NewName = {
+        name:'evrynew'
+    }
+
+   
+    let user2 = new User.Model({
+        username:'someNm',
+        password: 'pass'
+    })
+
+    let token2 = jwt.sign({userId:user2._id}, 'superSecret', { expiresIn:'24h'})
+
+    before(async function(){
+        await Promise.all([comp1.save(), user2.save()])
+
+    })
+
+    after(async function(){
+        await Promise.all([Company.remove({}), User.Model.remove({})])
+    })
+
+    it('should not be possible to update a company if auth is not provided', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).send(comp1NewName).expect(401)
+    })
+
+    it('should not be possible to update a company if it does not exist', async function(){
+        await supertest(app).put(`/api/company/${324234234}`).set({Authorization:`Bearer ${token2}`}).send(comp1NewName).expect(400)
+    })
+
+    it('should not be possible to update a company if exists but body is not name and user is authed', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).set({Authorization:`Bearer ${token2}`}).send({other:1}).expect(400)
+    })
+
+    it('should be possible to update if exists and body is name and user is authed', async function(){
+        await supertest(app).put(`/api/company/${comp1._id}`).set({Authorization:`Bearer ${token2}`}).send(comp1NewName).expect(200)
+        let updatedComp:any = await Company.findById(comp1._id)
+        expect(updatedComp).not.to.be.null
+        expect(updatedComp.name.toString()).to.equal(comp1NewName.name)
+    })
+
 })

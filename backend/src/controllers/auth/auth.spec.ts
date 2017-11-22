@@ -14,13 +14,13 @@ describe('Testing signup in auth',function(){
     }
 
     after(async function(){
-        let us = await User.findOne({username:user.username})
-        await User.findByIdAndRemove(us._id)
+        let us = await User.Model.findOne({username:user.username})
+        await User.Model.findByIdAndRemove(us._id)
     })
 
     it('shoudl be able to sign up and not sign up with the same ', async function(){
         let response = await supertest(app).post('/auth/signup').send(user).expect(200)
-        let userFromDb:any = await User.findOne({username:user.username})
+        let userFromDb:any = await User.Model.findOne({username:user.username})
         expect(userFromDb.username.toString()).to.equal(user.username)
         expect(userFromDb.password.toString()).to.equal(user.password)
         let response2 = await supertest(app).post('/auth/signup').send(user).expect(400)
@@ -34,14 +34,14 @@ describe('testing login', function(){
         password:'password'
     }
 
-    let userM = new User(user)
+    let userM = new User.Model(user)
 
     before(async function(){
         await userM.save()
     })
 
     after(async function(){
-        await User.findByIdAndRemove(userM._id)
+        await User.Model.findByIdAndRemove(userM._id)
     })
 
     it('should not give tokes if  login credetnials are wrong',async function(){
@@ -64,13 +64,13 @@ describe('testing /auth/verify ',function(){
         password:'password'
     }
 
-    let userM = new User(user)
+    let userM = new User.Model(user)
     before(async function(){
         await userM.save()
     })
 
     after(async function(){
-        await User.findByIdAndRemove(userM._id)
+        await User.Model.findByIdAndRemove(userM._id)
     })
 
     it('should not verify if token is not provided', async function(){
