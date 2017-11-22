@@ -258,7 +258,8 @@ Returns the new review
 
 ### Companies
 
-API updates `company.averageRating` and `company.nComments` as reviews are created and deleted
+API updates `company.averageRating` and `company.nComments` as reviews are created and deleted.
+See company object in the response below.
 
 
 
