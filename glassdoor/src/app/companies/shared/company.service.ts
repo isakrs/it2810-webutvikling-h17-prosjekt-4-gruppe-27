@@ -3,13 +3,15 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
+import { environment }   from '../../../environments/environment';
+
 import { Company } from './company.model';
 
 @Injectable()
 export class CompanyService {
 
   private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}, );
-  private companiesUrl = 'http://it2810-27.idi.ntnu.no:8084/api/company';  // URL to web api
+  private companiesUrl = `${environment.apiUrl}/api/company`;  // URL to web api
 
   constructor(private http: Http) { }
 
