@@ -81,7 +81,7 @@ data = [
 
 #### POST
 
-**Create new review**
+ **Create new review**
 
 POST
 
@@ -180,7 +180,7 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
-##### **Get top companies**
+##### Get top companies
 
 Returnerer top N companies basert på average rating. 
 
@@ -204,7 +204,7 @@ Det hadde vært supernice om man kunne chainet disse query'ene
 url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
 ```
 
-
+Returnerer 10 companies (skipper de 5 første) som har averageRating >= 4.4 og numComments >= 2. 
 
 #### POST
 
