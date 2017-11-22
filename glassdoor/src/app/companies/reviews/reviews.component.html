@@ -22,15 +22,17 @@
 </ng-template>
 
 
-<ul class="reviews">
-  <li *ngFor="let review of reviews" (click)="onSelect(review)"
+<mat-list class="reviews">
+  <mat-list-item *ngFor="let review of reviews" (click)="onSelect(review)"
       [class.selected]="review === selectedReview">
-    <span class="badge">{{review.rating}}</span>
-    <span>{{review.comment}}</span>
-    <button mat-raised-button *ngIf="username===review.user.username" class="delete"
+    <mat-icon matListIcon>
+      <mat-card class="badge">{{review.rating}}</mat-card>
+    </mat-icon> 
+    <h3 matLine>{{review.comment}}</h3>
+    <button  mat-raised-button *ngIf="username===review.user.username" class="delete"
       (click)="delete(review); $event.stopPropagation()">x</button>
-  </li>
-</ul>
+  </mat-list-item>
+</mat-list>
 <div *ngIf="selectedReview">
   <app-review-detail [review]="selectedReview" ></app-review-detail>
 </div>
