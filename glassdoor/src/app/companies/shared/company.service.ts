@@ -38,9 +38,9 @@ export class CompanyService {
     if (next) skip = 5;
     url += `/?skip=${skip}&size=5`;
 
-    if      (minRating  && !minComments) url += `/?minRating=${minRating}`;
-    else if (!minRating && minComments)  url += `/?minComments=${minComments}`;
-    else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
+    if      (minRating  && !minComments) url += `&minRating=${minRating}`;
+    else if (!minRating && minComments)  url += `&minComments=${minComments}`;
+    else if (minRating  && minComments)  url += `&minRating=${minRating}&minComments=${minComments}`;
 
 
 
