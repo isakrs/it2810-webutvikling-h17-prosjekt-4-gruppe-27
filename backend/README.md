@@ -11,7 +11,7 @@ reviews = [
   },
   {
     _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
-  	user: {_id: 1, username: isak}
+  	user: {_id: "1", username: "isak"}
   }
 ]
 ```
@@ -26,6 +26,18 @@ companies = [
   {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
   {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
 ]
+```
+
+
+
+#### Example user
+
+```typescript
+user = {
+  _id: string,
+  username: string,
+  password: string
+}
 ```
 
 
@@ -54,6 +66,7 @@ GET `url: 'api/reviews/3'` returns:
 ```
 
 
+
 **Get a user's reviews**
 
 GET
@@ -69,7 +82,7 @@ Returns reviews by the user.
 data = [
   {
     _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
-    user: {_id: 0, username: "marius"}
+    user: {_id: "0", username: "marius"}
   },
   {
     _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
@@ -77,6 +90,7 @@ data = [
   }
 ]
 ```
+
 
 
 **Create new review**
@@ -87,6 +101,18 @@ POST
 url: 'api/review'
 headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
 body: {rating: 3, comment: "Loved working here.", idCompany: "8"}
+```
+
+Returns the new review
+
+```typescript
+data = {
+  _id: "5a15bc9f7d44bcad8b253aa2", 
+  rating: 1, 
+  comment: "sucks", 
+  idCompany: "5a15b03b7d44bcad8b253a90", 
+  user: {username: "marius", _id:"5a15af797d44bcad8b253a88"}
+}
 ```
 
 
@@ -100,11 +126,46 @@ url: 'api/review/<id>'
 headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
 ```
 
+Returns nothing but response: 200
+
 
 
 ### Companies
 
 API updates `company.averageRating` and `company.nComments` as reviews are created and deleted
+
+
+
+**Get all companies**
+
+```typescript
+url: 'api/company'
+```
+
+Returns all companies
+
+```typescript
+[
+  {_id: "1", name: "Statoil",      averageRating: null, nComments: null},
+  {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
+  {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
+]
+```
+
+
+
+**Get company by id**
+
+```typescript
+url: 'api/company/<id>'
+```
+
+Returns for GET url: 'api/companies/1':
+
+```typescript
+{_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
+```
+
 
 
 **Search**
@@ -118,44 +179,11 @@ Returns list over companies where company.name contains `term`.
 
 `term` (string) is not case sensitive, i.e. 'Google' and 'google' would have equal response.
 
-Optionial Arguments:
-  `?top=x`, where x (int) are the top x company results based on company.averageRating
 
-  `?skip=x&size=y`, where x (int) is number of skipped results before desired result and y (int) are the number of desired results.
-
-
-
-**Get all companies**
-
-```typescript
-url: 'api/company'
-```
-
-som returner alle companies:
-
-```typescript
-[
-  {_id: "1", name: "Statoil",      averageRating: null, nComments: null},
-  {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
-  {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
-]
-```
-
-**Get company by id**
-
-```typescript
-url: 'api/company/<id>'
-```
-
-som returner (for GET url: 'api/companies/1'):
-
-```typescript
-{_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
-```
 
 **Filter companies**
 
-Filter companies on averageRating and nComments
+Filter companies on min `company.averageRating` and min `company.nComments`
 
 GET
 
@@ -175,6 +203,10 @@ GET
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
+All the above requests return company objects in an array. 
+
+
+
 **Top Companies**
 
 Return top N (int) companies bases on averageRating.
@@ -184,6 +216,7 @@ GET
 ```typescript
 url: api/company/?top=<N>
 ```
+
 
 
 **Pagination**
@@ -196,15 +229,18 @@ GET
 url: api/company/?skip=5&size=10
 ```
 
+
+
 **Chaining of filters and pagination**
 
-Chaining of filters and pagination is plausible. eg.
+Chaining of filters and pagination is possible. e.g.
 
 GET
 
 ```typescript
 url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
 ```
+
 
 
 **Create new company**
@@ -220,11 +256,11 @@ headers: {
 body: {name: 'Facebook'}
 ```
 
+Returns the new company created
+
 
 
 **Delete company by id**
-
-### krever auth
 
 DELETE
 
@@ -235,6 +271,9 @@ headers: {
   'headers': {'Authorization': 'Bearer <token>'}
 }
 ```
+
+Returns nothing but response: 200
+
 
 
 **Update company**
@@ -252,18 +291,7 @@ body: {name: 'SBanken'}
 
 
 
-
 ### User
-
-Data Model
-
-```typescript
-{
-  _id: string,
-  username: string,
-  password: string
-}
-```
 
 
 **Login**
@@ -288,6 +316,7 @@ data = [
 ```
 
 
+
 **Register**
 
 POST
@@ -298,7 +327,8 @@ headers: {'Content-Type': 'application/json'}
 {username: 'marius', password: 'password'}
 ```
 
-Returns solely response 200
+Returns nothing but response 200
+
 
 
 **Token validation**
