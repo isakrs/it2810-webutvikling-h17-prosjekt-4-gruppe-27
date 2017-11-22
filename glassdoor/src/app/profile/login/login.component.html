@@ -1,16 +1,15 @@
-<mat-card>
-	<form ngNativeValidate >
-		<mat-form-field>
-			<input matInput id="username" type="text" placeholder="username" required #username >
-		</mat-form-field>
-		<mat-form-field>
-			<input matInput id="password" type="password" placeholder="password" required #password >
-		</mat-form-field>
-			<button mat-raised-button id="login" type="submit" (click)="onLogin(username.value, password.value)">
-				Log in
-			</button>
-			<button mat-raised-button id="register" type="submit" (click)="onRegister(username.value, password.value)">
-				Register
-			</button>
-	</form>
-</mat-card>
+<form ngNativeValidate class="login" >
+	<mat-form-field>
+		<input matInput id="username" type="text" placeholder="username" required #username >
+	</mat-form-field>
+	<mat-form-field>
+		<input matInput id="password" type="password" placeholder="password" required #password >
+	</mat-form-field>
+		<button mat-raised-button id="login" type="submit" (click)="onLogin(username.value, password.value)">
+			Log in
+		</button>
+		<button mat-raised-button id="register" type="submit" (click)="onRegister(username.value, password.value)">
+			Register
+		</button>
+</form>
+
