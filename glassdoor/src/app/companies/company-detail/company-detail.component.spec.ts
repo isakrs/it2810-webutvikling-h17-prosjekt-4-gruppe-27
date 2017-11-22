@@ -10,6 +10,8 @@ import { Company }                from '../shared/company.model';
 import { ReviewsComponent }       from '../reviews/reviews.component';
 import { ReviewService }          from '../reviews/shared/review.service';
 import { Review }                 from '../reviews/shared/review.model';
+import { ProfileService }         from '../../profile/shared/profile.service';
+
 
 describe('CompanyDetailComponent', () => {
 
@@ -34,7 +36,7 @@ describe('CompanyDetailComponent', () => {
       declarations: [ CompanyDetailComponent, ReviewsComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [ FormsModule, HttpModule, RouterTestingModule ],
-      providers: [ CompanyService, ReviewService ]
+      providers: [ CompanyService, ReviewService, ProfileService ]
     })
     .compileComponents().then( () =>  {
       fixture = TestBed.createComponent(CompanyDetailComponent);

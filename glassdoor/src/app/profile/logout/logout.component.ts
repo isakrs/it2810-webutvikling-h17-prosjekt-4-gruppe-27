@@ -17,7 +17,7 @@ export class LogoutComponent implements OnInit {
     this.checkSession(session);
   }
 
-  checkSession(session: any): void {
+  private checkSession(session: any): void {
 		if (session === null) {
 			this.isLoggedIn = false;
 		} else {
