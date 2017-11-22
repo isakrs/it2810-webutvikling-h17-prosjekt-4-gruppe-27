@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginComponent }			from './login/login.component';
+import { LoginComponent }		from './login/login.component';
 import { MyPageComponent }		from './my-page/my-page.component';
-import { User }								from './shared/user.model';
+import { User }					from './shared/user.model';
 import { ProfileService } 		from './shared/profile.service';
 
 @Component({
@@ -12,8 +12,8 @@ import { ProfileService } 		from './shared/profile.service';
 })
 export class ProfileComponent implements OnInit {
 	isLoggedIn: boolean;
-	username: string;
-	token: string;
+	username: 	string;
+	token: 		string;
 
   constructor(private profileService: ProfileService) {}
 
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   }
 
 	checkSession(session: any): void {
-		if (session === null || session.auth === false) {
+		if (session === null) {
 			this.isLoggedIn = false;
 		} else {
 			this.profileService.isTokenValid(session.token)
