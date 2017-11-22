@@ -25,7 +25,7 @@ reviewRouter.post('/', async function(req:any, res: express.Response){
 
 reviewRouter.get('/company/:id', async function(req:express.Request, res: express.Response){
     try {
-        let reviews= await Review.find({idCompany:req.params.id})
+        let reviews= await Review.find({idCompany:req.params.id}).populate('user','username')
         return res.set(200).send(JSON.stringify(reviews))
     } catch (error) {
         return res.status(400).send()
@@ -74,7 +74,7 @@ reviewRouter.get('/user', async function(req:any,res:express.Response){
 
         if (!req.authed.isAuthed){
             return res.status(401).send()
-        }
+        }     
         let reviews:any = await Review.find({user:req.authed.user.userId}).populate('user','username')
     
         return res.status(200).send(JSON.stringify(reviews))

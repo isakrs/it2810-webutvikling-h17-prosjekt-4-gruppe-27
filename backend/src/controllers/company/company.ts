@@ -99,4 +99,21 @@ companyRouter.post('/', async(req:any, res: express.Response)=>{
        return res.status(400).send(JSON.stringify(error.message))
     }
 })
+companyRouter.put('/:id', async function(req:any, res:express.Response){
+    try {
+        
+        if (!req.authed.isAuthed){
+            return res.status(401).send()
+        }
+        if(!(name in req.body)){
+            throw new Error('must have name')
+        }
+       
+        let companany = await Company.findByIdAndUpdate(req.params.id,req.body, {new:true})
+        return res.status(200).send()
+    } catch (error) {
+        
+        return res.status(400).send()
+    }
+})
 export default companyRouter
