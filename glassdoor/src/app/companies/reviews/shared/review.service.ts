@@ -9,10 +9,12 @@ import { Review } from './review.model';
 
 @Injectable()
 export class ReviewService {
-  private token: string;
-  private session: any;
-  private headers: Headers;
-  private reviewsUrl = `${environment.apiUrl}/api/review`;  // URL to web api
+
+  private token:    string;
+  private session:  any;
+  private headers:  Headers;
+
+  private reviewsUrl = `${environment.apiUrl}/api/review`;
 
   constructor(private http: Http) {
     const session = JSON.parse(localStorage.getItem('session'));
@@ -21,11 +23,11 @@ export class ReviewService {
     }
     // Initialize headers. Token will be undefined if user is not logged in, but that's fine
     // for some requests
-    this.headers = new Headers(
-      {'Content-Type': 'application/json',
+    this.headers = new Headers({
+      'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': `Bearer ${this.token}`}
-      );
+      'Authorization': `Bearer ${this.token}`
+    });
   }
 
   getReviews(idCompany: string): Promise<Review[]> {

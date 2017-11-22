@@ -13,7 +13,7 @@ import { ProfileService } 		from './shared/profile.service';
 export class ProfileComponent implements OnInit {
 	isLoggedIn: boolean;
 	username: 	string;
-	token: 		string;
+  token: 		  string;
 
   constructor(private profileService: ProfileService) {}
 
