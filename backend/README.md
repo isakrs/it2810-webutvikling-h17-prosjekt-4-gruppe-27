@@ -1,4 +1,4 @@
-#kjører på it2810-27.idi.ntnu.no:8084/
+# kjører på it2810-27.idi.ntnu.no:8084/
 
 ## Datamodeller
 
@@ -8,11 +8,11 @@
 reviews = [
   {
     _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		user: {_id: "0", username: "marius"}
-  },	
+  },
   {
-    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
+    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
   	user: {_id: 1, username: isak}
-  } 
+  }
 ]
 ```
 
@@ -36,7 +36,7 @@ companies = [
 
 #### GET
 
-1. **Get reviews by idCompany**
+**Get reviews by idCompany**
 
 ```typescript
 url: 'api/review/company/<idCompany>'
@@ -55,7 +55,7 @@ GET url: 'api/reviews/3' skal returnere:
 
 #### GET
 
-1. **Get a user's reviews**
+**Get a user's reviews**
 
 ```typescript
 url: 'api/review/user'
@@ -64,16 +64,16 @@ headers: {'Authorization': 'Bearer <token>'}
 
 Returnerer _id, username og reviews gjort av denne brukeren
 
-```json
+```typescript
 data = [
   {
     _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
     user: {_id: 0, username: marius}
-  },	
+  },
   {
-    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4", 
+    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
   	user: {_id: "0", username: "marius"}
-  } 
+  }
 ]
 ```
 
@@ -81,27 +81,33 @@ data = [
 
 #### POST
 
-1. **Create new review**
+ **Create new review**
 
 POST
 
 Backend genererer ny unik id til review.
 
-Returnerer nye review
-
 ```typescript
 url: 'api/review'
-headers: {'Content-type': 'application/json'}
-data: {rating: 3, comment: "Loved working here.", idCompany: "8", idUser: "0", username: "marius"}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
+body: {rating: 3, comment: "Loved working here.", idCompany: "8"}
 ```
 
-2. **Delete review by id**
+Returnerer nye review:
+
+```typescript
+{rating: 3, comment: "Loved working here.", idCompany: "8", user: {_id: "0", username: "marius"}}
+```
+
+
+
+**Delete review by id**
 
 DELETE
 
 ```typescript
 url: 'api/review/<id>'
-headers: {'Content-type': 'application/json'}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
 ```
 
 ### Companies
@@ -120,20 +126,24 @@ nComments
 
 #### GET
 
-#####  Search
+**Search**
 
-GET
-Returnerer en liste over companies som matcher term på company.name. 
+Returns list over companies where company.name contains `term`
 
-term er ikke case-sensetivt. det vil si Gooogl og google vil være likt
-andre:
-søk er: ?top=x , hvor x er de x høeste baser på avgRating
-?skip=x&size=y både x og u er ints. skips sier noe om hvor mange man skal hoppe over, y er størrelsen på chunken man henter ut.
+`term` (string) is not case sensitiv, i.e. 'Google' and 'google' would have equal response.
+
 ```
 url: 'api/company/?name=${term}'
 ```
 
-1. **Get all companies**
+Optionial Arguments:
+
+`?top=x`, where x (int) are the top x company results based on company.averageRating
+
+`?skip=x&size=y`, where x (int) is number of skipped results before desired result and y (int) are the number of desired results.
+
+
+**Get all companies**
 
 ```typescript
 url: 'api/company'
@@ -149,7 +159,7 @@ som returner alle companies:
 ]
 ```
 
-1. **Get company by id**
+**Get company by id**
 
 ```typescript
 url: 'api/company/<id>'
@@ -161,9 +171,9 @@ som returner (for GET url: 'api/companies/1'):
 {_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
 ```
 
-1. **Filter companies**
+**Filter companies**
 
-Filtrering på >= minRating og/eller >= minComments 
+Filtrering på >= minRating og/eller >= minComments
 
 ```typescript
 url: api/companies/?minRating=4.4
@@ -177,12 +187,38 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
+##### Get top companies
 
+Returnerer top N companies basert på average rating.
+
+```typescript
+url: api/company/?top=<N>
+```
+
+##### **Pagination**
+
+Returnerer companies mellom skip og size
+
+```typescript
+url: api/company/?skip=5&size=10
+```
+
+##### **Chaining av filtering og pagination**
+
+Det hadde vært supernice om man kunne chainet disse query'ene
+
+```typescript
+url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
+```
+
+Returnerer 10 companies (skipper de 5 første) som har averageRating >= 4.4 og numComments >= 2.
 
 #### POST
 
-1. **Create new company**
-###krever auth
+**Create new company**
+
+### krever auth
+
 Generer en unik id.
 
 Returnerer nye company
@@ -195,8 +231,10 @@ headers: {'Content-type': 'application/json'}
 
 
 
-1. **Delete company by id**
-###krever auth
+**Delete company by id**
+
+### krever auth
+
 DELETE
 
 ```typescript
@@ -209,16 +247,20 @@ headers: {'Content-type': 'application/json'}
 
 
 
-1. **Update company**
+**Update company**
+
 Krever auth
 PUT
-F.eks. ved endring av navn.
-
-Returnerer oppdaterte company.
 
 ```typescript
 url: 'api/company/<id>'
 headers: {'Content-type': 'application/json'}
+body: {name: 'SBanken'}
+```
+
+Returnerer oppdaterte company name
+
+```typescript
 {name: 'SBanken'}
 ```
 
@@ -240,7 +282,7 @@ Datamodell
 
 #### POST
 
-1. **Login**
+**Login**
 
 ```typescript
 url: 'auth/login'
@@ -259,7 +301,7 @@ data = [
 ]
 ```
 
-2. **Register**
+**Register**
 
 ```typescript
 url: 'auth/signup'
@@ -269,7 +311,7 @@ headers: {'Content-Type': 'application/json'}
 
 Returnerer ingen data men respons 200
 
-3. **Auth**
+**Auth**
 
 Validerer token
 
@@ -279,4 +321,3 @@ headers: {'Authorization': 'Bearer <token>'}
 ```
 
 Returner ingen data men respons 200.
-

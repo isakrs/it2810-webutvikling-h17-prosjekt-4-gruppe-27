@@ -39,14 +39,12 @@ describe('testing calculations in reviewHelper', function(){
         })
 
     before(async function(){
-        await company1.save()
-        await [review1.save(),review2.save(),review3.save()]
+        await Promise.all([review1.save(),review2.save(),review3.save(),company1.save()])
 
     })
 
     after(async function(){
-        await Company.findByIdAndRemove(company1._id)
-        await Promise.all([Review.findByIdAndRemove(review1._id),Review.findByIdAndRemove(review2._id),Review.findByIdAndRemove(review3._id)])
+        await Promise.all([Review.remove({}), Company.remove({})])
 
     })
     it('should calculate avg correctly', async function(){
@@ -66,12 +64,13 @@ describe('testing update company',function(){
         })
 
     before(async function(){
+        await Company.remove({})
         await company1.save()
     })
 
     after(async function(){
-        await Company.findByIdAndRemove(company1._id)
-        await Review.findByIdAndRemove(review1._id)
+        await Company.remove({})
+        await Review.remove({})
     })
 
     it('should give the same results if companies are not updated', async function(){

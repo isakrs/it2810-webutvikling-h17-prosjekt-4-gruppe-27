@@ -25,7 +25,7 @@ reviewRouter.post('/', async function(req:any, res: express.Response){
 
 reviewRouter.get('/company/:id', async function(req:express.Request, res: express.Response){
     try {
-        let reviews= await Review.find({idCompany:req.params.id})
+        let reviews= await Review.find({idCompany:req.params.id}).populate('user','username')
         return res.set(200).send(JSON.stringify(reviews))
     } catch (error) {
         return res.status(400).send()
@@ -43,8 +43,8 @@ reviewRouter.put('/:id', async function(req:any, res: express.Response){
             return res.status(401).send()
         }
         review = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true})
-        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
-        await updateCompanyStats(updatedReviews,req.params.id)
+        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(review.idCompany.toString())
+        await updateCompanyStats(updatedReviews,review.idCompany.toString())
         res.status(200).send(JSON.stringify(review))
     } catch (error) {
         res.status(400).send()
@@ -61,8 +61,8 @@ reviewRouter.delete('/:id', async function(req:any, res: express.Response){
             return res.status(401).send()
         }
         review = await Review.findByIdAndRemove(req.params.id)
-       let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
-       await updateCompanyStats(updatedReviews,req.params.id)
+       let updatedReviews  = await calculateAvgRatingAndNumberOfComments(review.idCompany.toString())
+       await updateCompanyStats(updatedReviews,review.idCompany.toString())
         res.status(200).send(JSON.stringify(review))
     } catch (error) {
         res.status(400).send()
@@ -74,15 +74,13 @@ reviewRouter.get('/user', async function(req:any,res:express.Response){
 
         if (!req.authed.isAuthed){
             return res.status(401).send()
-        }
+        }     
         let reviews:any = await Review.find({user:req.authed.user.userId}).populate('user','username')
     
         return res.status(200).send(JSON.stringify(reviews))
     } catch (error) {
         return res.status(400).send()
     }
-    
-
 })
 
 

@@ -10,7 +10,7 @@
     "concurrently": "concurrently",
     "nodemon": "nodemon",
     "dev": "npm run concurrently -k -p \"npm run watch-tsc\" -p \"npm run watch-built-serve\"",
-    "test": "NODE_ENV=test mocha --timeout 10000 -r ts-node/register src/**/*.spec.ts"
+    "test": "NODE_ENV=test mocha --timeout 30000 -r ts-node/register src/**/*.spec.ts"
   },
   "author": "johannzv",
   "license": "ISC",
