@@ -22,11 +22,15 @@
 <app-company-filter (changeFilterClicked)="getCompanies($event)"></app-company-filter>
 
 <label>Sort by:</label>
-<select [(ngModel)]="sortValue">
-  <option value="name">Name</option>
-  <option value="averageRating">Rating</option>
-  <option value="nComments">Comments</option>
-</select>
+<mat-form-field>
+  <mat-select [(ngModel)]="sortValue">
+    <mat-option value="name">Name</mat-option>
+    <mat-option value="averageRating">Rating</mat-option>
+    <mat-option value="nComments">Comments</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
 
 <mat-list class="companies">
   <mat-list-item *ngFor="let company of companies | sortNames:sortValue" (click)="onSelect(company)"

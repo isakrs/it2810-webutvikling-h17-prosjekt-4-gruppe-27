@@ -32,7 +32,8 @@ import { MatButtonModule,
          MatCardModule,
          MatIconModule,
          MatInputModule,
-         MatAutocompleteModule
+         MatAutocompleteModule,
+         MatSelectModule
        } from '@angular/material';
 
 @NgModule({
@@ -65,7 +66,8 @@ import { MatButtonModule,
     MatCardModule,
     MatIconModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   providers: [ CompanyService, ProfileService ],
   bootstrap: [ AppComponent ]
