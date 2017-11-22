@@ -49,7 +49,7 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 ~~Legg til støtte for flere stjerneannmeldinger (gjennomsnitt) og støtte for flere kommentarer. ~~
 
-#### Iterasjon: 4
+#### ~~Iterasjon: 4~~
 
 ~~Støtte for at en bruker kan legge til flere bedrifter. ~~
 
