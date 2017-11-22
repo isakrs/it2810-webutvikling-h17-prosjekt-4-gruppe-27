@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { User } 		from '../shared/user.model';
 
@@ -8,7 +8,7 @@ import { User } 		from '../shared/user.model';
   styleUrls: ['./my-page.component.css']
 })
 export class MyPageComponent implements OnInit {
-	user: User;
+	@Input() username: string;
 
   constructor() { }
 
