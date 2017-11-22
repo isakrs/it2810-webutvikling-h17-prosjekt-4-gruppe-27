@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User } 		from '../shared/user.model';
+import { ReviewService } from '../../companies/reviews/shared/review.service';
 
 @Component({
   selector: 'app-my-page',
@@ -13,7 +13,10 @@ export class MyPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	// Initialize user object with the information received from the login service
+  }
+
+  getReviews() {
+    // Use get reviews
   }
 
 }
