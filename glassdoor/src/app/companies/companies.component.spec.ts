@@ -5,6 +5,9 @@ import { Http, HttpModule }                     from '@angular/http';
 import { APP_BASE_HREF }                        from '@angular/common';
 import { By }                                   from '@angular/platform-browser';
 import { FormsModule }                          from '@angular/forms';
+import { BrowserAnimationsModule }              from '@angular/platform-browser/animations';
+import { MatInputModule, MatCardModule,
+        MatSelectModule }                        from '@angular/material';
 
 import { CompaniesComponent } from './companies.component';
 import { CompanyService }     from './shared/company.service';
@@ -43,7 +46,11 @@ describe('CompaniesComponent', () => {
       imports: [
         RouterModule.forRoot([]),
         HttpModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatCardModule,
+        MatSelectModule
       ]
     }).compileComponents();
 
