@@ -15,16 +15,35 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(username: string, password: string): void {
-  	this.profileService.onLogin(username, password)
-  	.then(res => {
-  		localStorage.setItem('session', JSON.stringify(res.json()));
-  	})
+    if (username.length > 0 && password.length > 0) {
+      this.profileService.onLogin(username, password)
+      .then(res => {
+        console.log("res from login: ", res);
+        localStorage.setItem('session', JSON.stringify(res.json()));
+      }, err => {
+        this.onLoginError(err);
+      })
+    } 
   }
 
-  // TODO: add handling of register
   onRegister(username: string, password: string): void {
-  	this.profileService.onRegister(username, password);
-    this.onLogin(username, password);
+    if (username.length > 0 && password.length > 0) {
+      this.profileService.onRegister(username, password)
+      .then(res => {
+        console.log("res from register: ", res);
+        this.onLogin(username, password);
+      }, err => {
+        this.onRegisterError(err);
+      });
+    }
   }
 
+  // Todo: add better messages than alerts
+  private onRegisterError(err: any): void {
+    alert(err.json());
+  }
+
+  private onLoginError(err: any): void {
+    alert('Wrong username/password');
+  }
 }
