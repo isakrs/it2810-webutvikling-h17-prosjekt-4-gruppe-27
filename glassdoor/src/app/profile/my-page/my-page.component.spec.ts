@@ -11,7 +11,14 @@ describe('MyPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyPageComponent ]
+      declarations: [ MyPageComponent ],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ],
+      imports: [
+        RouterModule.forRoot([]),
+        HttpModule
+      ]
     })
     .compileComponents();
   }));
