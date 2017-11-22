@@ -87,13 +87,19 @@ POST
 
 Backend genererer ny unik id til review.
 
-Returnerer nye review
-
 ```typescript
 url: 'api/review'
-headers: {'Content-type': 'application/json'}
-data: {rating: 3, comment: "Loved working here.", idCompany: "8", idUser: "0", username: "marius"}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
+body: {rating: 3, comment: "Loved working here.", idCompany: "8"}
 ```
+
+Returnerer nye review: 
+
+```typescript
+{rating: 3, comment: "Loved working here.", idCompany: "8", user: {_id: "0", username: "marius"}}
+```
+
+
 
 2. **Delete review by id**
 
@@ -101,7 +107,7 @@ DELETE
 
 ```typescript
 url: 'api/review/<id>'
-headers: {'Content-type': 'application/json'}
+headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
 ```
 
 ### Companies
@@ -120,20 +126,16 @@ nComments
 
 #### GET
 
-#####  Search
+1. **Search**
 
-GET
 Returnerer en liste over companies som matcher term på company.name. 
 
-term er ikke case-sensetivt. det vil si Gooogl og google vil være likt
-andre:
-søk er: ?top=x , hvor x er de x høeste baser på avgRating
-?skip=x&size=y både x og u er ints. skips sier noe om hvor mange man skal hoppe over, y er størrelsen på chunken man henter ut.
+term er ikke case-sensetivt. det vil si Google og google vil være likt
 ```
 url: 'api/company/?name=${term}'
 ```
 
-1. **Get all companies**
+2. **Get all companies**
 
 ```typescript
 url: 'api/company'
@@ -149,7 +151,7 @@ som returner alle companies:
 ]
 ```
 
-2. **Get company by id**
+3. **Get company by id**
 
 ```typescript
 url: 'api/company/<id>'
@@ -161,7 +163,7 @@ som returner (for GET url: 'api/companies/1'):
 {_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
 ```
 
-3. **Filter companies**
+4. **Filter companies**
 
 Filtrering på >= minRating og/eller >= minComments 
 
@@ -177,12 +179,28 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
-4. **Get top companies**
+5. **Get top companies**
 
 Returnerer top N companies basert på average rating. 
 
 ```typescript
 url: api/company/?top=<N>
+```
+
+6. **Pagination**
+
+Returnerer companies mellom skip og size
+
+```typescript
+url: api/company/?skip=5&size=10
+```
+
+8. **Chaining av filtering og pagination**
+
+Det hadde vært supernice om man kunne chainet disse query'ene
+
+```typescript
+url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
 ```
 
 
@@ -203,7 +221,8 @@ headers: {'Content-type': 'application/json'}
 
 
 
-1. **Delete company by id**
+2. **Delete company by id**
+
 ###krever auth
 DELETE
 
@@ -217,16 +236,20 @@ headers: {'Content-type': 'application/json'}
 
 
 
-1. **Update company**
-  Krever auth
-  PUT
-  F.eks. ved endring av navn.
+3. **Update company**
 
-Returnerer oppdaterte company.
+Krever auth
+PUT
 
 ```typescript
 url: 'api/company/<id>'
 headers: {'Content-type': 'application/json'}
+body: {name: 'SBanken'}
+```
+
+Returnerer oppdaterte company name
+
+```typescript
 {name: 'SBanken'}
 ```
 
