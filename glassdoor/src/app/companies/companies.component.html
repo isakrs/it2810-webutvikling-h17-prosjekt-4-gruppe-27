@@ -1,11 +1,16 @@
 <h2>My Companies</h2>
 
 <div *ngIf="isLoggedIn; else login">
-  <label>Company name:</label>
-  <input id="company-input" #companyName/>
-  <button class="add-company" (click)="add(companyName.value); companyName.value=''">
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Company name" id="company-input" #companyName/>
+    </mat-form-field>
+    <button mat-raised-button class="add-company" (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
+  </form>
+
+  
 </div>
 
 <ng-template #login >
@@ -17,20 +22,26 @@
 <app-company-filter (changeFilterClicked)="getCompanies($event)"></app-company-filter>
 
 <label>Sort by:</label>
-<select [(ngModel)]="sortValue">
-  <option value="name">Name</option>
-  <option value="averageRating">Rating</option>
-  <option value="nComments">Comments</option>
-</select>
+<mat-form-field>
+  <mat-select [(ngModel)]="sortValue">
+    <mat-option value="name">Name</mat-option>
+    <mat-option value="averageRating">Rating</mat-option>
+    <mat-option value="nComments">Comments</mat-option>
+  </mat-select>
+</mat-form-field>
 
-<ul class="companies">
-  <li *ngFor="let company of companies | sortNames:sortValue" (click)="onSelect(company)"
+
+
+<mat-list class="companies">
+  <mat-list-item *ngFor="let company of companies | sortNames:sortValue" (click)="onSelect(company)"
       [class.selected]="company === selectedCompany">
-    <span *ngIf="company.averageRating" class="badge">{{company.averageRating.toFixed(1)}}</span>
-    <span>{{company.name}}</span>
-    <button class="delete"
+    <mat-icon matListIcon>
+      <mat-card *ngIf="company.averageRating" class="badge">{{company.averageRating.toFixed(1)}}</mat-card>
+    </mat-icon>
+    <h3 matLine>{{company.name}}</h3>
+    <button mat-raised-button class="delete"
       (click)="delete(company); $event.stopPropagation()">x</button>
-  </li>
-</ul>
-<button (click)="getCompanies()">Previous page</button>
-<button (click)="getNextPageCompanies()">Next page</button>
+  </mat-list-item>
+</mat-list>
+<button mat-raised-button (click)="getCompanies()">Previous page</button>
+<button mat-raised-button (click)="getNextPageCompanies()">Next page</button>

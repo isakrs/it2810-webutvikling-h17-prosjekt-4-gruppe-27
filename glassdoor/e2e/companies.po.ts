@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class CompaniesPage {
 
-  private companies = element.all(by.css('.companies li'));
+  private companies = element.all(by.css('.companies mat-list-item'));
   private delBttns = element.all(by.css('.delete'));
 
   private companyInput = element(by.css('#company-input'));

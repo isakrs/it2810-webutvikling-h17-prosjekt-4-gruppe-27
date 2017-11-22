@@ -12,6 +12,6 @@
   <div *ngIf="company.nComments">
     <label>Comments:</label>{{company.nComments}}
   </div>
-  <button (click)="goBack()">Back</button>
+  <button mat-raised-button (click)="goBack()">Back</button>
 </div>
 <reviews (reviewsChanged)="getCompany()" [company]="company" ></reviews>

@@ -1,6 +1,10 @@
 <div id="search-component">
   <h4>Company Search</h4>
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <form>
+  	<mat-form-field>
+  		<input matInput #searchBox placeholder="Search" id="search-box" (keyup)="search(searchBox.value)" />
+  	</mat-form-field>
+	</form>
   <div>
     <div *ngFor="let company of companies | async"
          (click)="gotoDetail(company)" class="search-result" >
@@ -8,3 +12,4 @@
     </div>
   </div>
 </div>
+
