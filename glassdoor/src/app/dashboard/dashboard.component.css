@@ -6,7 +6,7 @@
 [class*='col-']:last-of-type {
   padding-right: 0;
 }
-a {
+mat-card {
   text-decoration: none;
 }
 *, *:after, *:before {
@@ -26,20 +26,7 @@ h4 {
 .col-1-4 {
   width: 25%;
 }
-.module {
-  padding: 20px;
-  text-align: center;
-  color: #eee;
-  max-height: 120px;
-  min-width: 120px;
-  background-color: #607D8B;
-  border-radius: 2px;
-}
-.module:hover {
-  background-color: #EEE;
-  cursor: pointer;
-  color: #607d8b;
-}
+
 .grid-pad {
   padding: 10px 0;
 }
@@ -58,4 +45,20 @@ h4 {
   .module {
     min-width: 60px;
   }
+}
+
+mat-card {
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+  max-height: 120px;
+  min-width: 120px;
+  background-color: #607D8B;
+  border-radius: 2px;
+}
+
+mat-card:hover {
+  background-color: #EEE;
+  cursor: pointer;
+  color: #607d8b;
 }
