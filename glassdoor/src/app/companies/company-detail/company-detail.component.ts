@@ -25,6 +25,10 @@ export class CompanyDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCompany();
+  }
+
+  getCompany(): void {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.companyService.getCompany(params.get('_id')))
       .subscribe(company => this.company = company);
