@@ -3,7 +3,7 @@
 <div *ngIf="isLoggedIn; else login">
   <label>Company name:</label>
   <input id="company-input" #companyName/>
-  <button class="add-company" (click)="add(companyName.value); companyName.value=''">
+  <button mat-raised-button class="add-company" (click)="add(companyName.value); companyName.value=''">
     Add
   </button>
 </div>

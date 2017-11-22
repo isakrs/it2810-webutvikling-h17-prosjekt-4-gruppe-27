@@ -3,7 +3,7 @@
   <input id="review-input-rating" #reviewRating />
   <label>Review comment:</label>
   <input id="review-input-comment" #reviewComment />
-  <button
+  <button mat-raised-button
     class="add-review"
     (click)="
       add(reviewRating.value, reviewComment.value);
@@ -27,7 +27,7 @@
       [class.selected]="review === selectedReview">
     <span class="badge">{{review.rating}}</span>
     <span>{{review.comment}}</span>
-    <button *ngIf="username===review.user.username" class="delete"
+    <button mat-raised-button *ngIf="username===review.user.username" class="delete"
       (click)="delete(review); $event.stopPropagation()">x</button>
   </li>
 </ul>

@@ -3,10 +3,10 @@
 	<div>
 		<input id="username" type="text" placeholder="username" required #username >
 		<input id="password" type="password" placeholder="password" required #password >
-  		<button id="login" type="submit" (click)="onLogin(username.value, password.value)">
+  		<button mat-raised-button id="login" type="submit" (click)="onLogin(username.value, password.value)">
 				Log in
 			</button>
-  		<button id="register" type="submit" (click)="onRegister(username.value, password.value)">
+  		<button mat-raised-button id="register" type="submit" (click)="onRegister(username.value, password.value)">
 				Register
 			</button>
 	</div>

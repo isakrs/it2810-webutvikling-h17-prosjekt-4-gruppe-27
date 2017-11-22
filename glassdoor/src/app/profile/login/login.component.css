@@ -16,7 +16,7 @@ input {
   padding-left: .4em;
   margin: auto;
 }
-button {
+mat-raised-button {
   margin-top: 20px;
   margin-bottom: 30px;
   font-family: Arial;
@@ -26,10 +26,10 @@ button {
   border-radius: 4px;
   cursor: pointer; cursor: hand;
 }
-button:hover {
+mat-raised-button:hover {
   background-color: #cfd8dc;
 }
-button:disabled {
+mat-raised-button:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;
