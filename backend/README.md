@@ -1,62 +1,152 @@
-#  Url: `http://it2810-27.idi.ntnu.no:8084/`
+#  Backend Glassdoor
 
-## Data models
+#### Hvordan kjøre prosjektet? 
 
-#### Example reviews
+##### 1. Installer alle dependencies
 
-```typescript
-reviews = [
-  {
-    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		user: {_id: "0", username: "marius"}
-  },
-  {
-    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
-  	user: {_id: "1", username: "isak"}
-  }
-]
+```bash
+$ npm install --save
 ```
 
+##### 2.  Velg en av følgende
 
+- Kjør alle tester med testcov. 
 
-#### Example companies
-
-```typescript
-companies = [
-  {_id: "1", name: "Statoil",      averageRating: null, nComments: null},
-  {_id: "2", name: "Amazon",       averageRating: 3,    nComments: 3},
-  {_id: "3", name: "Google",       averageRating: 3.3,  nComments: 9}
-]
+```bash
+$npm run test
 ```
 
+- Kjør i produksjon. Denne vil først kompilere typescript og deretter bruke node for å start
 
+```bash
+$ npm start
+```
 
-#### Example user
+- Kjør dev. Denne vil bruke Nodemon og ts-node for å kunne starte serveren ved filendringer. Denne vil bruke port 3000. 
 
-```typescript
-user = {
-  _id: string,
-  username: string,
-  password: string
-}
+```bash
+$ npm run dev
 ```
 
 
 
 ## API endpoints
 
+#### Generelt 
+
+Noen av endepunktene til dette APIet krever at man har en gyldig token. Denne skal være i Header på følgende måte. 
+
+```http
+Authorization:Bearer <token>
+```
+
+Hvor token anskaffes gjennom å logge seg inn. Alle endepunkter som krever dette er market med dette. Se autentisering for nærmere informasjon om dette 
+
+
+
+For alle request som sender data: POST, PUT, DELETE. Kreves det at headeren Content-Type er satt på følgende måte
+
+```http
+Content-Type: application/json
+```
+
+ 
+
+##### **NB**  basUrl = host:port   
+
+### Autentisering
+
+Dette apiet bruker Bearer token for beskyttede endepunkter. For å kunne få en slik token må man først registrere en bruker, deretter logge in. 
+
+
+
+#### Register
+
+**Method: POST**
+
+**URL**: host:port/auth/signup
+
+*Sample request*
+
+```Json
+{"username": "marius", 
+ "password": "password"}
+```
+
+*Sample respond*
+
+Returnere status 200 hvis OK, 400 hvis det ikke gikk 
+
+#### Login
+
+**Method: POST**
+
+**URL**: host:port/auth/login
+
+*Sample request*
+
+```json
+{"username": "marius", 
+ "password": "password"}
+```
+
+*Sample respons*
+
+Status: 200
+
+```Json
+  {
+    "username": "marius",
+    "token": "token",
+  }
+```
+
+Status: 401, hvis ikke gyldig
+
+
+
+#### Token validation
+
+**Method: POST**
+
+**URL**: host:port/auth/verify
+
+```json
+{"token": "alødkføalkdjvøak"}
+```
+
+*Sample response*
+
+Returnere 200 hvis gyldig, 401 hvis ikke gyldig
+
+
+
+
+
+
+
 ### Reviews
 
 
 **Get reviews by idCompany**
 
-GET
+**Method: GET**
 
-```typescript
-url: 'api/review/company/<idCompany>'
+**URL**: host:port/review/company/<IdCompany>
+
+*Sample request*
+
+```http
+GET host:port/review/company/<IdCompany>
 ```
 
-Example:
-GET `url: 'api/reviews/3'` returns:
+*Sample response*
+
+```http
+STATUS 200
+```
+
+
 
 ```typescript
 [
@@ -69,64 +159,100 @@ GET `url: 'api/reviews/3'` returns:
 
 **Get a user's reviews**
 
-GET
+**Method: GET**
 
-```typescript
-url: 'api/review/user'
-headers: {Authorization: 'Bearer <token>'}
+**URL**: host:port/review/user
+
+**Auth**:TRUE
+
+*Sample request*
+
+```http
+GET host:port/review/review/
 ```
 
-Returns reviews by the user.
+*response*
 
-```typescript
-data = [
-  {
-    _id: "0", rating: 5, comment: "Loved working here.", idCompany: "3", 		
-    user: {_id: "0", username: "marius"}
+```json
+
+  [{
+    "_id": "0", "rating": 5, "comment": "Loved working here.", "idCompany": "3", 		
+    "user": {"_id": "0", "username": "marius"}
   },
   {
-    _id: "1", rating: 3, comment: "Loved working here.", idCompany: "4",
-  	user: {_id: "0", username: "marius"}
-  }
-]
+    "_id": 1, "rating": 3, "comment": "Loved working here.", "idCompany": 4,
+  	"user": {"_id": 0, "username": "marius"}
+  }]
+
 ```
 
-
+400 ikke ekisterer, 401 hvis ikke authed
 
 **Create new review**
 
-POST
+**Method: POST**
 
-```typescript
-url: 'api/review'
-headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
-body: {rating: 3, comment: "Loved working here.", idCompany: "8"}
+**URL**: host:port/review
+
+**Auth**:TRUE
+
+```json
+ {"rating": 3, "comment": "Loved working here.", "idCompany": 8}
 ```
 
 Returns the new review
 
-```typescript
-data = {
-  _id: "5a15bc9f7d44bcad8b253aa2", 
-  rating: 1, 
-  comment: "sucks", 
-  idCompany: "5a15b03b7d44bcad8b253a90", 
-  user: {username: "marius", _id:"5a15af797d44bcad8b253a88"}
+```json
+ {
+  "_id": "5a15bc9f7d44bcad8b253aa2", 
+  "rating": 1, 
+  "comment": "sucks", 
+  "idCompany": "5a15b03b7d44bcad8b253a90", 
+  "user": {"username": "marius", "_id":"5a15af797d44bcad8b253a88"}
 }
 ```
+
+200  hvis ok, 400 hvis ikke felter er korrekt, 401 hvis ikke authed
+
+
+
+**Update a review**
+
+**Method: PUT**
+
+**URL**: host:port/review/<id>
+
+**Auth**:TRUE
+
+```json
+ {"rating": 3, "comment": "Loved working here."}
+```
+
+Returns the new review
+
+```json
+ {
+  "_id": "5a15bc9f7d44bcad8b253aa2", 
+  "rating": 1, 
+  "comment": "sucks", 
+  "idCompany": "5a15b03b7d44bcad8b253a90", 
+  "user": {"username": "marius", "_id":"5a15af797d44bcad8b253a88"}
+}
+```
+
+200  hvis ok, 400 hvis ikke felter er korrekt, 401 hvis ikke authed eller ikke samme bruker
 
 
 
 **Delete review by id**
 
-DELETE
+**Method: DELETE**
 
-```typescript
-url: 'api/review/<id>'
-headers: {'Content-type': 'application/json', 'Authorization': 'Bearer <token>'}
-```
+**URL**: host:port/review/<id>
 
-Returns nothing but response: 200
+**Auth**:TRUE
+
+200  hvis ok, 400 hvis ikke felter er korrekt eller ikke samme bruker, 401 hvis ikke authed
 
 
 
@@ -170,10 +296,8 @@ Returns for GET url: 'api/companies/1':
 
 **Search**
 
-GET
-
-```typescript
-url: 'api/company/?name=${term}'
+```http
+GET api/company/?name=<term>
 ```
 Returns list over companies where company.name contains `term`.
 
@@ -185,25 +309,19 @@ Returns list over companies where company.name contains `term`.
 
 Filter companies on min `company.averageRating` and min `company.nComments`
 
-GET
-
-```typescript
-url: api/companies/?minRating=4.4
+```http
+GET host:port/api/companies/?minRating=<N>
 ```
 
-GET
-
-```typescript
-url: api/companies/?minComments=3
+```http
+GET host:port/api/companies/?minComments=<N>
 ```
 
-GET
-
-```typescript
-url: api/companies/?minRating=4.4&minComments=2
+```http
+GET host:port/api/companies/?minRating=<N>&minComments=<N>
 ```
 
-All the above requests return company objects in an array. 
+Alle returnerer en liste med companies og  status 200 hvis ok, 400 ellers
 
 
 
@@ -211,10 +329,8 @@ All the above requests return company objects in an array.
 
 Return top N (int) companies bases on averageRating.
 
-GET
-
-```typescript
-url: api/company/?top=<N>
+```http
+GET host:port/api/company/?top=<N>
 ```
 
 
@@ -223,10 +339,8 @@ url: api/company/?top=<N>
 
 Returns companies between skip (int) and size (int)
 
-GET
-
-```typescript
-url: api/company/?skip=5&size=10
+```http
+GET host:port/api/company/?skip=5&size=10
 ```
 
 
@@ -235,110 +349,56 @@ url: api/company/?skip=5&size=10
 
 Chaining of filters and pagination is possible. e.g.
 
-GET
-
-```typescript
-url: api/companies/?skip=5&size=10&minRating=4.4&minComments=2
+```http
+GET host:port/api/companies/?skip=5&size=10&minRating=4.4&minComments=2
 ```
 
 
 
 **Create new company**
 
-POST
+**Method: POST**
 
-```typescript
-url: 'api/company'
-headers: {
-  'Content-type': 'application/json',
-  'headers': {'Authorization': 'Bearer <token>'}
-}
-body: {name: 'Facebook'}
+**URL**: host:port/company
+
+**Auth**:TRUE
+
+```json
+{"name": "Facebook"}
 ```
 
-Returns the new company created
+Returnerer status 200 og objektet, ellers 400 og 401 hvis ikke authed
 
 
 
 **Delete company by id**
 
-DELETE
+**Method: DELETE**
 
-```typescript
-url: 'api/company/<id>'
-headers: {
-  'Content-type': 'application/json',
-  'headers': {'Authorization': 'Bearer <token>'}
-}
+**URL**: host:port/company
+
+**Auth**:TRUE
+
+```http
+DELETE host:port/api/company/<id>
 ```
 
-Returns nothing but response: 200
+Returnerer status 200 hvis ok, 401 hvis ikke authed, 400 hvis ikke finned
 
 
 
 **Update company**
 
-PUT
+**Method: PUT**
 
-```typescript
-url: 'api/company/<id>'
-headers: {
-  'Content-type': 'application/json',
-  'headers': {'Authorization': 'Bearer <token>'}
-}
-body: {name: 'SBanken'}
+**URL**: host:port/company
+
+**Auth**:TRUE
+
+```json
+{"name": "SBanken"}
 ```
 
+Returnerer company objektet og status 200, 400 hvis ikke felter er korrekt og 401 hvis ikke bruker er autentisert. 
 
 
-### User
-
-
-**Login**
-
-POST
-
-```typescript
-url: 'auth/login'
-headers: {'Content-Type': 'application/json'}
-{username: 'marius', password: 'password'}
-```
-
-Returns
-
-```typescript
-data = [
-  {
-    username: 'marius',
-    token: 'abc123123123',
-  }
-]
-```
-
-
-
-**Register**
-
-POST
-
-```typescript
-url: 'auth/signup'
-headers: {'Content-Type': 'application/json'}
-{username: 'marius', password: 'password'}
-```
-
-Returns nothing but response 200
-
-
-
-**Token validation**
-
-POST
-
-```typescript
-url: 'auth/verify'
-headers: {'Content-Type': 'application/json'}
-body: {token: 'alødkføalkdjvøak'}
-```
-
-Returner solely response 200.
