@@ -53,23 +53,23 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 ~~Støtte for at en bruker kan legge til flere bedrifter. ~~
 
-~~#### Iterasjon: 5~~
+#### ~~Iterasjon: 5~~
 
 ~~Backend: implementer databasen basert på hva vi har sett som behov. ~~
 
-~~#### Iterasjon: 6~~
+#### ~~Iterasjon: 6~~
 
 ~~Tillate sortering og filtrering på antall kommentarer, gjennomsnitsstjerner osv.~~
 
-~~#### Iterasjon: 7~~
+#### ~~Iterasjon: 7~~
 
 ~~Front-end-delen av login (min side)~~
 
-~~#### Iterasjon: 8~~
+#### ~~Iterasjon: 8~~
 
 ~~Knytte kommentarer til bruker med mock-data~~
 
-~~#### Iterasjon: 9~~
+#### ~~Iterasjon: 9~~
 
 ~~Back-end-delen av login (erstatte mock-data)~~
 
