@@ -9,7 +9,7 @@ import { Company } from './company.model';
 export class CompanyService {
 
   private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}, );
-  private companiesUrl = 'http://localhost:3000/api/company';  // URL to web api
+  private companiesUrl = 'http://it2810-27.idi.ntnu.no:8084/api/company';  // URL to web api
 
   constructor(private http: Http) { }
 

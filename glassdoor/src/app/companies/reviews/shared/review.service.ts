@@ -9,7 +9,7 @@ import { Review } from './review.model';
 export class ReviewService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private reviewsUrl = 'http://localhost:3000/api/review';  // URL to web api
+  private reviewsUrl = 'http://it2810-27.idi.ntnu.no:8084/api/review';  // URL to web api
 
   constructor(private http: Http) { }
 
