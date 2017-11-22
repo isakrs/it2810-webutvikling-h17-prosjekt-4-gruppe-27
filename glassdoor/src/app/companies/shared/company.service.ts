@@ -23,9 +23,9 @@ export class CompanyService {
     else if (minRating  && minComments)  url += `/?minRating=${minRating}&minComments=${minComments}`;
 
     return this.http.get(url)
-               .toPromise()
-               .then(response => response.json() as Company[])
-               .catch(this.handleError);
+      .toPromise()
+      .then(response => response.json() as Company[])
+      .catch(this.handleError);
   }
 
   getCompany(id: string): Promise<Company> {
