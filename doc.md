@@ -10,6 +10,7 @@ Applikasjonen viser en oversikt over selskaper i Norge som tilbyr internships/so
 
 Vi kommer (foreløpig) til å bruke kun brukergenerert data i vår implementasjon.
 
+Alle datamodeller og forklaringer om API finner du under mappe `backend/README.md`.
 
 
 ### Komponenter
@@ -40,37 +41,37 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 ~~Endre tour of heroes-applikasjonen fra tutorial til Glassdoor.no (endre navn, attributter osv.)~~
 
-#### Iterasjon: 2
+#### ~~Iterasjon: 2~~
 
-Legg til stjerneannmeldelser og tekstfelt for kommentarer, og logo på hvert selskap.
+~~Legg til stjerneannmeldelser og tekstfelt for kommentarer, og logo på hvert selskap.~~
 
-#### Iterasjon: 3
+#### ~~Iterasjon: 3~~
 
-Legg til støtte for flere stjerneannmeldinger (gjennomsnitt) og støtte for flere kommentarer. 
+~~Legg til støtte for flere stjerneannmeldinger (gjennomsnitt) og støtte for flere kommentarer. ~~
 
 #### Iterasjon: 4
 
-Støtte for at en bruker kan legge til flere bedrifter. 
+~~Støtte for at en bruker kan legge til flere bedrifter. ~~
 
-#### Iterasjon: 5
+~~#### Iterasjon: 5~~
 
-Backend: implementer databasen basert på hva vi har sett som behov. 
+~~Backend: implementer databasen basert på hva vi har sett som behov. ~~
 
-#### Iterasjon: 6
+~~#### Iterasjon: 6~~
 
-Tillate sortering og filtrering på antall kommentarer, gjennomsnitsstjerner osv.
+~~Tillate sortering og filtrering på antall kommentarer, gjennomsnitsstjerner osv.~~
 
-#### Iterasjon: 7
+~~#### Iterasjon: 7~~
 
-Front-end-delen av login (min side)
+~~Front-end-delen av login (min side)~~
 
-#### Iterasjon: 8
+~~#### Iterasjon: 8~~
 
-Knytte kommentarer til bruker med mock-data
+~~Knytte kommentarer til bruker med mock-data~~
 
-#### Iterasjon: 9
+~~#### Iterasjon: 9~~
 
-Back-end-delen av login (erstatte mock-data)
+~~Back-end-delen av login (erstatte mock-data)~~
 
 #### Iterasjon: 10 og utover
 
@@ -85,6 +86,6 @@ Angular på front-end og node.js på back-end. Vi har foreløpig ikke bestemt os
 
 ### Branches
 
-'master'-branchen har fungerende kode med tilhørende tester. 
-'dev'-branchen har fungerende kode hvor tester legges til før den merges inn i master.
+'master'-branchen har fungerende kode med tilhørende tester. Her legges kun produksjonskode, iterativt.
+'dev'-branchen har fungerende kode med tester, hvor ulike 'features' legges til fra utspringende 'feature-brancher'. Når man er klar med en iterasjon merges denne branchen inn i 'master'.
 feature branches lages for ny funksjonalitet.
