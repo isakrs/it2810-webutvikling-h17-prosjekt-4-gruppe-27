@@ -51,11 +51,11 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 #### ~~Iterasjon: 4~~
 
-~~Støtte for at en bruker kan legge til flere bedrifter. ~~
+~~Støtte for at en bruker kan legge til flere bedrifter.~~
 
 #### ~~Iterasjon: 5~~
 
-~~Backend: implementer databasen basert på hva vi har sett som behov. ~~
+~~Backend: implementer databasen basert på hva vi har sett som behov.~~
 
 #### ~~Iterasjon: 6~~
 
