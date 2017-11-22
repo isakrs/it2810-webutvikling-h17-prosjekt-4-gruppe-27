@@ -43,8 +43,8 @@ reviewRouter.put('/:id', async function(req:any, res: express.Response){
             return res.status(401).send()
         }
         review = await Review.findByIdAndUpdate(req.params.id,req.body, {new:true})
-        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
-        await updateCompanyStats(updatedReviews,req.params.id)
+        let updatedReviews  = await calculateAvgRatingAndNumberOfComments(review.idCompany.toString())
+        await updateCompanyStats(updatedReviews,review.idCompany.toString())
         res.status(200).send(JSON.stringify(review))
     } catch (error) {
         res.status(400).send()
@@ -61,8 +61,8 @@ reviewRouter.delete('/:id', async function(req:any, res: express.Response){
             return res.status(401).send()
         }
         review = await Review.findByIdAndRemove(req.params.id)
-       let updatedReviews  = await calculateAvgRatingAndNumberOfComments(req.params.id)
-       await updateCompanyStats(updatedReviews,req.params.id)
+       let updatedReviews  = await calculateAvgRatingAndNumberOfComments(review.idCompany.toString())
+       await updateCompanyStats(updatedReviews,review.idCompany.toString())
         res.status(200).send(JSON.stringify(review))
     } catch (error) {
         res.status(400).send()
@@ -81,8 +81,6 @@ reviewRouter.get('/user', async function(req:any,res:express.Response){
     } catch (error) {
         return res.status(400).send()
     }
-    
-
 })
 
 
