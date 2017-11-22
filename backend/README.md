@@ -180,7 +180,7 @@ url: api/companies/?minComments=3
 url: api/companies/?minRating=4.4&minComments=2
 ```
 
-**Get top companies**
+##### **Get top companies**
 
 Returnerer top N companies basert på average rating. 
 
@@ -188,7 +188,7 @@ Returnerer top N companies basert på average rating.
 url: api/company/?top=<N>
 ```
 
-**Pagination**
+##### **Pagination**
 
 Returnerer companies mellom skip og size
 
@@ -196,7 +196,7 @@ Returnerer companies mellom skip og size
 url: api/company/?skip=5&size=10
 ```
 
-**Chaining av filtering og pagination**
+##### **Chaining av filtering og pagination**
 
 Det hadde vært supernice om man kunne chainet disse query'ene
 
