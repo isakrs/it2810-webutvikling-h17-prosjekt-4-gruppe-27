@@ -11,6 +11,6 @@ This is a simple Norwegian version of the popular website glassdoor.com
 
 For a tentative project plan, see doc.md
 
-#### For deployment instructions, see the README.md file in the glassdoor directory. 
+#### For deployment instructions, see the README.md file in the `glassdoor` and `backend` directory. 
 
 

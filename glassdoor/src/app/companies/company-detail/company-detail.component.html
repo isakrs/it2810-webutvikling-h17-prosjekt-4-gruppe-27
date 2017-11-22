@@ -1,10 +1,7 @@
 <div *ngIf="company">
   <h2>{{company.name}} details!</h2>
   <div>
-    <label>id: </label>{{company._id}}
-  </div>
-  <div>
-    <label>name:</label>{{company.name}}
+    <label>Name:</label>{{company.name}}
   </div>
   <div *ngIf="company.averageRating">
     <label>Rating: </label>{{company.averageRating.toFixed(1)}}

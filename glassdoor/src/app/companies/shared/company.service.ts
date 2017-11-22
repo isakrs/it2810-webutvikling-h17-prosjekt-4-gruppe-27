@@ -63,14 +63,6 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
-  delete(id: string): Promise<Company> {
-    const url = `${this.companiesUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
-      .catch(this.handleError);
-  }
-
   create(name: string): Promise<Company> {
     return this.http
       .post(this.companiesUrl, JSON.stringify({name: name}), {headers: this.headers})
