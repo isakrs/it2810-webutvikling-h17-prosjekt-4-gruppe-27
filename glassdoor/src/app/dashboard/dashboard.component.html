@@ -1,9 +1,9 @@
 <h3>Top 4 Companies</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let company of companies"  [routerLink]="['/detail', company._id]"  class="col-1-4">
-    <div class="module company">
+  <mat-card *ngFor="let company of companies"  [routerLink]="['/detail', company._id]"  class="col-1-4">
+    <mat-card-content class="module company">
       <h4>{{company.name}}</h4>
-    </div>
-  </a>
+    </mat-card-content>
+  </mat-card>
 </div>
 <company-search></company-search>

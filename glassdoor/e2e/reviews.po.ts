@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class ReviewsSection {
 
-  private reviews = element.all(by.css('.reviews li'));
+  private reviews = element.all(by.css('.reviews mat-list-item'));
   private delBttns = element.all(by.css('.delete'));
 
   private reviewInputRating = element(by.css('#review-input-rating'));

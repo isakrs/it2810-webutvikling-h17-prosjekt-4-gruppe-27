@@ -1,18 +1,24 @@
 <div>
-  <label>Min rating:</label>
-  <select (change)="changeFilter(minRating.value, minComments.value)" #minRating>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
+  <mat-form-field>
+    <mat-select placeholder="Min rating" (change)="changeFilter(minRating.value, minComments.value)" #minRating>
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      <mat-option value="4">4</mat-option>
+      <mat-option value="5">5</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div>
-  <label>Min comment:</label>
-  <select (change)="changeFilter(minRating.value, minComments.value)" #minComments>
-    <option value="0">0</option>
-    <option value="10">10</option>
-    <option value="100">100</option>
-  </select>
+  <mat-form-field>
+    <mat-select placeholder="Min comments" (change)="changeFilter(minRating.value, minComments.value)" #minComments>
+      <mat-option value="0">0</mat-option>
+      <mat-option value="5">5</mat-option>
+      <mat-option value="10">10</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+
+
+
+

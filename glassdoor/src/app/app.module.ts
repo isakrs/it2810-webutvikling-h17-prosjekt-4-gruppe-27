@@ -23,7 +23,18 @@ import { ProfileComponent }       from './profile/profile.component';
 import { LoginComponent }         from './profile/login/login.component';
 import { MyPageComponent }        from './profile/my-page/my-page.component';
 import { ProfileService }         from './profile/shared/profile.service';
-import { LogoutComponent } from './profile/logout/logout.component';
+import { LogoutComponent }        from './profile/logout/logout.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule,
+         MatListModule,
+         MatCardModule,
+         MatIconModule,
+         MatInputModule,
+         MatAutocompleteModule,
+         MatSelectModule
+       } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,7 +59,15 @@ import { LogoutComponent } from './profile/logout/logout.component';
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
       passThruUnknownUrl: true
     }),
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   providers: [ CompanyService, ProfileService ],
   bootstrap: [ AppComponent ]
