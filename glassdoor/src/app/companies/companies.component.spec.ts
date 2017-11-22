@@ -68,11 +68,11 @@ describe('CompaniesComponent', () => {
     fixture.detectChanges();
 
     const liElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li'));
+            .queryAll(By.css('mat-list.companies mat-list-item'));
     const badgeElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li span.badge'));
+            .queryAll(By.css('mat-list.companies mat-list-item mat-card.badge'));
     const buttonElements = fixture.debugElement
-            .queryAll(By.css('ul.companies li button.delete'));
+            .queryAll(By.css('mat-list.companies mat-list-item button.delete'));
 
     expect(liElements.length).toBe(7);
     expect(badgeElements.length).toBe(3);

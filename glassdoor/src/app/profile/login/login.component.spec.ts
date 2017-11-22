@@ -2,11 +2,15 @@ import { async, ComponentFixture, TestBed }     from '@angular/core/testing';
 import { RouterModule }                         from '@angular/router';
 import { Http, HttpModule }                     from '@angular/http';
 import { APP_BASE_HREF }                        from '@angular/common';
+import { BrowserAnimationsModule }              from '@angular/platform-browser/animations';
+import { MatInputModule, MatCardModule }        from '@angular/material';
 
 import { LoginComponent }     from './login.component';
 import { MyPageComponent }    from '../my-page/my-page.component';
 
 import { ProfileService }     from '../shared/profile.service';
+
+
 
 
 describe('LoginComponent', () => {
@@ -22,7 +26,10 @@ describe('LoginComponent', () => {
       ],
       imports: [
         RouterModule.forRoot([]),
-        HttpModule
+        HttpModule,
+        MatInputModule,
+        MatCardModule,
+        BrowserAnimationsModule
       ]
     })
     .compileComponents();
