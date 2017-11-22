@@ -149,7 +149,7 @@ som returner alle companies:
 ]
 ```
 
-1. **Get company by id**
+2. **Get company by id**
 
 ```typescript
 url: 'api/company/<id>'
@@ -161,7 +161,7 @@ som returner (for GET url: 'api/companies/1'):
 {_id: "1", name: "DNB", averageRating: 2.2, nComments: 14}
 ```
 
-1. **Filter companies**
+3. **Filter companies**
 
 Filtrering på >= minRating og/eller >= minComments 
 
@@ -175,6 +175,14 @@ url: api/companies/?minComments=3
 
 ```typescript
 url: api/companies/?minRating=4.4&minComments=2
+```
+
+4. **Get top companies**
+
+Returnerer top N companies basert på average rating. 
+
+```typescript
+url: api/company/?top=<N>
 ```
 
 
@@ -210,9 +218,9 @@ headers: {'Content-type': 'application/json'}
 
 
 1. **Update company**
-Krever auth
-PUT
-F.eks. ved endring av navn.
+  Krever auth
+  PUT
+  F.eks. ved endring av navn.
 
 Returnerer oppdaterte company.
 

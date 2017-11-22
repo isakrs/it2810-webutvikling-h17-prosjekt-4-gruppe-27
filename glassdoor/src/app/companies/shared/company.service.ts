@@ -51,6 +51,14 @@ export class CompanyService {
       .catch(this.handleError);
   }
 
+  getTopCompanies(): Promise<Company[]> {
+    const url = `${this.companiesUrl}/?top=4`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Company[])
+      .catch(this.handleError);
+  }
+
   delete(id: string): Promise<Company> {
     const url = `${this.companiesUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
