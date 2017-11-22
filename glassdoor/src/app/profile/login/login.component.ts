@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     if (username.length > 0 && password.length > 0) {
       this.profileService.onLogin(username, password)
       .then(res => {
-        console.log("res from login: ", res);
         localStorage.setItem('session', JSON.stringify(res.json()));
       }, err => {
         this.onLoginError(err);
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
     if (username.length > 0 && password.length > 0) {
       this.profileService.onRegister(username, password)
       .then(res => {
-        console.log("res from register: ", res);
         this.onLogin(username, password);
       }, err => {
         this.onRegisterError(err);
