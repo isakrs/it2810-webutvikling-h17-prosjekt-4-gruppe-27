@@ -13,25 +13,26 @@ Vi kommer (foreløpig) til å bruke kun brukergenerert data i vår implementasjo
 Alle datamodeller og forklaringer om API finner du under mappe `backend/README.md`.
 
 
-### Komponenter
+### Sidevisning
 
-Foreløpig har vi planlagt følgende komponenter (burde nok deles opp mer etter hvert, men disse beskriver den overordnede arkitekturen)
+Prosjektet har disse sidene.
 
-#### 1. Companies
+#### 1. Companies Page
 
-Inneholder en liste over alle selskaper, med funksjonalitet for søk, filtrering og sortering. 
+En side som viser alle selskaper, med funksjonalitet for filtrering og sortering.
 
 #### 2. Company Detail
 
-Inneholder detaljert informasjon om et enkelt selskap, inkludert gjennomsnittsrating, kommetarer o.l. 
+Inneholder detaljert informasjon om et enkelt selskap, inkludert gjennomsnittsrating, antall reviews og selve reviewsene for firmaet. 
 
 #### 3. Dashboard
 
-Det første man ser når man går inn på siden. Har funksjonalitet for loginn, samt en liste over utvalgte (populære?) selskaper o.l, samt mulighet for søk for å gå direkte til et spesifikt selskap. 
+Det første man ser når man går inn på siden. Har funksjonalitet for søk etter firma, og visning av mest populære firmaer. Søket skal sende brukeren direkte til et spesifikt selskap. 
 
-### Planlagt implementasjon
 
-Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, og så legger vi på funksjonalitet for hver iterasjon.
+### Implementasjons plan
+
+Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, og så legger vi på funksjonalitet for hver iterasjon. Vi skal ha testbasert utvikling.
 
 #### ~~Iterasjon: 0~~
 
@@ -75,7 +76,7 @@ Vi planlegger å jobbe i iterasjoner, hvor vi alltid har et fungerende produkt, 
 
 #### Iterasjon: 10 og utover
 
-Se an hvordan vi ligger an og legg til funksjonalitet
+Se an hvordan vi ligger an og legg til funksjonalitet.
 
 
 
