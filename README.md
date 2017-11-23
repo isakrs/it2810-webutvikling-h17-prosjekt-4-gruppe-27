@@ -3,7 +3,7 @@
 ## Glassdoor.no
 This is a simple Norwegian version of the popular website glassdoor.com
 
-For project description and version info, please see doc.md.
+For project description and version info, please see `doc.md`.
 
 For deployment instructions, see the README.md file in the `glassdoor` and `backend` directory. 
 
