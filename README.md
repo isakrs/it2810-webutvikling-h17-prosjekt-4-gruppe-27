@@ -7,7 +7,7 @@ For a project plan and project description, please see doc.md.
 
 For deployment instructions, see the README.md file in the `glassdoor` and `backend` directory. 
 
-API instructions are found in 'backend/README.md'.
+API instructions are found in `backend/README.md`.
 
 #### `Master`
 `Master` branch is used for stable versions. 
