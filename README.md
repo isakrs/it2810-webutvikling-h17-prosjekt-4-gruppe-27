@@ -12,6 +12,3 @@ API instructions are found in `backend/README.md`.
 #### `Master`
 `Master` branch is used for stable versions. 
 Please use `Master` branch, when you review our code.
-For more detail about branch usage for this project, please see doc.md
-
-
