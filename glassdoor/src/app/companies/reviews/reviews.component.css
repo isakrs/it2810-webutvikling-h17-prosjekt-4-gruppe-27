@@ -4,9 +4,21 @@
 
 .add-review {
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
+
+@media (min-width: 700px){
+  .add-review {
+    flex-direction: row;
+  }
+}
+
+mat-slider {
+  margin: auto;
+}
+
 .selected {
   background-color: #CFD8DC !important;
   color: white;

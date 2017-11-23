@@ -1,22 +1,29 @@
-<mat-card *ngIf="isLoggedIn; else login" >
-  <form class="add-review">
-    <mat-form-field>
-      <input matInput placeholder="Rating 1-5" id="review-input-rating" #reviewRating />
-    </mat-form-field>
-    <mat-form-field id="review-input-comment" >
-      <input matInput placeholder="Comment"  #reviewComment />
-    </mat-form-field>
-    <button mat-raised-button
-      class="add-review"
-      (click)="
-        add(reviewRating.value, reviewComment.value);
-        reviewRating.value='';
-        reviewComment.value=''
-      "
-      >
-      Add
-    </button>
-  </form>
+<mat-card *ngIf="isLoggedIn; else login" id="add-review-card" >
+  <mat-card-title>Add review</mat-card-title>
+  <mat-card-content>
+    <form class="add-review">
+        <mat-slider
+        [max]="5"
+        [min]="1"
+        [step]="1"
+        [thumbLabel]="true"
+        #reviewRating
+        ></mat-slider>
+      <mat-form-field id="review-input-comment" >
+        <textarea matInput placeholder="Comment"  #reviewComment></textarea>
+      </mat-form-field>
+      <button mat-raised-button
+        class="add-review"
+        (click)="
+          add(reviewRating.value, reviewComment.value);
+          reviewRating.value='';
+          reviewComment.value=''
+        "
+        >
+        Add
+      </button>
+    </form>
+  </mat-card-content>
 </mat-card>
 
 <ng-template #login >
