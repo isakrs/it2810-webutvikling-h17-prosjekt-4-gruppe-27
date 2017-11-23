@@ -8,9 +8,9 @@ Applikasjonen viser en oversikt over selskaper i Norge som tilbyr internships/so
 
 ### Data
 
-Vi kommer (foreløpig) til å bruke kun brukergenerert data i vår implementasjon.
+Vi ønsker kun brukergenerert data i vår løsning. Reviews av firmaer skal være skrevet av virkelige employees.
 
-Alle datamodeller og forklaringer om API finner du under mappe `backend/README.md`.
+Alle datamodeller og forklaringer om API, finner du under mappe `backend/README.md`.
 
 
 ### Sidevisning
