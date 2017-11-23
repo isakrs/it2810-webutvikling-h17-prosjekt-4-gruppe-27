@@ -16,12 +16,11 @@ describe('Review section of Company Detail Page', () => {
     pPage = new ProfilePage();
   });
 
-  it('should add and remove reviews', async() => {
+  it('should have reviews', async() => {
 
     // log in user
     pPage.navigateTo();
     pPage.login(existingUser);
-    browser.sleep(1000);
 
     // Navigating to google's (_id) page
     rSec.navigateTo("5a15b9317d44bcad8b253a9a");
@@ -30,17 +29,6 @@ describe('Review section of Company Detail Page', () => {
     await rSec.noReviews().then(num => nReviews=num);
 
     expect(rSec.noReviews()).toBe(nReviews);
-
-    // add a test review
-    rSec.addReview(3, 'Test. Fairly happy about my internship here');
-    expect(rSec.noReviews()).toBe(nReviews+1);
-
-    // delete the added test review (will be the last index)
-    rSec.delReview(nReviews-1);
-    expect(rSec.noReviews()).toBe(nReviews);
-
-    // log out user
-    pPage.logout();
 
   });
 

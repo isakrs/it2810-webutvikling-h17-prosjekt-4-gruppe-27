@@ -3,7 +3,11 @@ import { RouterModule }                         from '@angular/router';
 import { Http, HttpModule }                     from '@angular/http';
 import { APP_BASE_HREF }                        from '@angular/common';
 import { BrowserAnimationsModule }              from '@angular/platform-browser/animations';
-import { MatInputModule, MatCardModule }        from '@angular/material';
+import { MatInputModule,
+         MatCardModule,
+         MatIconModule,
+         MatListModule
+       }        from '@angular/material';
 
 import { LoginComponent }     from './login.component';
 import { MyPageComponent }    from '../my-page/my-page.component';
@@ -29,7 +33,9 @@ describe('LoginComponent', () => {
         HttpModule,
         MatInputModule,
         MatCardModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatListModule
       ]
     })
     .compileComponents();

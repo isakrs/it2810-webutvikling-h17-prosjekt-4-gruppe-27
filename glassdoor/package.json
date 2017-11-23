@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "production": "ng build --prod && node serve.js",
-    "serve":"ng build && node serve.js"
+    "serve": "ng build && node serve.js"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +29,7 @@
     "angular-in-memory-web-api": "^0.5.1",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
+    "hammerjs": "^2.0.8",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },

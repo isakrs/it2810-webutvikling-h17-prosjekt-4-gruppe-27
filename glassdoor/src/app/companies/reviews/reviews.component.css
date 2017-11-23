@@ -1,3 +1,24 @@
+#review-input-comment {
+  width: 50%;
+}
+
+.add-review {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 700px){
+  .add-review {
+    flex-direction: row;
+  }
+}
+
+mat-slider {
+  margin: auto;
+}
+
 .selected {
   background-color: #CFD8DC !important;
   color: white;
@@ -6,7 +27,7 @@
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 15em;
+  width: 100%;
 }
 .reviews mat-list-item {
   cursor: pointer;
@@ -57,7 +78,7 @@ mat-raised-button {
 mat-raised-button:hover {
   background-color: #cfd8dc;
 }
-mat-raised-button.delete {
+bmat-raised-button.delete {
   float:right;
   margin-top: 2px;
   margin-right: .8em;
