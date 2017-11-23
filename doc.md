@@ -2,7 +2,7 @@
 
 Vi ønsker å lage en forenklet norsk versjon av den populære nettsiden glassdoor.com.
 
-Applikasjonen viser en oversikt over selskaper i Norge som tilbyr internships/sommerjobber til studenter, hvor man kan legge inn sine egne, og lese andre studenters erfaringer som sommerstudent i selskapet. F.eks. kan man se at Bekk har en gjennomsnittsrating på 4.5/5, og 7 kommentarer med efaringer fra tidligere sommerstudenter. Man skal kunne søke på bedriftsnavn, sortere på rating, antall kommentarer, og filtrere på studieretning. 
+Applikasjonen viser en oversikt over selskaper i Norge som tilbyr internships/sommerjobber til studenter, hvor man kan legge inn sine egne, og lese andre studenters erfaringer som sommerstudent i selskapet. F.eks. kan man se at Bekk har en gjennomsnittsrating på 4.5/5, og 7 kommentarer med efaringer fra tidligere sommerstudenter. Man skal kunne søke på bedriftsnavn, sortere på rating, antall kommentarer, og filtrere på studieretning. Man skal måtte være logget inn for å kunne legge til firmaer, og skrive reviews om firmaer.
 
 
 
