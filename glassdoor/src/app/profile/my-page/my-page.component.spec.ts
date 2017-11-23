@@ -2,8 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpModule }                       from '@angular/http';
 import { RouterModule }                     from '@angular/router';
 import { APP_BASE_HREF }                    from '@angular/common';
+import { MatCardModule,
+         MatIconModule,
+         MatListModule
+       }     from '@angular/material';
 
-import { MyPageComponent }                  from './my-page.component';
+import { MyPageComponent }   from './my-page.component';
 
 describe('MyPageComponent', () => {
   let component: MyPageComponent;
@@ -17,7 +21,10 @@ describe('MyPageComponent', () => {
       ],
       imports: [
         RouterModule.forRoot([]),
-        HttpModule
+        HttpModule,
+        MatCardModule,
+        MatIconModule,
+        MatListModule
       ]
     })
     .compileComponents();

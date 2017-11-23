@@ -1,16 +1,18 @@
-<p id="welcome-user">
+<h1 id="welcome-user">
   Welcome {{username}}
-</p>
+</h1>
 
 <div *ngIf="reviews">
   <p>Your reviews:</p>
-  <ul class="reviews">
-    <li *ngFor="let review of reviews" (click)="onSelect(review)"
+  <mat-list class="reviews">
+    <mat-list-item *ngFor="let review of reviews" (click)="onSelect(review)"
         [class.selected]="review === selectedReview">
-      <span class="badge">{{review.rating}}</span>
-      <span>{{review.comment}}</span>
+      <mat-icon matListIcon>
+        <mat-card class="badge">{{review.rating}}</mat-card>
+      </mat-icon> 
+      <h3 matLine>{{review.comment}}</h3>
       <button mat-raised-button class="delete"
         (click)="delete(review); $event.stopPropagation()">x</button>
-    </li>
-  </ul>
+    </mat-list-item>
+  </mat-list>
 </div>

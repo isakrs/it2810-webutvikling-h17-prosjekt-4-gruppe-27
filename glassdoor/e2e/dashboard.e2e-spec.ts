@@ -29,7 +29,7 @@ describe('Company search on Dashboard Page', () => {
 
     dPage.clickSearchResult(0);
 
-    expect(cdPage.getHeaderText()).toBe('Kolonial.no details!');
+    expect(cdPage.getResultTitle()).toContain('Kolonial.no');
   });
 
 });

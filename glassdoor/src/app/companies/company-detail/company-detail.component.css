@@ -1,3 +1,16 @@
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+@media (min-width: 700px){
+  .detail-content {
+    flex-direction: row;
+  }
+}
+
 label {
   display: inline-block;
   width: 6em;

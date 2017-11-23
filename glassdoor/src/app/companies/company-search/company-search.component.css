@@ -19,12 +19,13 @@
   height: 20px;
 }
 
-.example-form {
+.search-form {
+  margin-top: 60px;
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 
-.example-full-width {
+.search-full-width {
   width: 100%;
 }

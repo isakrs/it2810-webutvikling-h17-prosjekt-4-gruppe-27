@@ -31,6 +31,17 @@ $ npm run dev
 
 
 ## API endpoints
+**URLs Summary**
+```typescript
+api/company
+api/company/<id>
+api/user
+api/user/review
+api/review/company/<id>
+api/review/user
+api/login
+api/auth/verify
+```
 
 #### Generelt 
 
@@ -258,7 +269,8 @@ Returns the new review
 
 ### Companies
 
-API updates `company.averageRating` and `company.nComments` as reviews are created and deleted
+API updates `company.averageRating` and `company.nComments` as reviews are created and deleted.
+See company object in the response below.
 
 
 
@@ -310,15 +322,15 @@ Returns list over companies where company.name contains `term`.
 Filter companies on min `company.averageRating` and min `company.nComments`
 
 ```http
-GET host:port/api/companies/?minRating=<N>
+GET host:port/api/company/?minRating=<N>
 ```
 
 ```http
-GET host:port/api/companies/?minComments=<N>
+GET host:port/api/company/?minComments=<N>
 ```
 
 ```http
-GET host:port/api/companies/?minRating=<N>&minComments=<N>
+GET host:port/api/company/?minRating=<N>&minComments=<N>
 ```
 
 Alle returnerer en liste med companies og  status 200 hvis ok, 400 ellers
@@ -350,7 +362,7 @@ GET host:port/api/company/?skip=5&size=10
 Chaining of filters and pagination is possible. e.g.
 
 ```http
-GET host:port/api/companies/?skip=5&size=10&minRating=4.4&minComments=2
+GET host:port/api/company/?skip=5&size=10&minRating=4.4&minComments=2
 ```
 
 

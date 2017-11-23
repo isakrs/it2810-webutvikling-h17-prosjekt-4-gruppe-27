@@ -6,7 +6,7 @@ export class ReviewsSection {
   private delBttns = element.all(by.css('.delete'));
 
   private reviewInputRating = element(by.css('#review-input-rating'));
-  private reviewInputComment = element(by.css('#review-input-comment'));
+  private reviewInputComment = element(by.css('.mat-input-0'));
   private reviewInputSubmit = element(by.css('.add-review'));
 
   navigateTo(idCompany: string) {
@@ -18,7 +18,6 @@ export class ReviewsSection {
   }
 
   async addReview(rating: number, comment: string) {
-    this.reviewInputRating.sendKeys(rating);
     this.reviewInputComment.sendKeys(comment);
     this.reviewInputSubmit.click();
   }
