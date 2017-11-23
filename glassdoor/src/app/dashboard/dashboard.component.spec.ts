@@ -66,7 +66,7 @@ describe('DashboardComponent', () => {
   });
 
 	it(`should display title 'Top 4 Companies'`, () => {
-    de = fixture.debugElement.query(By.css('h3'));
+    de = fixture.debugElement.query(By.css('h2'));
     el = de.nativeElement;
 		expect(el.textContent).toEqual('Top 4 Companies');
 	})

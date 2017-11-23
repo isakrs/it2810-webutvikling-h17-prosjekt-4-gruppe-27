@@ -3,17 +3,22 @@
   <mat-card-content>
     <form class="add-review">
         <mat-slider
-        [max]="5"
-        [min]="1"
-        [step]="1"
-        [thumbLabel]="true"
-        #reviewRating
+          [max]="5"
+          [min]="1"
+          [step]="1"
+          [thumbLabel]="true"
+          #reviewRating
+          id="review-input-rating"
         ></mat-slider>
-      <mat-form-field id="review-input-comment" >
-        <textarea matInput placeholder="Comment"  #reviewComment></textarea>
+      <mat-form-field>
+        <textarea 
+          matInput
+          placeholder="Comment"
+          #reviewComment
+        ></textarea>
       </mat-form-field>
       <button mat-raised-button
-        class="add-review"
+        class="add-review delete"
         (click)="
           add(reviewRating.value, reviewComment.value);
           reviewRating.value='';

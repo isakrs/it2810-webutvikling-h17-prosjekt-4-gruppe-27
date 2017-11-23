@@ -33,7 +33,8 @@ import { MatButtonModule,
          MatInputModule,
          MatAutocompleteModule,
          MatSelectModule,
-         MatSliderModule
+         MatSliderModule,
+         MatGridListModule
        } from '@angular/material';
 
 import 'hammerjs';
@@ -70,7 +71,8 @@ import 'hammerjs';
     MatInputModule,
     MatAutocompleteModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatGridListModule
   ],
   providers: [ CompanyService, ProfileService ],
   bootstrap: [ AppComponent ]

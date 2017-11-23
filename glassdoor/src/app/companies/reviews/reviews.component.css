@@ -78,7 +78,7 @@ mat-raised-button {
 mat-raised-button:hover {
   background-color: #cfd8dc;
 }
-mat-raised-button.delete {
+bmat-raised-button.delete {
   float:right;
   margin-top: 2px;
   margin-right: .8em;
