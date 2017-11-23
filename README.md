@@ -1,6 +1,5 @@
 # it2810-webutvikling-h17-prosjekt-4-gruppe-27
 
-## Branches
 #### `Master`
 `Master` branch is used for stable versions. 
 Please use `Master` branch, when you review our code.
